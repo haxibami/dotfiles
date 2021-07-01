@@ -56,6 +56,9 @@
 !/.xinitrc
 !/.xprofile
 !/.xsessionrc
+!/.config/
+/.config/*/
+/.config/**
 !/.config/alacritty/
 !/.config/dunst/
 !/.config/i3/
