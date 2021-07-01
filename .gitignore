@@ -61,7 +61,7 @@
 !/.config/i3/
 !/.config/polybar/
 !/.config/rofi/
-!/.config/sway/
+!/.config/sway/**
 !/.config/systemd/
 !/.config/tilix/
 !/.config/waybar/
