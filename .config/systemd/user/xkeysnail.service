@@ -1,0 +1,15 @@
+[Unit]
+Description=xkeysnail
+
+[Service]
+KillMode=process
+ExecStartPre=/usr/bin/xhost +SI:localuser:root
+ExecStart=/usr/local/bin/xkeysnail /home/haxibami/.config/xkeysnail/config.py
+Type=simple
+Restart=always
+RestartSec=10s
+
+Environment=DISPLAY=:0
+
+[Install]
+WantedBy=default.target
