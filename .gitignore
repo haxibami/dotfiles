@@ -21,6 +21,11 @@
 !/.zsh/zfunc/**
 !/.zsh/completion/
 /.zsh/completion/**
+!/.zplug/
+!/.zplug/repos/
+!/.zplug/repos/dracula/
+!/.zplug/repos/dracula/zsh/
+!/.zplug/repos/dracula/zsh/**
 !/.virc
 !/.vimrc
 !/.vim/
