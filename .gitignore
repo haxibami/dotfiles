@@ -21,11 +21,6 @@
 !/.zsh/zfunc/**
 !/.zsh/completion/
 /.zsh/completion/**
-!/.zplug/
-!/.zplug/repos/
-!/.zplug/repos/dracula/
-!/.zplug/repos/dracula/zsh/
-!/.zplug/repos/dracula/zsh/**
 !/.virc
 !/.vimrc
 !/.vim/
@@ -111,6 +106,11 @@
 !/.config/waybar/**
 !/.config/xkeysnail/
 !/.config/xkeysnail/**
+!/.config/zplug/
+!/.config/zplug/dracula/
+!/.config/zplug/dracula/**
+!/.config/compton.conf
+!/.config/picom.conf
 !/.gitignore_global
 !/.gitconfig_shared
 
