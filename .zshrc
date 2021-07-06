@@ -7,7 +7,7 @@ alias spotify='/usr/bin/spotify --force-device-scale-factor=1.5'
 alias jp='setxkbmap -layout jp'
 
 #zplug
-source /usr/share/zsh/scripts/zplug/init.zsh
+source /usr/share/zplug/init.zsh
 zplug 'zplug/zplug', hook-build: 'zplug --self-manage'
 zplug 'mafredri/zsh-async'
 zplug 'dracula/zsh', as:theme
