@@ -7,8 +7,12 @@ alias spotify='/usr/bin/spotify --force-device-scale-factor=1.5'
 alias jp='setxkbmap -layout jp'
 
 #zplug
-#for Ubuntu 20.04
-source /usr/share/zplug/init.zsh
+ARCH_ZPLUG=/usr/share/zsh/scripts/zplug/init.zsh
+if [ -f ${ARCH_ZPLUG} ]; then 
+	source ${ARCH_ZPLUG}
+else
+	source /usr/share/zplug/init.zsh
+fi
 zplug 'zplug/zplug', hook-build: 'zplug --self-manage'
 zplug 'mafredri/zsh-async'
 zplug 'dracula/zsh', as:theme
