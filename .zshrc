@@ -6,7 +6,8 @@ alias ls='ls --color=auto'
 alias spotify='/usr/bin/spotify --force-device-scale-factor=1.5'
 alias jp='setxkbmap -layout jp'
 
-#zplug
+# zplug
+# only support Arch(AUR package) and Ubuntu(installed by apt)
 ARCH_ZPLUG=/usr/share/zsh/scripts/zplug/init.zsh
 if [ -f ${ARCH_ZPLUG} ]; then 
 	source ${ARCH_ZPLUG}
