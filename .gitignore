@@ -82,16 +82,20 @@
 /.config/**
 !/.config/alacritty/
 !/.config/alacritty/**
+!/.config/compton.conf
 !/.config/dunst/
 !/.config/dunst/**
 !/.config/i3/
 !/.config/i3/**
 !/.config/neofetch/
 !/.config/neofetch/**
+!/.config/picom.conf
 !/.config/polybar/
 !/.config/polybar/scripts/
 !/.config/polybar/scripts/**
 !/.config/polybar/**
+!/.config/ranger/
+!/.config/ranger/**
 !/.config/rofi/
 !/.config/rofi/**
 !/.config/sway/
@@ -109,8 +113,6 @@
 !/.config/zplug/
 !/.config/zplug/dracula/
 !/.config/zplug/dracula/**
-!/.config/compton.conf
-!/.config/picom.conf
 !/.gitignore_global
 !/.gitconfig_shared
 
