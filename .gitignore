@@ -113,6 +113,7 @@
 !/.config/zplug/
 !/.config/zplug/dracula/
 !/.config/zplug/dracula/**
+!/.latexmkrc
 !/.gitignore_global
 !/.gitconfig_shared
 
