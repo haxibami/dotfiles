@@ -24,11 +24,15 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 #set dpi
-output Virtual-1 scale 1.5
+output HDMI-A-1 scale 1.5
 xwayland scale 2
 
+# gnome-keyring
+exec eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+exec export SSH_AUTH_SOCK
+
 #set gtk themes
-exec_always import-gsettings.sh \
+exec_always /home/haxibami/.bin/import-gsettings.sh \
               gtk-theme:gtk-theme-name \
               icon-theme:gtk-icon-theme-name \
               cursor-theme:gtk-cursor-theme-name
@@ -37,9 +41,8 @@ exec_always import-gsettings.sh \
 output "*" background ~/.config/i3/arch.png fill
 
 #set window transparency&scale 
-set $opacity-active 0.95
-set $opacity-inactive 0.5
-for_window [app_id=".*"] opacity $opacity-active
+#set $opacity-active 0.95
+#for_window [app_id=".*"] opacity $opacity-active
 
 #set keyboard
 input * {
@@ -54,13 +57,10 @@ exec --no-startup-id dunst
 exec_always --no-startup-id fcitx-autostart
 exec wl-paste -t text --watch clipman store
 
-
 #startup apps
 exec --no-startup-id tilix
-exec --no-startup-id firefox
 
 #define bar
-
 exec_always ~/.config/waybar/launch.sh
 
 # Use pactl to adjust volume in PulseAudio.
@@ -77,7 +77,7 @@ floating_modifier $mod
 bindsym $mod+Return exec tilix
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run
@@ -90,8 +90,8 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
-bindsym $mod+i focus up
-bindsym $mod+l focus right
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left move left
@@ -102,8 +102,8 @@ bindsym $mod+Right move right
 # move focused window
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
-bindsym $mod+Shift+i move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left

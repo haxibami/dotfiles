@@ -12,7 +12,7 @@ configuration {
 /*    xoffset: 0;*/
 /*    fixed-num-lines: true;*/
       show-icons: true;
-/*    terminal: "rofi-sensible-terminal";*/
+	terminal: "tilix";
 /*    ssh-client: "ssh";*/
 /*    ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
 /*    run-command: "{cmd}";*/
