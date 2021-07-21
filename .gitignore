@@ -100,6 +100,9 @@
 !/.config/polybar/scripts/
 !/.config/polybar/scripts/**
 !/.config/polybar/**
+!/.config/qt5ct/
+!/.config/qt5ct/colors/
+!/.config/qt5ct/colors/Dracula.conf
 !/.config/ranger/
 !/.config/ranger/**
 !/.config/redshift.conf
