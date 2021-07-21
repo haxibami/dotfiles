@@ -6,7 +6,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
     "modules-center": ["sway/window"],
-    "modules-right": ["idle_inhibitor", "cpu", "memory", "temperature", "network", "pulseaudio", "battery", "sway/language", "clock", "tray"],
+    "modules-right": ["idle_inhibitor", "cpu", "memory", "temperature", "network", "pulseaudio", "backlight", "sway/language", "clock", "tray"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -76,15 +76,15 @@
         "format": "{}% "
     },
     "temperature": {
-        "thermal-zone": 2,
-        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+//        "thermal-zone": 2, //
+        "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
         "critical-threshold": 80,
         "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
         "format-icons": ["", "", ""]
     },
     "backlight": {
-        "device": "acpi_video1",
+        "device": "/dev/i2c-2",
         "format": "{percent}% {icon}",
         "format-icons": ["", ""]
     },

@@ -57,7 +57,7 @@ font-2 = FontAwesome5Free:style=Regular:pixelsize=16;1
 font-3 = FontAwesome5Brands:style=Regular:pixelsize=16;1
 font-4 = sans-serif:pixelsize=16;1
 
-modules-left = i3 spotify spotify-prev spotify-play-pause spotify-next
+modules-left = i3 spotify spotify-prev spotify-play-pause spotify-next xbacklight backlight-acpi
 modules-center = xwindow
 modules-right = cpu memory filesystem eth battery pulseaudio xkeyboard date powermenu
 
@@ -350,9 +350,9 @@ menu-2-0-exec = shutdown now
 
 [module/xbacklight]
 type = internal/xbacklight
-output = Virtual1
+output = HDMI-A-1
 format = <label> <bar>
-label = BL
+label = 
 
 bar-width = 10
 bar-indicator = |
@@ -398,7 +398,7 @@ type = internal/pulseaudio
 format-volume = <label-volume> <bar-volume>
 format-volume-background = #6272a4
 format-volume-padding = 1
-label-volume = VOL %percentage%%
+label-volume =  %percentage%%
 label-volume-foreground = ${colors.foreground}
 
 label-muted = 

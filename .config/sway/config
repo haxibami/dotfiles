@@ -10,29 +10,42 @@ font pango:Source Han Code JP 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
+# font pango:DejaVu Sans Mono 8
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec_always export XDG_CURRENT_SESSION=sway
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-#set dpi
+# set dpi
 output HDMI-A-1 scale 1.5
-xwayland scale 2
+
+# set compositor-unique variables
+
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 # gnome-keyring
-exec eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+exec "eval $(/usr/bin/gnome-keyring-daemon --start)"
 exec export SSH_AUTH_SOCK
 
+# screenlock
+
+exec_always swayidle -w \
+  timeout 600 'swaylock -f' \
+  timeout 1200 'swaymsg "output * dpms off"' \
+            resume 'swaymsg "output * dpms on"' \
+  before-sleep 'swaylock -f' \
+
+# start display utility tool
+
+exec gammastep
+
 #set gtk themes
-exec_always /home/haxibami/.bin/import-gsettings.sh \
+exec /home/haxibami/.bin/import-gsettings.sh \
               gtk-theme:gtk-theme-name \
               icon-theme:gtk-icon-theme-name \
               cursor-theme:gtk-cursor-theme-name
@@ -46,15 +59,15 @@ output "*" background ~/.config/i3/arch.png fill
 
 #set keyboard
 input * {
-  xkb_layout "us,jp"
+  xkb_layout "us,jp,ru"
   xkb_model "jp106"
-  xkb_options "grp:alt_shift_toggle"
+  xkb_options "grp:win_space_toggle"
 }
 
 #startup services
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id dunst
-exec_always --no-startup-id fcitx-autostart
+exec --no-startup-id mako
+exec --no-startup-id fcitx5 -d
 exec wl-paste -t text --watch clipman store
 
 #startup apps
@@ -88,10 +101,10 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left move left
@@ -100,10 +113,10 @@ bindsym $mod+Up move up
 bindsym $mod+Right move right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+#bindsym $mod+Shift+h move left
+#bindsym $mod+Shift+j move down
+#bindsym $mod+Shift+k move up
+#bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -112,10 +125,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+shift+h split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+shift+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -129,7 +142,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+tab focus mode_toggle
 
 # focus the parent container
 bindsym $mod+p focus parent
@@ -176,10 +189,10 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# (not works in sway) restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+# bindsym $mod+Shift+r restart
+# exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+e exec "swaymsg 'exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -189,10 +202,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -209,22 +222,25 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 
-#launch rofi
+# launch rofi
 bindsym Mod1+space exec "rofi -show run"
 
-#take screenshots
-bindsym $mod+shift+a exec "grim ~/Pictures/$(date "+%Y%m%d-%H%M%S")'_grim.png' "
-#bindsym $mod+shift+f exec "grim -g "$(swaymsg -t get_tree | jq -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"')"
-bindsym $mod+shift+s exec "grim ~/Pictures/$(date "+%Y%m%d-%H%M%S")'_grim.png' -g "$(slurp)""
-bindsym Print exec "grim - | wl-copy"
-#bindsym $mod+Print exec "grim -g "$(slurp)" - | wl-copy"
+# take screenshots
+bindsym $mod+shift+a exec "grim - | wl-copy & wl-paste > ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim.png' "
+# bindsym $mod+shift+f exec grim -g "$(swaymsg -t get_tree | jq -j '.. | select(.type?) | select(.focused).rect | \(.x),\(.y) \(.width)x\(.height)"')
+bindsym $mod+shift+s exec "grim -g "$(slurp)" ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim.png'"
+bindsym Print exec "grim - | wl-copy & wl-paste > ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim.png' "
 
-#set inner and outer gaps
+for_window [app_id="firefox" title="Firefox — 共有インジケータ"] {
+	floating enable
+}
+
+# set inner and outer gaps
 gaps inner 10
 gaps outer 10
-default_border pixel 1
+default_border pixel 2
 
-#set color theme
+# set color theme
 # class                 border  bground text    indicator child_border
 client.focused          #BD93F9 #BD93F9 #282A36 #6272A4   #BD93F9
 client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
