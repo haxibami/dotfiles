@@ -10,7 +10,7 @@ set rtp+=/usr/share/vim/vimfiles
 " initialize dein, plugins are installed to this directory
 call dein#begin(expand('~/.cache/dein'))
 " add packages here, e.g:
-call dein#add('/usr/share/vim/vimfiles')
+"call dein#add('/usr/share/vim/vimfiles')
 "call dein#add('qwelyt/TrippingRobot')
 " install packages from toml file
 let s:toml_dir  = $HOME . '/.config/nvim' 
