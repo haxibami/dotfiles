@@ -1,0 +1,14 @@
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+
+[[plugins]]
+repo = 'dracula/vim'
+
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+rev = 'release'
+merged = 0
+
+[[plugins]]
+repo = 'lilydjwg/fcitx.vim'
+rev = 'fcitx5'

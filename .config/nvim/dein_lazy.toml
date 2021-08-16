@@ -1,0 +1,14 @@
+[[plugins]]
+repo = 'lervag/vimtex'
+on_ft=['tex']
+hook_source='''
+  let g:vimtex_view_general_viewer = 'zathura'
+  let g:vimtex_compiler_progname = 'nvr'
+  let g:vimtex_view_general_options = "-x \"nvr +%{line} %{input}\" --synctex-forward @line:0:@tex @pdf"
+  let g:vimtex_compiler_latexmk = {
+      \ 'build_dir' : 'latexbuild',
+      \}
+  let g:vimtex_compiler_latexmk_engines = { '_': 'lualatex' }
+  let g:tex_flavor = 'latex'
+  let g:latex_latexmk_options = '-pdflua'
+'''

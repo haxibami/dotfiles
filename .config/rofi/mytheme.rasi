@@ -4,8 +4,8 @@
  */
 
 * {
-    selected-normal-foreground:  #21222c;
     foreground:                  #f8f8f2;
+    selected-normal-foreground:  #f8f8f2;
     normal-foreground:           @foreground;
     alternate-normal-background: #282a36;
     red:                         #ff5555;
@@ -20,13 +20,13 @@
     background:                  #282a36;
     bordercolor:                 #f8f8f2;
     alternate-normal-foreground: @foreground;
-    /*normal-background:          #6272a4;*/
-    lightfg:                     #586875;
-    selected-normal-background:  #f8f8f2;
+/*    normal-background:           #6272a4;*/
+    lightfg:                     #44475a;
+    selected-normal-background:  #44475a;
     selected-background:         @active-background;
     border-color:                #ff79C6;
     spacing:                     2;
-    separatorcolor:              #8be9fd;
+    separatorcolor:              #f8f8f2;
     urgent-background:           #ff5555;
     selected-urgent-background:  #ff5555;
     alternate-urgent-foreground: @urgent-foreground;
@@ -34,12 +34,16 @@
     alternate-active-foreground: @active-foreground;
     active-background:           #6272a4;
     selected-active-background:  #8be9fd;
+    colon-foreground:            #ff79C6;
+    input-text:                  #8be9fd;
+    input-background:            #44475a;
+    prompt-foreground:           #6272a4;
 }
 window {
     background-color: @background;
-    border:           1;
-    border-radius:    5;
-    padding:          5;
+    border:           2;
+    border-radius:    0;
+    padding:          30;
 }
 mainbox {
     border:  0;
@@ -51,7 +55,7 @@ message {
     padding:      1px ;
 }
 textbox {
-    text-color: @foreground;
+    text-color: @input-color;
 }
 listview {
     fixed-height: 0;
@@ -59,11 +63,11 @@ listview {
     border-color: @separatorcolor;
     spacing:      2px ;
     scrollbar:    true;
-    padding:      2px 0px 0px ;
+    padding:      10px 0 0 10px;
 }
 element {
     border:  0;
-    padding: 1px ;
+    margin: 5px;
 }
 element.normal.normal {
     background-color: @normal-background;
@@ -133,19 +137,34 @@ prompt, button{
     text-color: @normal-foreground;
 }
 inputbar {
-    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+    children:   [ textbox-prompt-colon,entry,case-indicator,prompt ];
+    padding: 5px;
+    margin: 0 0 10px 0;
+    background-color: @input-background;
+    border-radius: 5;
 }
 
 prompt {
-  text-color: #f1fa8c;
+    background-color: @input-background;
+    text-color: @prompt-foreground;
+    margin: 0 10px;
 }
 
 textbox-prompt-colon {
     expand:     false;
-    str:        " <";
-    margin:     0px 0.3em 0em 0em ;
-    text-color: @border-color;
+    str:        "";
+    margin:     0 0.3em 0 0.3em ;
+    text-color: @colon-foreground;
+    background-color: @input-background;
 }
 
+entry {
+    background-color: @input-background;
+    text-color: @input-text;
+}
 
+case-indicator {
+    background-color: @input-background;
+}
 
+/* vim:set ft=css: */

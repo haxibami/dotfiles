@@ -3,7 +3,7 @@ text-color=#f8f8f2
 border-color=#ff79c6
 
 border-radius=10
-default-timeout=5000
+default-timeout=10000
 
 [urgency=low]
 border-color=#282a36

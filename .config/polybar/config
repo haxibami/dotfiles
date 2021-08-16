@@ -17,7 +17,7 @@
 ;==========================================================
 
 [colors]
-background = #44475a
+background = #282A36
 background-alt = #444
 foreground = #f8f8f2
 foreground-alt = #555
@@ -26,15 +26,17 @@ foreground-alt-dark = #6272a4
 primary = #ffb86c
 secondary = #f1fa8c
 alert = #ff5555
+separator = 
 
 [bar/i3bar]
 ;monitor = VGA1
 width = 100%
-height = 50
+height = 60
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 0
 fixed-center = true
+bottom = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -45,24 +47,26 @@ line-color = #f00
 border-size = 0
 border-color = #00000000
 
-padding-left = 2
+padding-left = 1
 padding-right = 0
 
 module-margin-left = 1
-module-margin-right = 0
+module-margin-right = 1
 
-font-0 = RobotoMono:bold:pixelsize=16;1
-font-1 = FontAwesome5Free:style=Solid:pixelsize=16;1
-font-2 = FontAwesome5Free:style=Regular:pixelsize=16;1
-font-3 = FontAwesome5Brands:style=Regular:pixelsize=16;1
-font-4 = sans-serif:pixelsize=16;1
+font-0 = RobotoMono:pixelsize=20;4
+font-1 = HackgenNerd=20;1
+;font-1 = FontAwesome5Free:style=Solid:pixelsize=20;1
+;font-2 = FontAwesome5Free:style=Regular:pixelsize=20;1
+;font-3 = FontAwesome5Brands:style=Regular:pixelsize=20;1
+font-2 = HackgenNerd:style=Regular:pixelsize=20;4
+font-3 = Neuropol:style=Regular:pixelsize=35;8
 
-modules-left = i3 spotify spotify-prev spotify-play-pause spotify-next xbacklight backlight-acpi
-modules-center = xwindow
-modules-right = cpu memory filesystem eth battery pulseaudio xkeyboard date powermenu
+modules-left = i3 xwindow spotify
+modules-center = date
+modules-right = pacman cpu temperature memory filesystem eth ddcutil pulseaudio xkeyboard
 
-separator =
-dim-value =1.0
+separator = %{F#6272a4}|%{F-}
+dim-value = 1.0
 
 wm-name = i3wm
 
@@ -71,7 +75,7 @@ tray-detached = false
 tray-reparent = true
 tray-maxsize = 40
 ;tray-padding = 0
-tray-background = #282A36
+tray-background = ${colors.background}
 
 wm-restack = i3
 
@@ -99,14 +103,15 @@ wrapping-scroll = false
 ;label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
-label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 2
+label-focused = %index:1:1%
+;label-focused-background = ${colors.background-alt}
+label-focused-foreground = #50fa7b
+;label-focused-underline= ${colors.primary}
+label-focused-padding = 1
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%
-label-unfocused-padding = 2
+label-unfocused = %index:1:1%
+label-unfocused-padding = 1
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
@@ -124,14 +129,14 @@ label-urgent-padding = 2
 
 [module/cpu]
 type = internal/cpu
-interval = 2
-format = <label> <ramp-coreload>
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-padding = 1
-format-foreground = ${colors.foreground-dark}
-format-background = #ff6e6e
-label = %percentage:2%%
+interval = 3
+format = <label>
+format-prefix = "%{F#bd93f9}%{F-}"
+;format-prefix-foreground = ${colors.foreground-alt}
+format-padding = 0
+;format-foreground = ${colors.foreground-dark}
+;format-background = #ff6e6e
+label = %percentage:2:2%%
 label-padding = 0
 ramp-coreload-0 = ▁
 ramp-coreload-1 = ▂
@@ -141,53 +146,62 @@ ramp-coreload-4 = ▅
 ramp-coreload-5 = ▆
 ramp-coreload-6 = ▇
 ramp-coreload-7 = █
+ramp-load-0 = ▁
+ramp-load-1 = ▂
+ramp-load-2 = ▃
+ramp-load-3 = ▄
+ramp-load-4 = ▅
+ramp-load-5 = ▆
+ramp-load-6 = ▇
+ramp-load-7 = █
 
 [module/memory]
 type = internal/memory
-interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt-dark}
-format-background = #8be9fd
-format-foreground = ${colors.foreground-dark}
-format-padding = 1
+interval = 3
+format-prefix = " "
+format-prefix-foreground = #ff79c6
+;format-background = #8be9fd
+;format-foreground = ${colors.foreground-dark}
+format-padding = 0
 label = %percentage_used%%
 label-padding = 0
 
 [module/filesystem]
 type = internal/fs
-interval = 25
+interval = 60
 
 mount-0 = /
 
-label-mounted =  %{F#282A36}%percentage_used%%%{F-}
-label-mounted-foreground = ${colors.foreground-alt-dark}
+label-mounted = %{F#bd93f9}%{F-} %percentage_used%%
+;label-mounted-foreground = 
 ;label-mounted-underline = #0000ff
-label-mounted-background = #50fa7b
-label-mounted-padding = 1
+;label-mounted-background = #50fa7b
+label-mounted-padding = 0
 label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.foreground-alt-dark}
+;label-unmounted-foreground = ${colors.foreground-alt-dark}
 
 [module/eth]
 type = internal/network
 interface = wlp4s0
-interval = 3.0
+interval = 3
 
-format-connected-background = #ff79c6
-format-connected-foreground = ${colors.foreground-dark}
-format-connected-padding = 1
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt-dark}
-label-connected = %local_ip% %{F#282A36}%downspeed:8:15%%{F-} %{F#282A36}%upspeed:8:15%%{F-}
-label-connected-foreground = ${colors.foreground-dark}
+;format-connected-background = #ff79c6
+;format-connected-foreground = ${colors.foreground-dark}
+format-connected-padding = 0
+format-connected-prefix = " "
+format-connected-prefix-foreground = #ffb86c
+label-connected = %signal%% 
+label-alt = %downspeed:8:15% %upspeed:8:15%
+;label-connected-foreground = ${colors.foreground-dark}
 
 
 format-disconnected = !!
 ;format-disconnected-underline = ${self.format-connected-underline}
-format-disconnected-background = ${self.format-connected-background}
-format-disconnected-foreground = ${self.format-connected-prefix-foreground}
+;format-disconnected-background = ${self.format-connected-background}
+;format-disconnected-foreground = ${self.format-connected-prefix-foreground}
 format-disconnected-padding = 1
 label-disconnected = %ifname% disconnected
-label-disconnected-foreground = ${colors.foreground-alt}
+;label-disconnected-foreground = ${colors.foreground-alt}
 
 
 [module/battery]
@@ -236,7 +250,7 @@ animation-discharging-framerate = 750
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:30:...%
+label = %title:30:30:…%
 
 ;[module/window]
 ;type = custom/script
@@ -252,15 +266,15 @@ blacklist-0 = num lock
 
 format = <label-layout>
 format-spacing = 0
-format-prefix = ""
-format-prefix-foreground = ${colors.foreground-alt-dark}
-format-prefix-background = #f1fa8c
+format-prefix = " "
+;format-prefix-foreground = ${colors.foreground-alt-dark}
+;format-prefix-background = #f1fa8c
 ;format-prefix-underline = ${colors.secondary}
-format-prefix-padding = 1
+format-prefix-padding = 0
 
 label-layout = %layout%
-label-layout-background = ${self.format-prefix-background}
-label-layout-foreground = ${colors.foreground-dark}
+;label-layout-background = ${self.format-prefix-background}
+;label-layout-foreground = ${colors.foreground-dark}
 ;label-layout-underline = ${colors.secondary}
 label-layout-padding-right = 1
 
@@ -277,17 +291,17 @@ interval = 1
 ;date =
 date-alt = " %Y-%m-%d"
 
-time = %H:%M
-time-alt = %H:%M:%S
+time = "%{T4}%H:%M:%S%{T-}"
+time-alt = 
 
-format-prefix = ""
-format-prefix-foreground = ${colors.foreground-alt-dark}
-format-background = #BD93F9
+format-prefix = ""
+;format-prefix-foreground = ${colors.foreground-alt-dark}
+;format-background = #BD93F9
 format-padding = 1
 
 label = %date% %time%
 label-padding = 0
-label-foreground = ${colors.foreground-dark}
+;label-foreground = ${colors.foreground-dark}
 
 ;hidden = true
 
@@ -326,7 +340,7 @@ menu-1-0-exec = reboot
 menu-2-0 = %{F#282A36}shutdown%{F-}
 menu-2-0-exec = shutdown now
 
-[module/bspwm]
+;[module/bspwm]
 ;type = internal/bspwm
 
 ;label-focused = %index%
@@ -395,11 +409,12 @@ card = intel_backlight
 [module/pulseaudio]
 type = internal/pulseaudio
 
-format-volume = <label-volume> <bar-volume>
-format-volume-background = #6272a4
-format-volume-padding = 1
-label-volume =  %percentage%%
-label-volume-foreground = ${colors.foreground}
+format-volume = <label-volume>
+;<bar-volume>
+;format-volume-background = #6272a4
+format-volume-padding = 0
+label-volume = %{F#bd93f9}%{F-} %percentage%%
+;label-volume-foreground = 
 
 label-muted = 
 label-muted-foreground = ${colors.foreground}
@@ -422,6 +437,8 @@ bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
+
+click-right = pavucontrol
 
 ;[module/alsa]
 ;type = internal/alsa
@@ -452,33 +469,39 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 ;bar-volume-empty-font = 2
 ;bar-volume-empty-foreground = ${colors.foreground-alt}
 
-;[module/temperature]
-;type = internal/temperature
-;thermal-zone = 0
-;warn-temperature = 60
+[module/temperature]
+type = internal/temperature
+thermal-zone = 1
+warn-temperature = 75
+interval = 3
 
-;format = <ramp> <label>
+format = <ramp><label>
 ;format-underline = #f50a4d
-;format-warn = <ramp> <label-warn>
+format-warn = <ramp><label-warn>
 ;format-warn-underline = ${self.format-underline}
 
-;label = %temperature-c%
-;label-warn = %temperature-c%
+label = %temperature-c%
+label-warn = %temperature-c%
 ;label-warn-foreground = ${colors.secondary}
 
-;ramp-0 =
-;ramp-1 =
-;ramp-2 =
-;ramp-foreground = ${colors.foreground-alt}
+ramp-0 = ""
+ramp-1 = ""
+ramp-2 = ""
+ramp-foreground = #ffb86c
 
 [module/spotify]
 type = custom/script
 tail = true
 ; prefix symbol is shown before the text
 format-prefix = " "
+format-prefix-foreground = #50fa7b
 format = <label>
+label = "%output:0:20:…%"
 format-padding = 1
 exec = ~/.config/polybar/scripts/scroll_spotify_status.sh
+click-left = ~/.bin/play-pause.sh
+scroll-up = playerctl next
+scroll-down = playerctl previous
 
 [module/spotify-prev]
 type = custom/script
@@ -502,6 +525,35 @@ format = <label>
 format-padding = 1
 click-left = playerctl next spotify
 
+[module/ddcutil]
+type = custom/script
+exec = ~/.bin/getlight.sh
+interval = 2
+format = <label>
+format-prefix = " "
+format-prefix-foreground = #ff79c6
+label = %output%%
+scroll-up = ddcutil --bus 2 setvcp 10 + 10
+scroll-down = ddcutil --bus 2 setvcp 10 - 10
+
+[module/pacman]
+type = custom/script
+exec =  checkupdates | wc -l
+exec-if = exit 0
+interval = 3600
+click-left = tilix -e 'sudo pacman -Syu'; pkill -SIGRTMIN+8 polybar
+format = <label>
+format-prefix = " "
+label = %output%
+
+[module/temp]
+type = custom/script
+exec = cat /sys/class/hwmon/hwmon3/temp1_input | tr -d '000'
+interval = 5
+format = <label>
+format-prefix = "%{F#ffb86c}%{F-}"
+label = %output%℃
+
 [settings]
 screenchange-reload = true
 ;compositing-background = xor
@@ -514,8 +566,4 @@ screenchange-reload = true
 margin-top = 5
 margin-bottom = 5
 
-; vim:ft=dosini
-
-
-
-
+; vim:set ft=dosini:

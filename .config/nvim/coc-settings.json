@@ -1,0 +1,5 @@
+{
+  "suggest.noselect": true,
+  "suggest.preferCompleteThanJumpPlaceholder": false,
+  "coc.source.vimtex.enable": true
+}

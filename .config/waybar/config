@@ -1,31 +1,57 @@
+// waybar configuration
 {
     // "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
+//    "height": 36, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
+    "margin-top": 20,
+    "margin-left": 20,
+    "margin-right": 20,
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
-    "modules-center": ["sway/window"],
-    "modules-right": ["idle_inhibitor", "cpu", "memory", "temperature", "network", "pulseaudio", "backlight", "sway/language", "clock", "tray"],
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/window", "custom/media"],
+    "modules-center": ["clock"],
+    "modules-right": ["idle_inhibitor", "custom/pacman", "cpu", "temperature", "memory", "disk", "network", "custom/brightness", "pulseaudio", "sway/language", "tray"],
     // Modules configuration
-    // "sway/workspaces": {
-    //     "disable-scroll": true,
-    //     "all-outputs": true,
-    //     "format": "{name}: {icon}",
-    //     "format-icons": {
-    //         "1": "",
-    //         "2": "",
-    //         "3": "",
-    //         "4": "",
-    //         "5": "",
-    //         "urgent": "",
-    //         "focused": "",
-    //         "default": ""
-    //     }
-    // },
+//    "sway/workspaces": {
+//        "disable-scroll": true,
+//        "all-outputs": true,
+//        "format": "{name}: {icon}",
+//        "format-icons": {
+//               "1": "",
+//               "2": "",
+//               "3": "",
+//               "4": "",
+//               "urgent": "",
+//               "focused": "",
+//               "default": ""
+//         }
+//     },
     "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
+        "format": "<span style=\"italic\">{}</span>",
+        "max-length": 50
     },
+    "sway/window": {
+        "format": "{}",
+        "min-length": 30,
+        "max-length": 30,
+        "rewrite": {
+            "(.*) - Mozilla Firefox":"A $1",
+            "(.*) - NVIM": "B $1",
+            "(.*) - (.*)": "$0 $1"
+        }
+    },
+    "sway/language" : {
+        "format": "{} ",
+    },
+    "wlr/taskbar": {
+        "format": "{icon}",
+        "icon-size": 14,
+        "icon-theme": "",
+        "tooltip-format": "{title}",
+        "on-click": "activate",
+        "on-click-middle": "close"
+    },
+    
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ ",
         "format-disconnected": "Disconnected ",
@@ -65,29 +91,42 @@
     },
     "clock": {
         // "timezone": "America/New_York",
+        "interval": 1,
+        "format": "{:%H:%M:%S}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
-        "format": "{usage}% ",
-        "tooltip": false
+        "interval": 5,
+        "format": "{usage}%/{avg_frequency}/{max_frequency}G ",
+        "tooltip": true
     },
     "memory": {
-        "format": "{}% "
+        "format": "{}% ",
+        "interval": 5
     },
     "temperature": {
-//        "thermal-zone": 2, //
+        "thermal-zone": 1, 
         "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
-        "critical-threshold": 80,
+        "critical-threshold": 75,
+        "interval": 5,
         "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
+        "format-icons": ["", "", ""]
     },
-    "backlight": {
-        "device": "/dev/i2c-2",
-        "format": "{percent}% {icon}",
-        "format-icons": ["", ""]
-    },
+
+    "disk": {
+        "interval": 30,
+        "format": "{percentage_used}% ",
+//        "path": "/" //
+        "on-click": "thunar"
+},
+
+//    "backlight": {
+//        "device": "/dev/i2c-2",
+//        "format": "{percent}% {icon}",
+//        "format-icons": ["", ""]
+//    },
 //    "battery": {
 //        "states": {
 //            "good": 95,
@@ -107,11 +146,13 @@
 //    },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-wifi": "{signalStrength}% ",
         "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-alt": "{bandwidthUpBits}  {bandwidthDownBits} ",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}\n{essid}",
+        "interval": 5
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
@@ -135,14 +176,41 @@
     "custom/media": {
         "format": "{icon} {}",
         "return-type": "json",
-        "max-length": 40,
+        "signal": 15,
+//        "min-length": 25,
+        "max-length": 30,
         "format-icons": {
             "spotify": "",
-            "default": "🎜"
+            "spotifyd": "",
+            "default": ""
         },
         "escape": true,
-        "on-click": "playerctl play-pause",
-        "exec": "python $HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+        "on-click": "~/.bin/play-pause.sh",
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous",
+        "exec-if": "pgrep spotifyd",
+        //"exec": "$HOME/.config/waybar/media.sh 2> /dev/null",
+        "exec": "python $HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Incompatible with spotifyd(daemon)
+        //"exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    },
+    "custom/pacman": {
+        "format": "{} ",
+        "interval": 3600,                     // every hour
+        "exec": "checkupdates | wc -l",       // # of updates
+        "exec-if": "exit 0",                  // always run; consider advanced run conditions
+        "on-click": "tilix -e 'sudo pacman -Syu'; pkill -SIGRTMIN+8 waybar", // update system
+        "signal": 8,
+        "tooltip-format": "pacman wants to eat... {}"
+    },
+    "custom/brightness": {
+        "format": "{}% ",
+        "interval": 2,
+        "signal": 8,
+        "exec": "~/.bin/getlight.sh",
+        "on-scroll-up": "ddcutil --bus 2 setvcp 10 + 10",
+        "on-scroll-down": "ddcutil --bus 2 setvcp 10 - 10",
+        "tooltip-format": "{}"
     }
 }
+
+// vim:set ft=javascript:

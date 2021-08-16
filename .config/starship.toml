@@ -1,0 +1,22 @@
+add_newline = true
+
+scan_timeout = 10
+
+format = """
+[┌──](white)$directory$git_branch$git_status$hostname
+[└─>](white)$character(white)"""
+
+#[│](white)$directory$hostname
+
+[character]
+success_symbol = "[\\[๑ᴖ◡ᴖ๑\\]](#50fa7b) [<](#ff79c6)"
+error_symbol = "[\\[๑>_<๑\\]](#ff5555) [<](#ff79c6)"
+vicmd_symbol = "[\\[๑ᴖ◡ᴖ๑\\]](#f1fa8c) [<](#ff79c6)"
+
+[directory]
+truncation_length = 5
+format = " [$read_only]($read_only_style)[$path](bold underline #f1fa8c) "
+
+[hostname]
+ssh_only = false
+format = "on [$hostname](bold #8be9fd)"

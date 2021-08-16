@@ -1,18 +1,20 @@
+/*  rofi main config file
+ *  styling -> ..mytheme.rasi */
+
 configuration {
-  modi: "window,run,drun,ssh,combi";
-    width: 20;
+    modi: "window,run,drun,ssh,combi";
+    width: 30;
 /*    lines: 15;*/
 /*    columns: 1;*/
-/*    font: "mono 12";*/
-      font: "SourceHanCodeJP 20";
-      bw: 1;
-      location: 0;
+    font: "Neuropol 20";
+    bw: 1;
+    location: 0;
 /*    padding: 5;*/
 /*    yoffset: 0;*/
 /*    xoffset: 0;*/
 /*    fixed-num-lines: true;*/
-      show-icons: true;
-	terminal: "tilix";
+    show-icons: true;
+	  terminal: "tilix";
 /*    ssh-client: "ssh";*/
 /*    ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
 /*    run-command: "{cmd}";*/
@@ -45,7 +47,7 @@ configuration {
 /*    line-padding: 1;*/
 /*    filter: ;*/
 /*    separator-style: "dash";*/
-/*    hide-scrollbar: false;*/
+    hide-scrollbar: true;
 /*    fullscreen: false;*/
 /*    fake-transparency: false;*/
 /*    dpi: -1;*/
@@ -151,7 +153,8 @@ configuration {
 /*    me-accept-entry: "MouseDPrimary";*/
 /*    me-accept-custom: "Control+MouseDPrimary";*/
 }
+
 @import "/home/haxibami/.config/rofi/mytheme.rasi"
 
 
-
+/* vim:set ft=css: */

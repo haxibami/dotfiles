@@ -1,16 +1,19 @@
+/* waybar style sheet */
+
 * {
     border: none;
     border-radius: 0;
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Roboto Mono, Helvetica, Arial, sans-serif;
-    font-size: 13px;
-    min-height: 0;
+    font-family: Roboto Mono, FontAwesome5Free, FontAwesome5Brands, FiraCode Nerd Font , sans-serif;
+    font-size: 16px;
+/*    min-height: 24px;*/
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.5);
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
-    color: #ffffff;
+/*    background-color: rgba(43, 48, 59, 0.5);*/
+      background-color: transparent;
+/*    border-bottom: 3px solid #44475A;*/
+    color: #f8f8f2;
     transition-property: background-color;
     transition-duration: .5s;
 }
@@ -24,45 +27,47 @@ window#waybar.empty {
     background-color: transparent;
 }
 window#waybar.solo {
-    background-color: #FFFFFF;
+    background-color: #f8f8f2;
 }
 */
 
-window#waybar.termite {
+/*window#waybar.tilix {
     background-color: #3F3F3F;
 }
 
-window#waybar.chromium {
+window#waybar.firefox {
     background-color: #000000;
     border: none;
-}
+}*/
 
 #workspaces button {
-    padding: 0 5px;
+    padding: 0 8px;
     background-color: transparent;
-    color: #ffffff;
+    color: #f8f8f2;
     /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0 -3px transparent;
+/*   box-shadow: inset 0 -3px transparent;*/
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
     background: rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 -3px #ffffff;
+/*    box-shadow: inset 0 -3px #f8f8f2;*/
+    border-radius: 15;
 }
 
 #workspaces button.focused {
-    background-color: #64727D;
-    box-shadow: inset 0 -3px #ffffff;
+/*    background-color: #44475A;*/
+/*    box-shadow: inset 0 -3px #f8f8f2;*/
+    color: #50fa7b
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    background-color: #ff5555;
 }
 
 #mode {
     background-color: #64727D;
-    border-bottom: 3px solid #ffffff;
+    border-bottom: 3px solid #f8f8f2;
 }
 
 #clock,
@@ -75,18 +80,38 @@ window#waybar.chromium {
 #network,
 #pulseaudio,
 #custom-media,
+#custom-pacman,
+#custom-brightness,
+#language,
 #tray,
 #mode,
 #idle_inhibitor,
 #mpd {
     padding: 0 10px;
-    margin: 0 4px;
-    color: #ffffff;
+/*    margin: 0 4px;*/
+    margin: 0 0px;
+    color: #f8f8f2;
+}
+
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#custom-brightness,
+#pulseaudio,
+#mode,
+#mpd {
+    background-color: #bd93f9;
+    color: #000000;
 }
 
 #window,
-#workspaces {
-    margin: 0 4px;
+#workspaces,
+#custom-media {
+    margin: 0 10px;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -100,29 +125,30 @@ window#waybar.chromium {
 }
 
 #clock {
-    background-color: #64727D;
+/*    background-color: #64727D;*/
+  font-size: 25px;
 }
 
 #battery {
-    background-color: #ffffff;
-    color: #000000;
+/*    background-color: #f8f8f2;*/
+/*    color: #000000;*/
 }
 
 #battery.charging, #battery.plugged {
-    color: #ffffff;
-    background-color: #26A65B;
+/*    color: #f8f8f2;
+    background-color: #26A65B;*/
 }
 
 @keyframes blink {
     to {
-        background-color: #ffffff;
+        background-color: #f8f8f2;
         color: #000000;
     }
 }
 
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
+    background-color: #ff5555;
+    color: #f8f8f2;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -134,74 +160,110 @@ label:focus {
     background-color: #000000;
 }
 
+#window {
+}
+
+#custom-pacman {
+    background-color: #44475A;
+    border-radius: 20;
+
+}
+
+#workspaces {
+    min-width: 7em;
+}
+
 #cpu {
-    background-color: #2ecc71;
+/*    background-color: #50fa7b;*/
     color: #000000;
+/*    background-color: #ff79c6;*/
+    min-width: 11em;
+    border-bottom-left-radius:20;
+    border-top-left-radius:20;
+    margin-right: 0;
+    margin-left: 5px;
+    padding-right:0;
+}
+
+#temperature {
+/*    background-color: #f0932b;*/
+    background-color:#ffb86c;
+}
+
+#temperature.critical {
+    background-color: #ff5555;
 }
 
 #memory {
-    background-color: #9b59b6;
+/*    background-color: #9b59b6;*/
+    background-color: #ff79c6;
 }
 
 #disk {
-    background-color: #964B00;
+/*    background-color: #964B00;*/
+/*    background-color: #50fa7b;*/
 }
+
+#network {
+/*    background-color: #2980b9;*/
+/*    background-color: #8be9fd;*/
+    background-color: #ffb86c;
+}
+
+#network.disconnected {
+    background-color: #ff5555;
+}
+
 
 #backlight {
     background-color: #90b1b1;
 }
-
-#network {
-    background-color: #2980b9;
-}
-
-#network.disconnected {
-    background-color: #f53c3c;
+#custom-brightness {
+    background-color: #ff79c6;
 }
 
 #pulseaudio {
-    background-color: #f1c40f;
+/*    background-color: #f1c40f;*/
+    background-color: #bd93f9;
     color: #000000;
+    border-top-right-radius: 20;
+    border-bottom-right-radius: 20;
 }
-
 #pulseaudio.muted {
     background-color: #90b1b1;
     color: #2a5c45;
 }
 
 #custom-media {
-    background-color: #66cc99;
+    background-color: #50fa7b;
     color: #2a5c45;
-    min-width: 100px;
+    border-radius: 20;
+    padding: 0 10px;
+    
 }
 
 #custom-media.custom-spotify {
-    background-color: #66cc99;
+    background-color: #50fa7b;
 }
 
 #custom-media.custom-vlc {
     background-color: #ffa000;
 }
 
-#temperature {
-    background-color: #f0932b;
-}
-
-#temperature.critical {
-    background-color: #eb4d4b;
-}
-
-#tray {
-    background-color: #2980b9;
-}
-
 #idle_inhibitor {
-    background-color: #2d3436;
+    background-color: #44475A;
+    border-radius: 20;
+    padding: 8px;
+    margin-right: 4px;
+    min-width: 20px;
 }
 
 #idle_inhibitor.activated {
-    background-color: #ecf0f1;
-    color: #2d3436;
+    background-color: #f8f8f2;
+    color: #282a36;
+    border-radius: 20;
+    padding:8px;
+    margin-right: 4px;
 }
 
 #mpd {
@@ -210,7 +272,7 @@ label:focus {
 }
 
 #mpd.disconnected {
-    background-color: #f53c3c;
+    background-color: #ff5555;
 }
 
 #mpd.stopped {
@@ -222,9 +284,16 @@ label:focus {
 }
 
 #language {
-    background: #00b093;
-    color: #740864;
+/*    background: #00b093;*/
+/*    color: #740864;*/
+    color: #f8f8f2;
+    border-radius: 20;
     padding: 0 5px;
     margin: 0 5px;
-    min-width: 16px;
+    min-width: 18px;
+}
+
+#tray {
+    background-color: #6272a4;
+    border-radius: 20;
 }

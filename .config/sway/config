@@ -15,90 +15,183 @@ font pango:Source Han Code JP 10
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
-exec_always export XDG_CURRENT_SESSION=sway
+# set default browser(firefox) to run on Wayland: configured entry is needed
+exec --no-startup-id xdg-settings set default-web-browser wayfox.desktop
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
+# currently nm-applet inavailable on Wayland(>_<)
 
-# set dpi
+# set output & scaling
 output HDMI-A-1 scale 1.5
 
 # set compositor-unique variables
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway 
 
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
-# gnome-keyring
-exec "eval $(/usr/bin/gnome-keyring-daemon --start)"
-exec export SSH_AUTH_SOCK
+## look & feel
+# set wallpaper
+output "*" background ~/.config/i3/arch.png fill
 
-# screenlock
+# set inner and outer gaps
+gaps inner 18
+gaps outer 8
+default_border pixel 2
 
-exec_always swayidle -w \
+# set window transparency
+# set $opacity-active 0.80
+# for_window [app_id=".*"] opacity $opacity-active
+
+# set color theme: Dracula loves night.
+# class                 border  bground text    indicator child_border
+client.focused          #BD93F9 #BD93F9 #282A36 #6272A4   #BD93F9
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #44475A #44475A #BFBFBF #282A36   #f8f8f2
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
+# set xkeyboard layout
+input * {
+  xkb_layout "us,ru"
+  xkb_model "jp106"
+  xkb_options "grp:win_space_toggle"
+}
+
+# define status bar: waybar is a great statusbar to customize.
+bar {
+  swaybar_command waybar
+}
+
+## startup services
+# start auth services
+exec --no-startup-id "eval $(/usr/bin/gnome-keyring-daemon --start)"
+exec --no-startup-id export SSH_AUTH_SOCK
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# start other background services
+exec --no-startup-id mako
+exec --no-startup-id fcitx5 -d
+exec --no-startup-id clipman restore
+exec --no-startup-id wl-paste -t text --watch clipman store
+exec --no-startup-id wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"
+exec --no-startup-id playerctld daemon
+exec --no-startup-id thunar --daemon
+
+# start screenlocker
+exec swayidle -w \
   timeout 600 'swaylock -f' \
   timeout 1200 'swaymsg "output * dpms off"' \
             resume 'swaymsg "output * dpms on"' \
   before-sleep 'swaylock -f' \
 
-# start display utility tool
+# start display gamma setting tool: you may not want to hurt your eyes.
 
-exec gammastep
+exec --no-startup-id gammastep-indicator
 
-#set gtk themes
-exec /home/haxibami/.bin/import-gsettings.sh \
+# set gtk themes (lxappearance or other X11 based utility does not works)
+exec_always --no-startup-id /home/haxibami/.bin/import-gsettings.sh \
               gtk-theme:gtk-theme-name \
               icon-theme:gtk-icon-theme-name \
               cursor-theme:gtk-cursor-theme-name
 
-#set wallpaper
-output "*" background ~/.config/i3/arch.png fill
+# startup graphical apps
+exec tilix
 
-#set window transparency&scale 
-#set $opacity-active 0.95
-#for_window [app_id=".*"] opacity $opacity-active
-
-#set keyboard
-input * {
-  xkb_layout "us,jp,ru"
-  xkb_model "jp106"
-  xkb_options "grp:win_space_toggle"
-}
-
-#startup services
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id mako
-exec --no-startup-id fcitx5 -d
-exec wl-paste -t text --watch clipman store
-
-#startup apps
-exec --no-startup-id tilix
-
-#define bar
-exec_always ~/.config/waybar/launch.sh
-
-# Use pactl to adjust volume in PulseAudio.
-
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+## apps-related keybinds
 
 # start a terminal
 bindsym $mod+Return exec tilix
 
+# start browser
+bindsym $mod+b exec ~/.bin/wayfox.sh
+
+# start file manager
+bindsym $mod+e exec thunar
+
+# screenlock (manual)
+bindsym $mod+control+l exec swaylock -f
+
+# brightness controls (requires non-root access to i2c devices)
+bindsym $mod+F5 exec ddcutil --bus 2 setvcp 10 - 10
+bindsym $mod+F6 exec ddcutil --bus 2 setvcp 10 + 10
+
+# media controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% 
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% 
+bindsym XF86AudioRaiseVolume+shift exec --no-startup-id pactl set-source-volume @DEFAULT_SOURCE@ +5% 
+bindsym XF86AudioLowerVolume+shift exec --no-startup-id pactl set-source-volume @DEFAULT_SOURCE@ -5% 
+bindsym $mod+shift+m exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym $mod+m exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym $mod+comma exec playerctl previous
+bindsym $mod+period exec ~/.bin/play-pause.sh
+#bindsym $mod+period exec playerctl --player playerctld play-pause
+bindsym $mod+slash exec playerctl next
+bindsym $mod+shift+comma exec playerctl --player playerctld position -10
+bindsym $mod+shift+slash exec playerctl --player playerctld position +10
+
+# show history with clipboard manager & wofi
+
+bindsym $mod+control+h exec clipman pick -t wofi
+
+# take screenshots
+# [fullscreen, copy & save]
+#bindsym $mod+shift+a exec grim - | wl-copy & wl-paste > ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim.png'
+bindsym $mod+shift+a exec grimshot --notify copy output | wl-paste -t image/png > ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim_full.png'
+
+# [slurp, copy & save]
+#bindsym $mod+shift+s exec grim -t png -g "$(slurp -d)" - | wl-copy -t image/png && wl-paste -t image/png > ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim.png'
+bindsym $mod+shift+s exec grimshot --notify copy area | wl-paste -t image/png > ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim_area.png'
+# [select window, copy & save]
+bindsym $mod+shift+f exec grimshot --notify copy window
+
+# [fullscreen, only copy]
+bindsym $mod+Print exec grimshot --notify copy output
+# [slurp, only copy]
+bindsym Print exec grimshot --notify copy area
+# [select window, only copy]
+bindsym $mod+shift+Print exec grimshot --notify copy window
+
+#bindcode $mod+40 exec "rofi -modi drun,run -show drun"
+
+# launch wofi, a rofi alternative on Wayland
+bindsym Mod1+space exec ~/.bin/mywofi.sh
+bindsym Mod1+Tab exec ~/.bin/window_walker.sh
+
+
+## window-related keybinds
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# exit sway
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+# allow floating popup exceptions
+for_window [app_id="firefox" title="Firefox — 共有インジケータ"] {
+	floating enable
+}
+
+for_window [app_id="thunar" title="ファイル操作進行中"] {
+  floating enable
+}
+
+for_window [app_id="thunar" title="File Operation Progress"] {
+  floating enable
+}
+
+for_window [app_id="tilix" title="Tilix の設定"] {
+  floating enable
+}
+
+for_window [app_id="tilix" title="Tilix Preferences"] {
+  floating enable
+}
+
+for_window [app_id="guake"] {
+  floating enable
+}
+
 # kill focused window
 bindsym $mod+q kill
-
-# start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
-# A more modern dmenu replacement is rofi:
-# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
-# There also is i3-dmenu-desktop which only displays applications shipping a
-# .desktop file. It is a wrapper around dmenu, so you need that installed.
-# bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+h focus left
@@ -106,7 +199,7 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# alternatively, you can use the cursor keys:
+# move focused window
 bindsym $mod+Left move left
 bindsym $mod+Down move down
 bindsym $mod+Up move up
@@ -134,9 +227,12 @@ bindsym $mod+shift+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+control+s layout stacking
+bindsym $mod+control+w layout tabbed
+bindsym $mod+control+e layout toggle split
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod normal
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -148,7 +244,9 @@ bindsym $mod+tab focus mode_toggle
 bindsym $mod+p focus parent
 
 # focus the child container
-#bindsym $mod+c focus child
+bindsym $mod+c focus child
+
+## keybindings for workspaces
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -187,13 +285,6 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# (not works in sway) restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-# bindsym $mod+Shift+r restart
-# exit sway (logs you out of your Wayland session)
-bindsym $mod+Shift+e exec "swaymsg 'exit'"
-
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -220,30 +311,3 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
-
-
-# launch rofi
-bindsym Mod1+space exec "rofi -show run"
-
-# take screenshots
-bindsym $mod+shift+a exec "grim - | wl-copy & wl-paste > ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim.png' "
-# bindsym $mod+shift+f exec grim -g "$(swaymsg -t get_tree | jq -j '.. | select(.type?) | select(.focused).rect | \(.x),\(.y) \(.width)x\(.height)"')
-bindsym $mod+shift+s exec "grim -g "$(slurp)" ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim.png'"
-bindsym Print exec "grim - | wl-copy & wl-paste > ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim.png' "
-
-for_window [app_id="firefox" title="Firefox — 共有インジケータ"] {
-	floating enable
-}
-
-# set inner and outer gaps
-gaps inner 10
-gaps outer 10
-default_border pixel 2
-
-# set color theme
-# class                 border  bground text    indicator child_border
-client.focused          #BD93F9 #BD93F9 #282A36 #6272A4   #BD93F9
-client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
-client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
-client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36

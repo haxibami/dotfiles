@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 import argparse
 import logging
@@ -6,6 +5,7 @@ import sys
 import signal
 import gi
 import json
+import os
 gi.require_version('Playerctl', '2.0')
 from gi.repository import Playerctl, GLib
 
@@ -75,7 +75,6 @@ def signal_handler(sig, frame):
     sys.stdout.flush()
     # loop.quit()
     sys.exit(0)
-
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
