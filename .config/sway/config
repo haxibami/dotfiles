@@ -35,7 +35,7 @@ output "*" background ~/.config/i3/arch.png fill
 
 # set inner and outer gaps
 gaps inner 18
-gaps outer 8
+gaps outer 3
 default_border pixel 2
 
 # set window transparency
@@ -44,10 +44,10 @@ default_border pixel 2
 
 # set color theme: Dracula loves night.
 # class                 border  bground text    indicator child_border
-client.focused          #BD93F9 #BD93F9 #282A36 #6272A4   #BD93F9
+client.focused          #BD93F9 #BD93F9 #282A36 #BD93F9   #BD93F9
 client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-client.unfocused        #44475A #44475A #BFBFBF #282A36   #f8f8f2
-client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.unfocused        #44475A #44475A #BFBFBF #44475A   #44475A
+client.urgent           #FF5555 #FF5555 #F8F8F2 #FF5555   #FF5555
 client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 
 # set xkeyboard layout

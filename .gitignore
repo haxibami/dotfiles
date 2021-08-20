@@ -11,6 +11,10 @@
 !/README.md
 !/LICENSE
 
+# pacman
+!/desktop_pkglist.txt
+!/desktop_foreignpkglist.txt
+
 # zsh
 !/.zshrc
 !/.zshenv
@@ -55,8 +59,6 @@
 !/.config/cava/
 !/.config/cava/**
 !/.config/compton.conf
-!/.config/dconf/
-!/.config/dconf/user
 !/.config/dracula/
 !/.config/dracula/**
 !/.config/dunst/
