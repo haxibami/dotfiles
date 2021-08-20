@@ -14,6 +14,8 @@
 # pacman
 !/desktop_pkglist.txt
 !/desktop_foreignpkglist.txt
+!/wsl_pkglist.txt
+!/wsl_foreignpkglist.txt
 
 # zsh
 !/.zshrc

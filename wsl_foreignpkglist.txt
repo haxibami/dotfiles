@@ -1,0 +1,4 @@
+cbonsai
+fakeroot-tcp
+paru
+vim-dein-git
