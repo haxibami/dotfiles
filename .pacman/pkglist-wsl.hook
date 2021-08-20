@@ -1,0 +1,10 @@
+[Trigger]
+Operation = Install
+Operation = Remove
+Type = Package
+Target = *
+
+[Action]
+Description = Updating pkglists after installs and removes...
+When = PostTransaction
+Exec = /bin/sh -c '/usr/bin/pacman -Qqen > /home/haxibami/.pacman/pkglist_wsl.txt'

@@ -1,0 +1,9 @@
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = *
+
+[Action]
+Description = Cleaning pacman cache, except for most recent 3 gens...
+When = PostTransaction
+Exec = /usr/bin/paccache -r 

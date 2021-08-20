@@ -1,0 +1,10 @@
+[Trigger]
+Operation = Install
+Operation = Remove
+Type = Package
+Target = *
+
+[Action]
+Description = Updating external pkglists after installs and removes...
+When = PostTransaction
+Exec = /bin/sh -c '/usr/bin/pacman -Qqem > /home/haxibami/.pacman/pkglist_desktop_foreign.txt'
