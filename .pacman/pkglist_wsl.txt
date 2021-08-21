@@ -26,6 +26,7 @@ pacman-contrib
 patch
 pkgconf
 python
+python-pip
 ranger
 starship
 sudo
@@ -47,4 +48,5 @@ texlive-science
 vi
 vim
 which
+xorg-xeyes
 zsh
