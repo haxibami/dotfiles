@@ -68,7 +68,6 @@ lightdm
 lightdm-webkit-theme-litarvan
 lightdm-webkit2-greeter
 linux-firmware
-linux-headers
 linux-zen
 linux-zen-headers
 lshw
