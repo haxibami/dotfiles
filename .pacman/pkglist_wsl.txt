@@ -7,6 +7,7 @@ bat
 binutils
 bison
 exa
+fd
 flex
 gcc
 git
@@ -15,6 +16,7 @@ less
 libtool
 m4
 make
+man-db
 nano
 neofetch
 neovim
