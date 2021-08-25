@@ -86,30 +86,32 @@ set tabstop=2
 set showmatch
 set pumblend=10
 set shortmess-=S
+let g:fern#default_hidden=1
 
 let g:jpmode = 0
 
-nnoremap <M-j> :call Jptoggle(jpmode)<cr><Esc>
-inoremap <M-j> <Esc>:call Jptoggle(jpmode)<cr><a><a>
+nnoremap <M-q> :call Jptoggle(jpmode)<cr><Esc>
+inoremap <M-q> <Esc>:call Jptoggle(jpmode)<cr><a><a>
 
 function! Jptoggle(jpmode)
   if g:jpmode == 0
     nnoremap j gj
     nnoremap k gk
+    nnoremap <Home> g0
+    nnoremap <End> g$
     nnoremap <Down> gj
     nnoremap <Up> gk
-    inoremap <Down> <C-o>gj
-    inoremap <Up> <C-o>gk
     let g:jpmode = 1
     return g:jpmode
   else 
     nnoremap j j
     nnoremap k k
+    nnoremap <Home> <Home>
+    nnoremap <End> <End>
     nnoremap <Down> <Down>
     nnoremap <Up> <Up>
-    inoremap <Down> <Down>
-    inoremap <Up> <Up>
     let g:jpmode = 0
     return g:jpmode
   endif
 endfunction
+

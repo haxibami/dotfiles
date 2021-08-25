@@ -1,11 +1,11 @@
 * {
-font-family: Neuropol;
+font-family: Neuropol, HackgenNerd;
 font-size: 25;
 }
 
 window {
 margin: 0px;
-border: 2px solid #ff79c6;
+border: 2px solid #ff5555;
 background-color: #282a36;
 }
 

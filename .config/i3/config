@@ -11,6 +11,8 @@
 
 set $mod Mod4
 
+set $term alacritty
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font pango:Source Han Code JP 10
@@ -24,20 +26,15 @@ exec --no-startup-id xdg-settings set default-web-browser firefox.desktop
 exec --no-startup-id "feh --bg-scale ~/.config/i3/arch.png"
 
 # set gaps
-gaps inner 18
-gaps outer 8
+gaps inner 24
+gaps outer 0
 default_border pixel 1
 
 # set color theme: Dracula loves night.
 # class                 border  bground text    indicator child_border
-#client.focused          #BD93F9 #BD93F9 #282A36 #6272A4   #BD93F9
-#client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-#client.unfocused        #44475A #44475A #BFBFBF #282A36   #44475A
-#client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
-#client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #44475A
-client.focused          #bd93f9 #bd93f9 #282A36 #6272A4   #bd93f9
-client.focused_inactive #f8f8f2 #44475A #F8F8F2 #44475A   #f8f8f2
-client.unfocused        #f8f8f2 #44475A #BFBFBF #282A36   #f8f8f2
+client.focused          #bd93f9 #bd93f9 #282A36 #bd93f9   #bd93f9
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #44475A #44475A #BFBFBF #44475A   #44475A
 client.urgent           #f8f8f2 #FF5555 #F8F8F2 #FF5555   #FF5555
 client.placeholder      #f8f8f2 #282A36 #F8F8F2 #282A36   #f8f8f2
 
@@ -67,20 +64,20 @@ exec_always --no-startup-id "picom --config ~/.config/picom.conf"
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen
-exec_always --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec_always --no-startup-id xss-lock --transfer-sleep-lock -- ~/.bin/myi3lock.sh --nofork
 
 # start display gamma setting tool: you may not want to hurt your eyes.
 exec --no-startup-id redshift-gtk
 #exec --no-startup-id gammastep-indicator
 
 #startup apps
-exec tilix
+exec $term
 
 
 ## apps-related keybinds
 
 # start a terminal
-bindsym $mod+Return exec tilix
+bindsym $mod+Return exec $term
 bindsym $mod+shift+Return exec tilix --quake
 
 # start browser
@@ -90,7 +87,8 @@ bindsym $mod+b exec firefox
 bindsym $mod+e exec thunar
 
 # screenlock (manual)
-bindsym $mod+control+l exec i3lock -c 000000
+bindsym $mod+control+l exec ~/.bin/myi3lock.sh
+bindsym $mod+control+shift+l exec systemctl suspend
 
 # brightness controls (requires non-root access to i2c devices)
 bindsym $mod+F5 exec ddcutil --bus 2 setvcp 10 - 10
@@ -144,11 +142,12 @@ bindsym Mod1+space exec "~/.bin/myrofi.sh"
 
 ## window-related keybinds
 # reload the configuration file
-bindsym $mod+Shift+c reload
+#bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym $mod+Shift+c restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3?'  -b 'Reboot' 'systemctl reboot' -b 'Shutdown' 'systemctl poweroff' -b 'Logout' 'i3-msg exit'"
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3?'  -b 'Reboot' 'systemctl reboot' -b 'Shutdown' 'systemctl poweroff' -b 'Logout' 'i3-msg exit'"
+bindsym $mod+shift+e exec ~/.bin/xpowermenu.sh
 
 # kill focused window
 bindsym $mod+q kill

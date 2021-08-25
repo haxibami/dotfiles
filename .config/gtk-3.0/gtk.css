@@ -129,6 +129,6 @@
 VteTerminal,
 TerminalScreen,
 vte-terminal {
-    padding: 20px 20px 20px 20px;
-    -VteTerminal-inner-border: 20px 20px 20px 20px;
+    padding: 30px 30px 30px 30px;
+    -VteTerminal-inner-border: 30px 30px 30px 30px;
 }

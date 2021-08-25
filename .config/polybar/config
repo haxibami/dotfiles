@@ -36,7 +36,7 @@ height = 60
 ;offset-y = 1%
 radius = 0
 fixed-center = true
-bottom = true
+bottom = false
 
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -53,13 +53,13 @@ padding-right = 0
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = RobotoMono:pixelsize=20;4
-font-1 = HackgenNerd=20;1
+font-0 = RobotoMono:pixelsize=20;3
+font-1 = HackgenNerd:style=Regular:pixelsize=20;3
 ;font-1 = FontAwesome5Free:style=Solid:pixelsize=20;1
 ;font-2 = FontAwesome5Free:style=Regular:pixelsize=20;1
 ;font-3 = FontAwesome5Brands:style=Regular:pixelsize=20;1
-font-2 = HackgenNerd:style=Regular:pixelsize=20;4
-font-3 = Neuropol:style=Regular:pixelsize=35;8
+font-2 = HackgenNerd:style=Regular:pixelsize=20;3
+font-3 = HackgenNerd:style=Regular:pixelsize=35;6
 
 modules-left = i3 xwindow spotify
 modules-center = date
@@ -250,7 +250,7 @@ animation-discharging-framerate = 750
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:30:30:…%
+label = %{T3}%title:30:30:%%{T-}
 
 ;[module/window]
 ;type = custom/script
@@ -289,7 +289,7 @@ label-layout-padding-right = 1
 type = internal/date
 interval = 1
 ;date =
-date-alt = " %Y-%m-%d"
+date-alt = "%{T4} %Y-%m-%d%{T-}"
 
 time = "%{T4}%H:%M:%S%{T-}"
 time-alt = 

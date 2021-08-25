@@ -1,6 +1,12 @@
-# If not running interactively, don't do anything
-
+# If not running interactively, do not do anything
 [[ $- != *i* ]] && return
+[[ -z "$TMUX" ]] && exec tmux
+# TMUX
+#if which tmux >/dev/null 2>&1; then
+#    #if not inside a tmux session, and if no session is started, start a new session
+#    test -z "$TMUX" && (tmux attach || tmux new-session)
+#fi
+
 
 # aliases
 alias spotify='/usr/bin/spotify --force-device-scale-factor=1.5'
@@ -11,8 +17,13 @@ alias ls='exa'
 # set environment variables
 export EDITOR=nvim
 export LANG=ja_JP.UTF-8
-export TERM=xterm-256color
+#export TERM=xterm-256color
 export COLORTERM=truecolor
+
+# auto-compile ~/.zshrc
+if [ ~/.zshrc -nt ~/.zshrc.zwc ]; then
+   zcompile ~/.zshrc
+fi
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -43,9 +54,9 @@ zinit wait lucid light-mode for \
     zsh-users/zsh-history-substring-search \
   blockf \
     zsh-users/zsh-completions \
-    atinit'ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay' \
+    wait'0b' atinit'ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay' \
       zdharma/fast-syntax-highlighting \
-    wait'0b' atload'_zsh_autosuggest_start' \
+    wait'0c' atload'_zsh_autosuggest_start' \
       zsh-users/zsh-autosuggestions \
   mafredri/zsh-async
 
@@ -64,6 +75,12 @@ compinit
 bindkey -v
 bindkey -v '^[[H' beginning-of-line
 bindkey -v '^[[F' end-of-line
+#bindkey "${terminfo[khome]}" beginning-of-line
+#bindkey "${terminfo[kend]}" end-of-line
+if [[ -n "$TMUX" ]]; then
+  bindkey -v '^[[1~' beginning-of-line
+  bindkey -v '^[[4~' end-of-line
+fi
 
 # select completion
 zstyle ':completion:*' menu select

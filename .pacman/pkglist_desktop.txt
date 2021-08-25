@@ -12,10 +12,13 @@ bison
 chafa
 chromium
 clamtk
+cowfortune
 dbus-python
 dhcpcd
 dialog
 discord
+dmenu
+drawing
 dunst
 exa
 fakeroot
@@ -33,7 +36,6 @@ gammastep
 gawk
 gcc
 gettext
-gifski
 git
 glfw-wayland
 gnome-keyring
@@ -46,7 +48,6 @@ gvfs
 gzip
 i3-gaps
 i3blocks
-i3lock
 i3status
 inkscape
 intel-gpu-tools
@@ -78,6 +79,7 @@ mako
 man-db
 man-pages
 mesa
+mesa-demos
 mpv
 neofetch
 neovim
@@ -111,6 +113,7 @@ python-gobject
 python-i3ipc
 python-pip
 python-psutil
+python-pyqt5
 qt5-wayland
 qt5-webengine
 qt5ct
@@ -128,7 +131,6 @@ sudo
 swappy
 sway
 swayidle
-swaylock
 sysstat
 texinfo
 texlive-bibtexextra
@@ -148,10 +150,12 @@ thunar
 thunar-volman
 tilix
 tk
+tmux
 tracker3-miners
 ttf-font-awesome
 ttf-roboto-mono
 vi
+vifm
 vim
 vulkan-intel
 vulkan-mesa-layers

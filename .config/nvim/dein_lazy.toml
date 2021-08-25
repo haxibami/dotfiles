@@ -1,4 +1,10 @@
 [[plugins]]
+repo = 'lambdalisue/fern.vim'
+
+[[plugins]]
+repo = 'antoinemadec/FixCursorHold.nvim'
+
+[[plugins]]
 repo = 'lervag/vimtex'
 on_ft=['tex']
 hook_source='''

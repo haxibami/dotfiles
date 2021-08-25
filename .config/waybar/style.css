@@ -5,7 +5,7 @@
     border-radius: 0;
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: Roboto Mono, FontAwesome5Free, FontAwesome5Brands, FiraCode Nerd Font , sans-serif;
-    font-size: 16px;
+    font-size: 24px;
 /*    min-height: 24px;*/
 }
 
@@ -41,7 +41,7 @@ window#waybar.firefox {
 }*/
 
 #workspaces button {
-    padding: 0 8px;
+    padding: 0 12px;
     background-color: transparent;
     color: #f8f8f2;
     /* Use box-shadow instead of border so the text isn't offset */
@@ -52,7 +52,7 @@ window#waybar.firefox {
 #workspaces button:hover {
     background: rgba(0, 0, 0, 0.2);
 /*    box-shadow: inset 0 -3px #f8f8f2;*/
-    border-radius: 15;
+    border-radius: 24;
 }
 
 #workspaces button.focused {
@@ -87,7 +87,7 @@ window#waybar.firefox {
 #mode,
 #idle_inhibitor,
 #mpd {
-    padding: 0 10px;
+    padding: 0 15px;
 /*    margin: 0 4px;*/
     margin: 0 0px;
     color: #f8f8f2;
@@ -111,7 +111,7 @@ window#waybar.firefox {
 #window,
 #workspaces,
 #custom-media {
-    margin: 0 10px;
+    margin: 0 15px;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -126,7 +126,7 @@ window#waybar.firefox {
 
 #clock {
 /*    background-color: #64727D;*/
-  font-size: 25px;
+  font-size: 36px;
 }
 
 #battery {
@@ -165,7 +165,7 @@ label:focus {
 
 #custom-pacman {
     background-color: #44475A;
-    border-radius: 20;
+    border-radius: 25;
 
 }
 
@@ -178,10 +178,10 @@ label:focus {
     color: #000000;
 /*    background-color: #ff79c6;*/
     min-width: 11em;
-    border-bottom-left-radius:20;
-    border-top-left-radius:20;
+    border-bottom-left-radius:30;
+    border-top-left-radius:30;
     margin-right: 0;
-    margin-left: 5px;
+    margin-left: 7px;
     padding-right:0;
 }
 
@@ -226,8 +226,8 @@ label:focus {
 /*    background-color: #f1c40f;*/
     background-color: #bd93f9;
     color: #000000;
-    border-top-right-radius: 20;
-    border-bottom-right-radius: 20;
+    border-top-right-radius: 30;
+    border-bottom-right-radius: 30;
 }
 #pulseaudio.muted {
     background-color: #90b1b1;
@@ -237,8 +237,8 @@ label:focus {
 #custom-media {
     background-color: #50fa7b;
     color: #2a5c45;
-    border-radius: 20;
-    padding: 0 10px;
+    border-radius: 30;
+    padding: 0 15px;
     
 }
 
@@ -252,18 +252,18 @@ label:focus {
 
 #idle_inhibitor {
     background-color: #44475A;
-    border-radius: 20;
-    padding: 8px;
-    margin-right: 4px;
-    min-width: 20px;
+    border-radius: 30;
+    padding: 12px;
+    margin-right: 6px;
+    min-width: 30px;
 }
 
 #idle_inhibitor.activated {
     background-color: #f8f8f2;
     color: #282a36;
-    border-radius: 20;
-    padding:8px;
-    margin-right: 4px;
+    border-radius: 30;
+    padding:12px;
+    margin-right: 6px;
 }
 
 #mpd {
@@ -287,13 +287,13 @@ label:focus {
 /*    background: #00b093;*/
 /*    color: #740864;*/
     color: #f8f8f2;
-    border-radius: 20;
-    padding: 0 5px;
-    margin: 0 5px;
-    min-width: 18px;
+    border-radius: 30;
+    padding: 0 7px;
+    margin: 0 7px;
+    min-width: 27px;
 }
 
 #tray {
     background-color: #6272a4;
-    border-radius: 20;
+    border-radius: 30;
 }

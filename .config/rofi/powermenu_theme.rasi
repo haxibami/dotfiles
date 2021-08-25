@@ -1,5 +1,5 @@
 /**
- * ROFI Color theme;
+ * ROFI Color theme for powermenu;
  * User: haxibami
  */
 
@@ -24,7 +24,7 @@
     lightfg:                     #44475a;
     selected-normal-background:  #44475a;
     selected-background:         @active-background;
-    border-color:                #ff79C6;
+    border-color:                #ff5555;
     spacing:                     2;
     separatorcolor:              #f8f8f2;
     urgent-background:           #ff5555;
@@ -34,7 +34,7 @@
     alternate-active-foreground: @active-foreground;
     active-background:           #6272a4;
     selected-active-background:  #8be9fd;
-    colon-foreground:            #ff79C6;
+    colon-foreground:            #ff5555;
     input-text:                  #8be9fd;
     input-background:            #44475a;
     prompt-foreground:           #6272a4;
@@ -43,7 +43,7 @@ window {
     background-color: @background;
     border:           2;
     border-radius:    0;
-    padding:          20;
+    padding:          30;
 }
 mainbox {
     border:  0;
@@ -137,7 +137,7 @@ prompt, button{
     text-color: @normal-foreground;
 }
 inputbar {
-    children:   [ textbox-prompt-colon,entry,case-indicator,prompt ];
+    children:   [ textbox-prompt-colon,entry,prompt];
     padding: 5px;
     margin: 0 0 10px 0;
     background-color: @input-background;
@@ -148,6 +148,7 @@ prompt {
     background-color: @input-background;
     text-color: @prompt-foreground;
     margin: 0 10px;
+    text: "a";
 }
 
 textbox-prompt-colon {
@@ -165,6 +166,7 @@ entry {
 
 case-indicator {
     background-color: @input-background;
+    text: "a";
 }
 
 /* vim:set ft=css: */

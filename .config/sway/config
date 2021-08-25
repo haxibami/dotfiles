@@ -3,10 +3,18 @@
 # set modifier
 set $mod Mod4
 
+set $left h
+set $down j
+set $up k
+set $right l
+
+set $term alcrt
+
+set $menu ~/.bin/mywofi.sh | mywofi.sh | xargs swaymsg exec --
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Source Han Code JP 10
+font pango:Source Han Code JP 15
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -16,14 +24,14 @@ font pango:Source Han Code JP 10
 # they are included here as an example. Modify as you see fit.
 
 # set default browser(firefox) to run on Wayland: configured entry is needed
-exec --no-startup-id xdg-settings set default-web-browser wayfox.desktop
+exec xdg-settings set default-web-browser wayfox.desktop
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 # currently nm-applet inavailable on Wayland(>_<)
 
 # set output & scaling
-output HDMI-A-1 scale 1.5
+output HDMI-A-1 scale 1
 
 # set compositor-unique variables
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway 
@@ -34,9 +42,9 @@ exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DE
 output "*" background ~/.config/i3/arch.png fill
 
 # set inner and outer gaps
-gaps inner 18
+gaps inner 30
 gaps outer 3
-default_border pixel 2
+default_border pixel 3
 
 # set window transparency
 # set $opacity-active 0.80
@@ -64,43 +72,45 @@ bar {
 
 ## startup services
 # start auth services
-exec --no-startup-id "eval $(/usr/bin/gnome-keyring-daemon --start)"
-exec --no-startup-id export SSH_AUTH_SOCK
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec "eval $(/usr/bin/gnome-keyring-daemon --start)"
+exec export SSH_AUTH_SOCK
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # start other background services
-exec --no-startup-id mako
-exec --no-startup-id fcitx5 -d
-exec --no-startup-id clipman restore
-exec --no-startup-id wl-paste -t text --watch clipman store
-exec --no-startup-id wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"
-exec --no-startup-id playerctld daemon
-exec --no-startup-id thunar --daemon
+exec mako
+exec fcitx5 -d
+exec clipman restore
+exec wl-paste -t text --watch clipman store
+exec wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"
+exec playerctld daemon
+exec thunar --daemon
 
 # start screenlocker
 exec swayidle -w \
-  timeout 600 'swaylock -f' \
-  timeout 1200 'swaymsg "output * dpms off"' \
-            resume 'swaymsg "output * dpms on"' \
-  before-sleep 'swaylock -f' \
+  timeout 600 'env LANG=en.US_UTF-8 swaylock -f' \
+  timeout 1200 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+  before-sleep 'env LANG=en.US_UTF-8 swaylock -f' \
 
 # start display gamma setting tool: you may not want to hurt your eyes.
 
-exec --no-startup-id gammastep-indicator
+exec gammastep-indicator
 
 # set gtk themes (lxappearance or other X11 based utility does not works)
-exec_always --no-startup-id /home/haxibami/.bin/import-gsettings.sh \
+exec_always ~/.bin/import-gsettings.sh \
               gtk-theme:gtk-theme-name \
               icon-theme:gtk-icon-theme-name \
               cursor-theme:gtk-cursor-theme-name
 
+# set cursor theme
+seat seat0 xcursor_theme Bibata-Original-Classic 24
+
 # startup graphical apps
-exec tilix
+
 
 ## apps-related keybinds
 
 # start a terminal
-bindsym $mod+Return exec tilix
+bindsym $mod+Return exec $term
 
 # start browser
 bindsym $mod+b exec ~/.bin/wayfox.sh
@@ -109,19 +119,20 @@ bindsym $mod+b exec ~/.bin/wayfox.sh
 bindsym $mod+e exec thunar
 
 # screenlock (manual)
-bindsym $mod+control+l exec swaylock -f
+bindsym $mod+control+l exec env LANG=en.US_UTF-8 swaylock -f
+bindsym $mod+control+shift+l exec systemctl suspend
 
 # brightness controls (requires non-root access to i2c devices)
 bindsym $mod+F5 exec ddcutil --bus 2 setvcp 10 - 10
 bindsym $mod+F6 exec ddcutil --bus 2 setvcp 10 + 10
 
 # media controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% 
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% 
-bindsym XF86AudioRaiseVolume+shift exec --no-startup-id pactl set-source-volume @DEFAULT_SOURCE@ +5% 
-bindsym XF86AudioLowerVolume+shift exec --no-startup-id pactl set-source-volume @DEFAULT_SOURCE@ -5% 
-bindsym $mod+shift+m exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym $mod+m exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioRaiseVolume exec  pactl set-sink-volume @DEFAULT_SINK@ +5% 
+bindsym XF86AudioLowerVolume exec  pactl set-sink-volume @DEFAULT_SINK@ -5% 
+bindsym XF86AudioRaiseVolume+shift exec  pactl set-source-volume @DEFAULT_SOURCE@ +5% 
+bindsym XF86AudioLowerVolume+shift exec  pactl set-source-volume @DEFAULT_SOURCE@ -5% 
+bindsym $mod+shift+m exec  pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym $mod+m exec  pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym $mod+comma exec playerctl previous
 bindsym $mod+period exec ~/.bin/play-pause.sh
 #bindsym $mod+period exec playerctl --player playerctld play-pause
@@ -136,13 +147,11 @@ bindsym $mod+control+h exec clipman pick -t wofi
 # take screenshots
 # [fullscreen, copy & save]
 #bindsym $mod+shift+a exec grim - | wl-copy & wl-paste > ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim.png'
-bindsym $mod+shift+a exec grimshot --notify copy output | wl-paste -t image/png > ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim_full.png'
-
+bindsym $mod+shift+a exec grimshot --notify save output ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim_full.png'
 # [slurp, copy & save]
-#bindsym $mod+shift+s exec grim -t png -g "$(slurp -d)" - | wl-copy -t image/png && wl-paste -t image/png > ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim.png'
-bindsym $mod+shift+s exec grimshot --notify copy area | wl-paste -t image/png > ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim_area.png'
+bindsym $mod+shift+s exec grimshot --notify save area ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim_area.png'
 # [select window, copy & save]
-bindsym $mod+shift+f exec grimshot --notify copy window
+bindsym $mod+shift+f exec grimshot --notify save window ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim_window.png'
 
 # [fullscreen, only copy]
 bindsym $mod+Print exec grimshot --notify copy output
@@ -154,20 +163,20 @@ bindsym $mod+shift+Print exec grimshot --notify copy window
 #bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 
 # launch wofi, a rofi alternative on Wayland
-bindsym Mod1+space exec ~/.bin/mywofi.sh
+#bindsym Mod1+space exec ~/.bin/mywofi.sh
+bindsym Mod1+space exec $menu
 bindsym Mod1+Tab exec ~/.bin/window_walker.sh
-
-
 ## window-related keybinds
 # reload the configuration file
 bindsym $mod+Shift+c reload
 
 # exit sway
-bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+shift+e exec ~/.bin/powermenu.sh
 
 # allow floating popup exceptions
 for_window [app_id="firefox" title="Firefox — 共有インジケータ"] {
-	floating enable
+	floating enable,
+  sticky enable,
 }
 
 for_window [app_id="thunar" title="ファイル操作進行中"] {
@@ -218,10 +227,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+shift+h split h
+bindsym $mod+shift+h splith
 
 # split in vertical orientation
-bindsym $mod+shift+v split v
+bindsym $mod+shift+v splitv
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -245,6 +254,11 @@ bindsym $mod+p focus parent
 
 # focus the child container
 bindsym $mod+c focus child
+
+## scratchpad
+
+bindsym $mod+shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
 
 ## keybindings for workspaces
 
@@ -311,3 +325,6 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+
+include /etc/sway/config.d/*

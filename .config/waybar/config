@@ -4,9 +4,9 @@
     // "position": "bottom", // Waybar position (top|bottom|left|right)
 //    "height": 36, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
-    "margin-top": 20,
-    "margin-left": 20,
-    "margin-right": 20,
+    "margin-top": 30,
+    "margin-left": 30,
+    "margin-right": 30,
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window", "custom/media"],
     "modules-center": ["clock"],
@@ -86,7 +86,7 @@
         }
     },
     "tray": {
-        // "icon-size": 21,
+        "icon-size": 27,
         "spacing": 10
     },
     "clock": {

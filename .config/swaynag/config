@@ -1,0 +1,27 @@
+background=ff79c6
+border=282a36
+border-bottom=ff79c6
+button-background=ff79c6
+text=282a36
+button-text=282a36
+border-bottom-size=0
+message-padding=15
+details-background=ff5555
+details-border-size=3
+button-border-size=3
+button-gap=40
+button-dismiss-gap=30
+button-margin-right=20
+button-padding=11
+edge=bottom
+font=HackgenNerd 20
+
+[warning]
+background=ffb86ccc
+border=282a36
+border-bottom=282a36
+button-background=ffb86c
+text=282a36
+button-text=282a36
+details-background=ff5555
+font=HackgenNerd 20

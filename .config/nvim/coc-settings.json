@@ -1,5 +1,6 @@
 {
   "suggest.noselect": true,
   "suggest.preferCompleteThanJumpPlaceholder": false,
-  "coc.source.vimtex.enable": true
+  "coc.source.vimtex.enable": true,
+  "diagnostic.checkCurrentLine": true
 }

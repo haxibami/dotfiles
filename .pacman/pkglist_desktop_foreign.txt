@@ -8,8 +8,10 @@ fcitx5-dark-default
 fcitx5-mozc-ut
 fcitx5-skin-adwaita-dark
 fcitx5-skin-dark-numix
+gifski-git
 google-drive-ocamlfuse-opam
 grimshot
+i3lock-color-git
 inxi
 mpv-mpris-git
 netdiscover
@@ -26,6 +28,8 @@ rofi-greenclip
 slack-desktop
 spotify
 spotify-tui
+swaylock-effects
+swaynagmode
 systemd-boot-pacman-hook
 ttf-hackgen
 tty-clock

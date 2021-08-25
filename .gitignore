@@ -36,6 +36,9 @@
 !/.gitignore_global
 !/.github/**
 
+# tmux
+!/.tmux.conf
+
 # xorg
 !/.xinitrc
 !/.xprofile
@@ -77,7 +80,6 @@
 !/.config/kitty/**
 !/.config/mako/
 !/.config/mako/**
-!/.config/mimeapps.list
 !/.config/mpv/
 !/.config/mpv/mpv.conf
 !/.config/neofetch/
@@ -115,6 +117,8 @@
 !/.config/sway/**
 !/.config/swaylock/
 !/.config/swaylock/**
+!/.config/swaynag/
+!/.config/swaynag/**
 !/.config/systemd/
 !/.config/systemd/user/
 !/.config/systemd/user/xkeysnail.service
@@ -130,6 +134,3 @@
 !/.config/wofi/**
 !/.config/xkeysnail/
 !/.config/xkeysnail/**
-!/.config/zplug/
-!/.config/zplug/dracula/
-!/.config/zplug/dracula/**
