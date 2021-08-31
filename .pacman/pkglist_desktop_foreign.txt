@@ -28,7 +28,6 @@ paru
 pipes.sh
 pixterm
 polybar
-ponymix
 rofi-greenclip
 slack-desktop
 spotify
