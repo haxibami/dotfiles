@@ -6,11 +6,11 @@
 * {
     foreground:                  #f8f8f2;
     selected-normal-foreground:  #f8f8f2;
-    normal-foreground:           @foreground;
+    normal-foreground:           #f8f8f2;
     alternate-normal-background: #282a36;
     red:                         #ff5555;
-    selected-urgent-foreground:  #21222c;
-    blue:                        #268bd2;
+    selected-urgent-foreground:  #ff5555;
+    blue:                        #6272a4;
     urgent-foreground:           #ff79C6;
     alternate-urgent-background: #282a36;
     active-foreground:           #50fa7b;
@@ -18,7 +18,7 @@
     selected-active-foreground:  #ff6e6e;
     alternate-active-background: #282a36;
     background:                  #282a36;
-    bordercolor:                 #f8f8f2;
+    bordercolor:                 #ffffff;
     alternate-normal-foreground: @foreground;
 /*    normal-background:           #6272a4;*/
     lightfg:                     #44475a;
@@ -55,7 +55,7 @@ message {
     padding:      1px ;
 }
 textbox {
-    text-color: @input-color;
+    text-color: @input-text;
 }
 listview {
     fixed-height: 0;
@@ -126,11 +126,13 @@ inputbar {
 }
 case-indicator {
     spacing:    0;
+    background-color: @input-background;
     text-color: @normal-foreground;
 }
 entry {
     spacing:    0;
-    text-color: @normal-foreground;
+    background-color: @input-background;
+    text-color: @input-text;
 }
 prompt, button{
     spacing:    0;
@@ -157,14 +159,3 @@ textbox-prompt-colon {
     text-color: @colon-foreground;
     background-color: @input-background;
 }
-
-entry {
-    background-color: @input-background;
-    text-color: @input-text;
-}
-
-case-indicator {
-    background-color: @input-background;
-}
-
-/* vim:set ft=css: */

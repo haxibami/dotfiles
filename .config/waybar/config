@@ -2,7 +2,7 @@
 {
     // "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
-//    "height": 36, // Waybar height (to be removed for auto height)
+//    "height": 60, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
     "margin-top": 30,
     "margin-left": 30,
@@ -10,7 +10,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window", "custom/media"],
     "modules-center": ["clock"],
-    "modules-right": ["idle_inhibitor", "custom/pacman", "cpu", "temperature", "memory", "disk", "network", "custom/brightness", "pulseaudio", "sway/language", "tray"],
+    "modules-right": ["idle_inhibitor", "custom/pacman", "cpu", "temperature", "memory", "disk", "network", "pulseaudio", "sway/language", "tray"],
     // Modules configuration
 //    "sway/workspaces": {
 //        "disable-scroll": true,
@@ -188,9 +188,9 @@
         "on-click": "~/.bin/play-pause.sh",
         "on-scroll-up": "playerctl next",
         "on-scroll-down": "playerctl previous",
-        "exec-if": "pgrep spotifyd",
+//        "exec-if": "pgrep spotify",
         //"exec": "$HOME/.config/waybar/media.sh 2> /dev/null",
-        "exec": "python $HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Incompatible with spotifyd(daemon)
+        "exec": "~/.config/waybar/mediaplayer.sh" // Incompatible with spotifyd(daemon)
         //"exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
     "custom/pacman": {
@@ -198,19 +198,19 @@
         "interval": 3600,                     // every hour
         "exec": "checkupdates | wc -l",       // # of updates
         "exec-if": "exit 0",                  // always run; consider advanced run conditions
-        "on-click": "tilix -e 'sudo pacman -Syu'; pkill -SIGRTMIN+8 waybar", // update system
+        "on-click": "alacritty -e 'sudo pacman -Syu'; pkill -SIGRTMIN+8 waybar", // update system
         "signal": 8,
         "tooltip-format": "pacman wants to eat... {}"
     },
     "custom/brightness": {
         "format": "{}% ",
-        "interval": 2,
-        "signal": 8,
+//        "signal": 15,
         "exec": "~/.bin/getlight.sh",
-        "on-scroll-up": "ddcutil --bus 2 setvcp 10 + 10",
-        "on-scroll-down": "ddcutil --bus 2 setvcp 10 - 10",
+//        "exec-if": "exit 1",
+//        "escape": true,
+//        "on-scroll-up": "ddcutil --bus 2 setvcp 10 + 10",
+//        "on-scroll-down": "ddcutil --bus 2 setvcp 10 - 10",
         "tooltip-format": "{}"
     }
 }
 
-// vim:set ft=javascript:

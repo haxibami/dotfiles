@@ -1,9 +1,12 @@
+bear
 bibata-cursor-theme-bin
+bitwarden-bin
 cava
 cbonsai
 clipman
 cnijfilter2
 ddcci-driver-linux-dkms
+ddccontrol-git
 fcitx5-dark-default
 fcitx5-mozc-ut
 fcitx5-skin-adwaita-dark
@@ -16,6 +19,7 @@ inxi
 mpv-mpris-git
 netdiscover
 neuropol-ttf
+nvm
 onedriver
 onivim2-git
 otf-nerd-fonts-fira-code
@@ -24,6 +28,7 @@ paru
 pipes.sh
 pixterm
 polybar
+ponymix
 rofi-greenclip
 slack-desktop
 spotify
@@ -36,5 +41,8 @@ tty-clock
 unzip-iconv
 vim-dein-git
 visual-studio-code-bin
+wev
+wob
+xob
 zoom
 zscroll-git

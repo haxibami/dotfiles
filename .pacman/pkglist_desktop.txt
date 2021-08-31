@@ -9,6 +9,10 @@ bashtop
 bat
 binutils
 bison
+blueman
+bluez
+bluez-utils
+ccls
 chafa
 chromium
 clamtk
@@ -74,6 +78,7 @@ linux-zen-headers
 lshw
 lxappearance-gtk3
 m4
+maim
 make
 mako
 man-db
@@ -97,6 +102,7 @@ otf-ipafont
 otf-ipamjfont
 pacman
 pacman-contrib
+pamixer
 parcellite
 patch
 pavucontrol
@@ -121,6 +127,7 @@ ranger
 read-edid
 redshift
 rofi
+rofi-calc
 seahorse
 sed
 skktools
@@ -154,6 +161,8 @@ tmux
 tracker3-miners
 ttf-font-awesome
 ttf-roboto-mono
+usb_modeswitch
+usbutils
 vi
 vifm
 vim

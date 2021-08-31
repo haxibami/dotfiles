@@ -63,7 +63,7 @@ font-3 = HackgenNerd:style=Regular:pixelsize=35;6
 
 modules-left = i3 xwindow spotify
 modules-center = date
-modules-right = pacman cpu temperature memory filesystem eth ddcutil pulseaudio xkeyboard
+modules-right = pacman cpu temperature memory filesystem eth pulseaudio xkeyboard
 
 separator = %{F#6272a4}|%{F-}
 dim-value = 1.0
@@ -267,8 +267,8 @@ blacklist-0 = num lock
 format = <label-layout>
 format-spacing = 0
 format-prefix = " "
-;format-prefix-foreground = ${colors.foreground-alt-dark}
-;format-prefix-background = #f1fa8c
+format-prefix-foreground = #bd93f9
+#format-prefix-background = #bd93f9
 ;format-prefix-underline = ${colors.secondary}
 format-prefix-padding = 0
 
@@ -411,9 +411,9 @@ type = internal/pulseaudio
 
 format-volume = <label-volume>
 ;<bar-volume>
-;format-volume-background = #6272a4
+;format-volume-background = #ff79c6
 format-volume-padding = 0
-label-volume = %{F#bd93f9}%{F-} %percentage%%
+label-volume = %{F#ff79c6}%{F-} %percentage%%
 ;label-volume-foreground = 
 
 label-muted = 
@@ -528,13 +528,13 @@ click-left = playerctl next spotify
 [module/ddcutil]
 type = custom/script
 exec = ~/.bin/getlight.sh
-interval = 2
+;interval = 2
 format = <label>
 format-prefix = " "
 format-prefix-foreground = #ff79c6
 label = %output%%
-scroll-up = ddcutil --bus 2 setvcp 10 + 10
-scroll-down = ddcutil --bus 2 setvcp 10 - 10
+#scroll-up = ddcutil --bus 2 setvcp 10 + 10
+#scroll-down = ddcutil --bus 2 setvcp 10 - 10
 
 [module/pacman]
 type = custom/script

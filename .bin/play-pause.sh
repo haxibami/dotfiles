@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Clone of `playerctl`. Sends the second argument (e.g. `PlayPause` `Pause` etc.) to the first argument's media player.
 function pctl {

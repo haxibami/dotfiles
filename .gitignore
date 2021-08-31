@@ -66,8 +66,6 @@
 !/.config/dracula/**
 !/.config/dunst/
 !/.config/dunst/**
-!/.config/flameshot/
-!/.config/flameshot/flameshot.ini
 !/.config/gammastep/
 !/.config/gammastep/**
 !/.config/greenclip.toml

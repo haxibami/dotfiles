@@ -133,15 +133,17 @@
 ; gradient_color_8 = '#cc3333'
 
 gradient = 1
-gradient_count = 8
+gradient_count = 3
 gradient_color_1 = '#bd93f9'
-gradient_color_2 = '#6272a4'
-gradient_color_3 = '#8be9fd'
-gradient_color_4 = '#50fa7b'
-gradient_color_5 = '#f1fa8c'
-gradient_color_6 = '#ffb86c'
-gradient_color_7 = '#ff5555'
-gradient_color_8 = '#ff79c6'
+;gradient_color_2 = '#6272a4'
+gradient_color_2 = '#ff79c6'
+;gradient_color_3 = '#8be9fd'
+gradient_color_3 = '#ff5555'
+;gradient_color_4 = '#50fa7b'
+;gradient_color_5 = '#f1fa8c'
+;gradient_color_6 = '#ffb86c'
+;gradient_color_7 = '#ff5555'
+;gradient_color_8 = '#ff79c6'
 
 
 

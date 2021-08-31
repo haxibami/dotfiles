@@ -1,12 +1,6 @@
 # If not running interactively, do not do anything
 [[ $- != *i* ]] && return
 [[ -z "$TMUX" ]] && exec tmux
-# TMUX
-#if which tmux >/dev/null 2>&1; then
-#    #if not inside a tmux session, and if no session is started, start a new session
-#    test -z "$TMUX" && (tmux attach || tmux new-session)
-#fi
-
 
 # aliases
 alias spotify='/usr/bin/spotify --force-device-scale-factor=1.5'
@@ -66,21 +60,20 @@ HISTSIZE=100000
 SAVEHIST=100000
 
 # enable autocompletion
-autoload -Uz promptinit
+autoload -Uz promptinit compinit
 promptinit
-autoload -U compinit
 compinit
 
 # keybind
 bindkey -v
 bindkey -v '^[[H' beginning-of-line
 bindkey -v '^[[F' end-of-line
-#bindkey "${terminfo[khome]}" beginning-of-line
-#bindkey "${terminfo[kend]}" end-of-line
-if [[ -n "$TMUX" ]]; then
-  bindkey -v '^[[1~' beginning-of-line
-  bindkey -v '^[[4~' end-of-line
-fi
+bindkey "${terminfo[khome]}" beginning-of-line
+bindkey "${terminfo[kend]}" end-of-line
+#if [[ -n "$TMUX" ]]; then
+#  bindkey -v '^[[1~' beginning-of-line
+#  bindkey -v '^[[4~' end-of-line
+#fi
 
 # select completion
 zstyle ':completion:*' menu select
@@ -90,3 +83,7 @@ eval "$(starship init zsh)"
 
 # opam configuration
 test -r /home/haxibami/.opam/opam-init/init.zsh && . /home/haxibami/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+# nvm
+
+#test -r /usr/share/nvm/init-nvm.sh && source /usr/share/nvm/init-nvm.sh > /dev/null 2> /dev/null || true

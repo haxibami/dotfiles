@@ -9,8 +9,10 @@ set $up k
 set $right l
 
 set $term alcrt
+set $guaketerm guake-toggle
 
-set $menu ~/.bin/mywofi.sh | mywofi.sh | xargs swaymsg exec --
+#set $menu dmenu_path | ~/.bin/mydofi.sh | xargs swaymsg exec --
+set $menu ~/.bin/mywofi.sh
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -32,29 +34,31 @@ exec xdg-settings set default-web-browser wayfox.desktop
 
 # set output & scaling
 output HDMI-A-1 scale 1
+exec ddccontrol -p
 
 # set compositor-unique variables
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway 
-
+#exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
 ## look & feel
 # set wallpaper
-output "*" background ~/.config/i3/arch.png fill
+output "*" background ~/.config/i3/purple_moon.jpg fill
 
 # set inner and outer gaps
 gaps inner 30
 gaps outer 3
-default_border pixel 3
+default_border pixel 4
 
 # set window transparency
-# set $opacity-active 0.80
+# set $opacity-active 0.9
 # for_window [app_id=".*"] opacity $opacity-active
+exec_always ~/.config/sway/window-transparency.sh
 
 # set color theme: Dracula loves night.
 # class                 border  bground text    indicator child_border
-client.focused          #BD93F9 #BD93F9 #282A36 #BD93F9   #BD93F9
-client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-client.unfocused        #44475A #44475A #BFBFBF #44475A   #44475A
+client.focused          #ff79c6 #ff79c6 #282A36 #ff79c6   #ff79c6
+client.focused_inactive #44475A #44475A #F8F8F2 #f8f8f2   #f8f8f2
+client.unfocused        #44475A #44475A #BFBFBF #f8f8f2   #f8f8f2
 client.urgent           #FF5555 #FF5555 #F8F8F2 #FF5555   #FF5555
 client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 
@@ -72,6 +76,7 @@ bar {
 
 ## startup services
 # start auth services
+
 exec "eval $(/usr/bin/gnome-keyring-daemon --start)"
 exec export SSH_AUTH_SOCK
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -79,9 +84,9 @@ exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # start other background services
 exec mako
 exec fcitx5 -d
-exec clipman restore
-exec wl-paste -t text --watch clipman store
-exec wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"
+exec myclipman restore
+exec wl-paste -t text --watch myclipman
+exec wl-paste -p -t text --watch myclipman
 exec playerctld daemon
 exec thunar --daemon
 
@@ -95,6 +100,11 @@ exec swayidle -w \
 
 exec gammastep-indicator
 
+# start network manager applet
+
+exec nm-applet --indicator
+exec blueman-applet
+
 # set gtk themes (lxappearance or other X11 based utility does not works)
 exec_always ~/.bin/import-gsettings.sh \
               gtk-theme:gtk-theme-name \
@@ -104,13 +114,23 @@ exec_always ~/.bin/import-gsettings.sh \
 # set cursor theme
 seat seat0 xcursor_theme Bibata-Original-Classic 24
 
+# set volume/brightness bar: wob
+set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
+exec mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
+set $DDCSOCK $XDG_RUNTIME_DIR/ddc.sock
+exec mkfifo $DDCSOCK && tail -f $DDCSOCK | wob
+
+#exec_always sleep 2; ddcutil --bus 2 getvcp 10 | awk '{print $9}' | tr -d ',' > $DDCSOCK 
+
 # startup graphical apps
 
+exec guake
 
 ## apps-related keybinds
 
 # start a terminal
 bindsym $mod+Return exec $term
+bindsym $mod+shift+Return exec $guaketerm
 
 # start browser
 bindsym $mod+b exec ~/.bin/wayfox.sh
@@ -118,31 +138,37 @@ bindsym $mod+b exec ~/.bin/wayfox.sh
 # start file manager
 bindsym $mod+e exec thunar
 
+# calc
+bindsym Mod1+c exec rofi -show calc -modi calc -no-show-match -no-sort
+
 # screenlock (manual)
 bindsym $mod+control+l exec env LANG=en.US_UTF-8 swaylock -f
 bindsym $mod+control+shift+l exec systemctl suspend
 
 # brightness controls (requires non-root access to i2c devices)
-bindsym $mod+F5 exec ddcutil --bus 2 setvcp 10 - 10
-bindsym $mod+F6 exec ddcutil --bus 2 setvcp 10 + 10
+#bindsym $mod+F5 exec ~/.bin/downlight.sh
+bindsym $mod+F5 exec ddccontrol -f -r 0x10 -W -5 dev:/dev/i2c-2 | grep Brightness | cut -d "/" -f 2 | tee $WOBSOCK $DDCSOCK
+#bindsym $mod+F6 exec ~/.bin/uplight.sh
+bindsym $mod+F6 exec ddccontrol -f -r 0x10 -W +5 dev:/dev/i2c-2 | grep Brightness | cut -d "/" -f 2 | tee $WOBSOCK $DDCSOCK
 
 # media controls
-bindsym XF86AudioRaiseVolume exec  pactl set-sink-volume @DEFAULT_SINK@ +5% 
-bindsym XF86AudioLowerVolume exec  pactl set-sink-volume @DEFAULT_SINK@ -5% 
-bindsym XF86AudioRaiseVolume+shift exec  pactl set-source-volume @DEFAULT_SOURCE@ +5% 
-bindsym XF86AudioLowerVolume+shift exec  pactl set-source-volume @DEFAULT_SOURCE@ -5% 
-bindsym $mod+shift+m exec  pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym $mod+m exec  pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && pamixer --get-volume > $WOBSOCK
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && pamixer --get-volume > $WOBSOCK
+bindsym XF86AudioRaiseVolume+shift exec pactl set-source-volume @DEFAULT_SOURCE@ +5% && pamixer --default-source --get-volume > $WOBSOCK
+bindsym XF86AudioLowerVolume+shift exec pactl set-source-volume @DEFAULT_SOURCE@ -5% && pamixer --default-source --get-volume > $WOBSOCK
+bindsym $mod+shift+m exec  pactl set-sink-mute @DEFAULT_SINK@ toggle && ( pamixer --get-mute && echo 0 > $WOBSOCK ) || pamixer --get-volume > $WOBSOCK
+bindsym $mod+m exec  pactl set-source-mute @DEFAULT_SOURCE@ toggle && ( pamixer --default-source --get-mute && echo 0 > $WOBSOCK ) || pamixer --default-source --get-volume > $WOBSOCK
 bindsym $mod+comma exec playerctl previous
 bindsym $mod+period exec ~/.bin/play-pause.sh
 #bindsym $mod+period exec playerctl --player playerctld play-pause
 bindsym $mod+slash exec playerctl next
 bindsym $mod+shift+comma exec playerctl --player playerctld position -10
 bindsym $mod+shift+slash exec playerctl --player playerctld position +10
+bindsym $mod+s exec ~/.bin/wofi-pulse.sh
 
 # show history with clipboard manager & wofi
 
-bindsym $mod+control+h exec clipman pick -t wofi
+bindsym $mod+v exec clipman pick -t wofi
 
 # take screenshots
 # [fullscreen, copy & save]
@@ -165,6 +191,7 @@ bindsym $mod+shift+Print exec grimshot --notify copy window
 # launch wofi, a rofi alternative on Wayland
 #bindsym Mod1+space exec ~/.bin/mywofi.sh
 bindsym Mod1+space exec $menu
+bindsym Mod1+shift+space exec ~/.bin/myrofi.sh
 bindsym Mod1+Tab exec ~/.bin/window_walker.sh
 ## window-related keybinds
 # reload the configuration file
@@ -183,21 +210,27 @@ for_window [app_id="thunar" title="ファイル操作進行中"] {
   floating enable
 }
 
-for_window [app_id="thunar" title="File Operation Progress"] {
-  floating enable
-}
-
 for_window [app_id="tilix" title="Tilix の設定"] {
-  floating enable
-}
-
-for_window [app_id="tilix" title="Tilix Preferences"] {
   floating enable
 }
 
 for_window [app_id="guake"] {
   floating enable
+  move up 486 px
 }
+
+for_window [app_id="qt5ct" title="Qt5 Configuration Tool"] {
+  floating enable
+}
+
+for_window [app_id="fcitx5" title="Fcitx の設定"] {
+  floating enable
+}
+
+for_window [app_id="blueman-manager"] {
+  floating enable
+}
+
 
 # kill focused window
 bindsym $mod+q kill
@@ -307,16 +340,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 50 px
+        bindsym j resize grow height 50 px
+        bindsym k resize shrink height 50 px
+        bindsym l resize grow width 50 px
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 10 px or 5 ppt
+        bindsym Down resize grow height 10 px or 5 ppt
+        bindsym Up resize shrink height 10 px or 5 ppt
+        bindsym Right resize grow width 10 px or 5 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"

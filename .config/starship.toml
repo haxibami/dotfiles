@@ -4,14 +4,17 @@ scan_timeout = 10
 
 format = """
 [┌──](white)$directory$git_branch$git_status$hostname
-[└─>](white)$character(white)"""
-
+[└─](white)$character(white)"""
+# 
 #[│](white)$directory$hostname
 
 [character]
-success_symbol = "[\\[๑ᴖ◡ᴖ๑\\]](#50fa7b) [<](#ff79c6)"
-error_symbol = "[\\[๑>_<๑\\]](#ff5555) [<](#ff79c6)"
-vicmd_symbol = "[\\[๑ᴖ◡ᴖ๑\\]](#f1fa8c) [<](#ff79c6)"
+success_symbol = "[🐑 🏳 ](#50fa7b) [](#ff79c6)"
+# \\[๑ᴖ◡ᴖ๑\\]🏳
+error_symbol = "[🐑 🏳 ](#ff5555) [](#ff79c6)"
+# \\[๑>_<๑\\]
+vicmd_symbol = "[🐑 🏳 ](#f1fa8c) [](#ff79c6)"
+# \\[๑ᴖ◡ᴖ๑\\]
 
 [directory]
 truncation_length = 5

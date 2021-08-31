@@ -54,6 +54,8 @@ set nowritebackup
 set updatetime=300
 set shortmess+=c
 set signcolumn=number
+set clipboard&
+set clipboard^=unnamedplus
 
 augroup mygroup
   autocmd!
@@ -87,6 +89,8 @@ set showmatch
 set pumblend=10
 set shortmess-=S
 let g:fern#default_hidden=1
+
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 let g:jpmode = 0
 

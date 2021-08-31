@@ -12,6 +12,7 @@
 set $mod Mod4
 
 set $term alacritty
+set $guaketerm guake-toggle
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -23,7 +24,7 @@ exec --no-startup-id xdg-settings set default-web-browser firefox.desktop
 
 ## look & feel
 # set wallpaper
-exec --no-startup-id "feh --bg-scale ~/.config/i3/arch.png"
+exec_always --no-startup-id "feh --bg-scale ~/.config/i3/ShibuyaRiver.jpg"
 
 # set gaps
 gaps inner 24
@@ -48,13 +49,15 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec --no-startup-id nm-applet
 
 # start auth services
+
+#exec "eval $(/usr/bin/gnome-keyring-daemon --start)"
+#exec export SSH_AUTH_SOCK
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # start other background services
 exec --no-startup-id dunst
 exec --no-startup-id fcitx5 -d
 exec --no-startup-id parcellite
-exec --no-startup-id "sudo xkeysnail ~/.config/xkeysnail/config.py"
 exec --no-startup-id playerctld daemon
 exec_always --no-startup-id "picom --config ~/.config/picom.conf"
 
@@ -70,15 +73,23 @@ exec_always --no-startup-id xss-lock --transfer-sleep-lock -- ~/.bin/myi3lock.sh
 exec --no-startup-id redshift-gtk
 #exec --no-startup-id gammastep-indicator
 
-#startup apps
-exec $term
+# startup volume/brightness bars
 
+set $XOBSOCK $XDG_RUNTIME_DIR/xob.sock
+exec mkfifo $XOBSOCK && tail -f $XOBSOCK | xob
+set $DDCSOCK $XDG_RUNTIME_DIR/ddc.sock
+exec mkfifo $DDCSOCK && tail -f $DDCSOCK
+
+exec_always sleep 2;ddcutil --bus 2 getvcp 10 | awk '{print $9}' | tr -d ',' > $DDCSOCK
+
+# start graphical apps
+exec guake
 
 ## apps-related keybinds
 
 # start a terminal
 bindsym $mod+Return exec $term
-bindsym $mod+shift+Return exec tilix --quake
+bindsym $mod+shift+Return exec $guaketerm
 
 # start browser
 bindsym $mod+b exec firefox
@@ -91,20 +102,20 @@ bindsym $mod+control+l exec ~/.bin/myi3lock.sh
 bindsym $mod+control+shift+l exec systemctl suspend
 
 # brightness controls (requires non-root access to i2c devices)
-bindsym $mod+F5 exec ddcutil --bus 2 setvcp 10 - 10
-bindsym $mod+F6 exec ddcutil --bus 2 setvcp 10 + 10
+bindsym $mod+F5 exec ddccontrol -f -r 0x10 -W -5 dev:/dev/i2c-2 | grep Brightness | cut -d "/" -f 2 | tee $XOBSOCK $DDCSOCK
+bindsym $mod+F6 exec ddccontrol -f -r 0x10 -W +5 dev:/dev/i2c-2 | grep Brightness | cut -d "/" -f 2 | tee $XOBSOCK $DDCSOCK
 
 # media controls
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
-bindsym XF86AudioRaiseVolume+shift exec --no-startup-id pactl set-source-volume @DEFAULT_SOURCE@ +5% $refresh_i3status
-bindsym XF86AudioLowerVolume+shift exec --no-startup-id pactl set-source-volume @DEFAULT_SOURCE@ -5% $refresh_i3status
+# set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && pamixer --get-volume > $XOBSOCK
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && pamixer --get-volume > $XOBSOCK
+bindsym XF86AudioRaiseVolume+shift exec --no-startup-id pactl set-source-volume @DEFAULT_SOURCE@ +5% && pamixer --source $(pamixer --list-sources | grep input.pci | cut -d " " -f-1) --get-volume > $XOBSOCK
+bindsym XF86AudioLowerVolume+shift exec --no-startup-id pactl set-source-volume @DEFAULT_SOURCE@ -5% && pamixer --source $(pamixer --list-sources | grep input.pci | cut -d " " -f-1) --get-volume > $XOBSOCK
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-bindsym $mod+shift+m exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym $mod+m exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym $mod+shift+m exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle ( pamixer --get-mute && echo 0 > $XOBSOCK ) || pamixer --get-volume > $XOBSOCK
+bindsym $mod+m exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle ( pamixer --source &pamixer --list-sources | grep input.pci | cut -d " " -f-1) --get-mute && echo 0 > $XOBSOCK ) || pamixer --get-volume > $XOBSOCK
 bindsym $mod+comma exec playerctl previous
 bindsym $mod+period exec ~/.bin/play-pause.sh
 #bindsym $mod+period exec playerctl --player playerctld play-pause
@@ -114,22 +125,26 @@ bindsym $mod+shift+slash exec playerctl --player playerctld position +10
 
 # take screenshots
 # [fullscreen, copy & save]
-bindsym $mod+shift+a exec "flameshot full -c -p ~/Pictures/Screenshots/"
+#bindsym $mod+shift+a exec "flameshot full -c -p ~/Pictures/Screenshots/"
+bindsym $mod+shift+a exec maim ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_maim_full.png'
 # [area, copy & save]
-bindsym $mod+shift+s exec "flameshot gui"
+bindsym $mod+shift+s exec maim -s ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_maim_area.png'
 # [select window, copy & save]
-bindsym $mod+shift+f exec "flameshot gui"
+bindsym $mod+shift+f exec "~/.bin/maimshot.sh"
 
 # [fullscreen, copy]
-bindsym $mod+Print exec "flameshot full -c"
+bindsym $mod+Print exec maim | xclip -selection clipboard -t image/png
 # [area, only only copy]
-bindsym Print exec "flameshot gui"
+bindsym Print exec exec maim -s | xclip -selection clipboard -t image/png
 # [select window, only copy]
-bindsym $mod+shift+Print exec "flameshot gui"
+#bindsym $mod+shift+Print exec maim -g $(i3-msg -t get_tree | jq -r '.. | select(.id? and .focused?) | .rect | "\(.width)x\(.height)+\(.x)+\(.y)"' | slop -f "%wx%h+%x+%y") | xclip -selection clipboard -t image/png
+bindsym $mod+shift+Print exec maim -s | xclip -selection clipboard -t image/png
+
 
 # launch rofi, a dmenu alternative on X11
 #bindsym Mod1+space exec "rofi -show run"
 bindsym Mod1+space exec "~/.bin/myrofi.sh"
+bindsym Mod1+Tab exec "rofi -show window"
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
@@ -250,16 +265,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 5 ppt
+        bindsym j resize grow height 10 px or 5 ppt
+        bindsym k resize shrink height 10 px or 5 ppt
+        bindsym l resize grow width 10 px or 5 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 10 px or 5 ppt
+        bindsym Down resize grow height 10 px or 5 ppt
+        bindsym Up resize shrink height 10 px or 5 ppt
+        bindsym Right resize grow width 10 px or 5 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
