@@ -86,7 +86,7 @@ exec mako
 exec fcitx5 -d
 exec myclipman restore
 exec wl-paste -t text --watch myclipman
-exec wl-paste -p -t text --watch myclipman
+#exec wl-paste -p -t text --watch myclipman
 exec playerctld daemon
 exec thunar --daemon
 
@@ -100,10 +100,11 @@ exec swayidle -w \
 
 exec gammastep-indicator
 
-# start network manager applet
+# start applets
 
 exec nm-applet --indicator
 exec blueman-applet
+exec meteo-qt
 
 # set gtk themes (lxappearance or other X11 based utility does not works)
 exec_always ~/.bin/import-gsettings.sh \
@@ -164,7 +165,7 @@ bindsym $mod+period exec ~/.bin/play-pause.sh
 bindsym $mod+slash exec playerctl next
 bindsym $mod+shift+comma exec playerctl --player playerctld position -10
 bindsym $mod+shift+slash exec playerctl --player playerctld position +10
-bindsym $mod+s exec ~/.bin/wofi-pulse.sh
+#bindsym $mod+s exec ~/.bin/swaypulse.sh
 
 # show history with clipboard manager & wofi
 
@@ -186,6 +187,12 @@ bindsym Print exec grimshot --notify copy area
 # [select window, only copy]
 bindsym $mod+shift+Print exec grimshot --notify copy window
 
+# record screen
+#bindsym $mod+control+r exec ~/.bin/swayrec.sh
+
+# cast screen as dummy camera
+#bindsym $mod+shift+r exec ~/.bin/swayscrshare.sh
+
 #bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 
 # launch wofi, a rofi alternative on Wayland
@@ -198,12 +205,14 @@ bindsym Mod1+Tab exec ~/.bin/window_walker.sh
 bindsym $mod+Shift+c reload
 
 # exit sway
-bindsym $mod+shift+e exec ~/.bin/powermenu.sh
+bindsym $mod+shift+e exec ~/.bin/swaypower.sh
 
 # allow floating popup exceptions
 for_window [app_id="firefox" title="Firefox — 共有インジケータ"] {
-	floating enable,
-  sticky enable,
+	floating enable
+  sticky enable
+  move up 1065 px
+  move right 330 px
 }
 
 for_window [app_id="thunar" title="ファイル操作進行中"] {
@@ -231,6 +240,44 @@ for_window [app_id="blueman-manager"] {
   floating enable
 }
 
+for_window [class="flameshot" title="設定"] {
+  floating enable
+}
+
+for_window [class="XEyes" title="xeyes"] {
+  floating enable
+}
+
+for_window [app_id="showmethekey-gtk" title="Floating Window - Show Me The Key"] {
+  floating enable
+  sticky enable
+  move up 1065 px
+  move left 450 px
+}
+
+for_window [app_id="showmethekey-gtk"] {
+  floating enable
+}
+
+for_window [class="zoom" title="zoom"] {
+  floating enable
+}
+
+#for_window [class="zoom" title="Zoom"] {
+#  floating enable
+#}
+
+for_window [class="zoom" title="設定"] {
+  floating enable
+}
+
+#for_window [class="zoom" title="ズーム会議"] {
+#  set height 10 ppt
+#}
+
+for_window [app_id="meteo-qt.python3"] {
+  floating enable
+}
 
 # kill focused window
 bindsym $mod+q kill
@@ -359,5 +406,34 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+mode "media" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+#        bindsym h resize shrink width 50 px
+#        bindsym j resize grow height 50 px
+#        bindsym k resize shrink height 50 px
+#        bindsym l resize grow width 50 px
+
+        # record screen
+        bindsym control+r exec ~/.bin/swayrec.sh
+
+        # cast screen as dummy camera
+        bindsym Mod1+r exec ~/.bin/swayscrshare.sh
+
+        # set default sink & sources
+        bindsym p exec ~/.bin/swaypulse.sh
+
+
+        # back to normal
+#        bindsym Return mode "default"
+#        bindsym Escape mode "default"
+        bindsym $mod+g mode "default"
+}
+
+bindsym $mod+g mode "media"
 
 include /etc/sway/config.d/*

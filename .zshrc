@@ -87,3 +87,4 @@ test -r /home/haxibami/.opam/opam-init/init.zsh && . /home/haxibami/.opam/opam-i
 # nvm
 
 #test -r /usr/share/nvm/init-nvm.sh && source /usr/share/nvm/init-nvm.sh > /dev/null 2> /dev/null || true
+

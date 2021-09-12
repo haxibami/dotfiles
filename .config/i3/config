@@ -24,7 +24,7 @@ exec --no-startup-id xdg-settings set default-web-browser firefox.desktop
 
 ## look & feel
 # set wallpaper
-exec_always --no-startup-id "feh --bg-scale ~/.config/i3/ShibuyaRiver.jpg"
+exec_always --no-startup-id "feh --bg-scale ~/.config/i3/purple_moon.jpg"
 
 # set gaps
 gaps inner 24
@@ -89,7 +89,7 @@ exec guake
 
 # start a terminal
 bindsym $mod+Return exec $term
-bindsym $mod+shift+Return exec $guaketerm
+bindsym $mod+shift+Return exec guake-toggle
 
 # start browser
 bindsym $mod+b exec firefox
@@ -162,7 +162,7 @@ bindsym Mod1+Tab exec "rofi -show window"
 bindsym $mod+Shift+c restart
 # exit i3 (logs you out of your X session)
 #bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3?'  -b 'Reboot' 'systemctl reboot' -b 'Shutdown' 'systemctl poweroff' -b 'Logout' 'i3-msg exit'"
-bindsym $mod+shift+e exec ~/.bin/xpowermenu.sh
+bindsym $mod+shift+e exec ~/.bin/i3power.sh
 
 # kill focused window
 bindsym $mod+q kill

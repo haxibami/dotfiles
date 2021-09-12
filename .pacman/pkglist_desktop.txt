@@ -14,7 +14,6 @@ bluez
 bluez-utils
 ccls
 chafa
-chromium
 clamtk
 cowfortune
 dbus-python
@@ -22,6 +21,8 @@ dhcpcd
 dialog
 discord
 dmenu
+docker
+docker-compose
 drawing
 dunst
 exa
@@ -35,12 +36,15 @@ file
 findutils
 firefox
 flameshot
+flatpak
 flex
+fzf
 gammastep
 gawk
 gcc
 gettext
 git
+git-delta
 glfw-wayland
 gnome-keyring
 gnome-sound-recorder
@@ -48,6 +52,7 @@ grep
 grim
 groff
 guake
+guvcview
 gvfs
 gzip
 i3-gaps
@@ -95,6 +100,7 @@ networkmanager
 noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
+npm
 nss-mdns
 otf-font-awesome
 otf-ipaexfont
@@ -126,12 +132,14 @@ qt5ct
 ranger
 read-edid
 redshift
+ripgrep
 rofi
 rofi-calc
 seahorse
 sed
 skktools
 slurp
+sof-firmware
 spotifyd
 starship
 sudo
@@ -153,6 +161,7 @@ texlive-pictures
 texlive-pstricks
 texlive-publishers
 texlive-science
+the_silver_searcher
 thunar
 thunar-volman
 tilix
@@ -163,6 +172,7 @@ ttf-font-awesome
 ttf-roboto-mono
 usb_modeswitch
 usbutils
+v4l2loopback-dkms
 vi
 vifm
 vim
@@ -170,6 +180,7 @@ vulkan-intel
 vulkan-mesa-layers
 w3m
 waybar
+wayvnc
 wf-recorder
 which
 wl-clipboard
@@ -193,6 +204,7 @@ xorg-xcursorgen
 xorg-xdpyinfo
 xorg-xdriinfo
 xorg-xev
+xorg-xeyes
 xorg-xgamma
 xorg-xhost
 xorg-xinit

@@ -1,10 +1,4 @@
 [[plugins]]
-repo = 'lambdalisue/fern.vim'
-
-[[plugins]]
-repo = 'antoinemadec/FixCursorHold.nvim'
-
-[[plugins]]
 repo = 'lervag/vimtex'
 on_ft=['tex']
 hook_source='''
@@ -22,3 +16,34 @@ hook_source='''
 [[plugins]]
 repo = 'mzlogin/vim-markdown-toc'
 on_ft = ['md']
+
+[[plugins]]
+repo = 'lambdalisue/fern.vim'
+hook_source = '''
+  let g:fern#default_hidden=1
+  let g:fern#renderer = "nerdfont"
+'''
+
+[[plugins]]
+repo = 'lambdalisue/nerdfont.vim'
+on_source = ['fern.vim']
+
+[[plugins]]
+repo = 'lambdalisue/fern-renderer-nerdfont.vim'
+on_source = ['fern.vim']
+
+[[plugins]]
+repo = 'lambdalisue/glyph-palette.vim'
+on_source = ['fern.vim']
+hook_source = '''
+  augroup my-glyph-palette
+    autocmd! *
+    autocmd FileType fern call glyph_palette#apply()
+    autocmd FileType nerdtree,startify call glyph_palette#apply()
+  augroup END
+'''
+
+[[plugins]]
+repo = 'iamcco/markdown-preview.nvim'
+on_ft = ['md', 'markdown', 'pandoc.markdown', 'rmd']
+build = 'sh -c "cd app && yarn install"'

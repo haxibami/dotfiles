@@ -3,11 +3,23 @@ repo = 'itchyny/lightline.vim'
 
 [[plugins]]
 repo = 'dracula/vim'
+hook_post_source = '''
+  let g:dracula_colorterm=0
+'''
 
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 rev = 'release'
 
 [[plugins]]
+repo = 'antoinemadec/FixCursorHold.nvim'
+
+[[plugins]]
 repo = 'lilydjwg/fcitx.vim'
 rev = 'fcitx5'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'

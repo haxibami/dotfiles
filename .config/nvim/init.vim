@@ -39,10 +39,8 @@ let g:lightline = {
       \ }
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
-
 "overall
 set termguicolors
-let g:dracula_colorterm=0
 colorscheme dracula
 syntax enable
 set ambiwidth=double
@@ -88,9 +86,9 @@ set tabstop=2
 set showmatch
 set pumblend=10
 set shortmess-=S
-let g:fern#default_hidden=1
 
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+nnoremap <C-E> :Fern . -reveal=% -drawer -toggle -width=40<CR>
 
 let g:jpmode = 0
 
@@ -119,3 +117,43 @@ function! Jptoggle(jpmode)
   endif
 endfunction
 
+"" git操作
+nnoremap g[ :GitGutterPrevHunk<CR>
+" g[で次の変更箇所へ移動する
+nnoremap g] :GitGutterNextHunk<CR>
+" ghでdiffをハイライトする
+nnoremap gh :GitGutterLineHighlightsToggle<CR>
+" gpでカーソル行のdiffを表示する
+nnoremap gp :GitGutterPreviewHunk<CR>
+" 記号の色を変更する
+highlight GitGutterAdd ctermfg=green
+highlight GitGutterChange ctermfg=blue
+highlight GitGutterDelete ctermfg=red
+
+"" 反映時間を短くする(デフォルトは4000ms)
+set updatetime=250
+" g]で前の変更箇所へ移動する
+
+fun! FzfOmniFiles()
+  let is_git = system('git status')
+  if v:shell_error
+    :Files
+  else
+    :GFiles
+  endif
+endfun
+nnoremap <C-p> :call FzfOmniFiles()<CR>
+
+"ノーマルモードで
+"スペース2回でCocList
+nmap <silent> <space><space> :<C-u>CocList<cr>
+"スペースhでHover
+nmap <silent> <space>h :<C-u>call CocAction('doHover')<cr>
+"スペースdfでDefinition
+nmap <silent> <space>df <Plug>(coc-definition)
+"スペースrfでReferences
+nmap <silent> <space>rf <Plug>(coc-references)
+"スペースrnでRename
+nmap <silent> <space>rn <Plug>(coc-rename)
+"スペースfmtでFormat
+nmap <silent> <space>fmt <Plug>(coc-format)

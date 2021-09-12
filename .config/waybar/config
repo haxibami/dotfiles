@@ -86,7 +86,7 @@
         }
     },
     "tray": {
-        "icon-size": 27,
+        "icon-size": 32,
         "spacing": 10
     },
     "clock": {

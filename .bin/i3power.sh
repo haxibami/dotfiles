@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-menu=$( echo -e " Poweroff\n Reboot\n Suspend\n Lock\n Logout" | rofi -p "power" -dmenu -width 500 --lines=5 -theme ~/.config/rofi/powermenu.rasi | awk '{print tolower($2)}' )
+menu=$( echo -e " Poweroff\n Reboot\n Suspend\n Lock\n Logout" | rofi -p "power" -dmenu -width 500 -theme ~/.config/rofi/powermenu.rasi | awk '{print tolower($2)}' )
 
 case $menu in 
         poweroff)
