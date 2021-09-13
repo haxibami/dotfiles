@@ -1,6 +1,6 @@
 # If not running interactively, do not do anything
 [[ $- != *i* ]] && return
-[[ -z "$TMUX" ]] && exec tmux
+which tmux && [[ -z "$TMUX" ]] && exec tmux
 
 # aliases
 alias spotify='/usr/bin/spotify --force-device-scale-factor=1.5'

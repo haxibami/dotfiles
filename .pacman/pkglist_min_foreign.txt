@@ -1,3 +1,5 @@
+daemonize
 fakeroot-tcp
+genie-systemd
 paru
 vim-dein-git

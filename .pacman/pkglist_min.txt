@@ -22,6 +22,7 @@ neofetch
 neovim
 nodejs
 npm
+openssh
 pacman-contrib
 patch
 pkgconf
@@ -34,6 +35,7 @@ systemd
 texinfo
 vi
 vim
+wget
 which
 xorg-xeyes
 zsh
