@@ -9,11 +9,11 @@ format = """
 #[│](white)$directory$hostname
 
 [character]
-success_symbol = "[🐑 🏳 ](#50fa7b) [](#ff79c6)"
+success_symbol = "[🐑  ](#50fa7b) [](#ff79c6)"
 # \\[๑ᴖ◡ᴖ๑\\]🏳
-error_symbol = "[🐑 🏳 ](#ff5555) [](#ff79c6)"
+error_symbol = "[🐑  ](#ff5555) [](#ff79c6)"
 # \\[๑>_<๑\\]
-vicmd_symbol = "[🐑 🏳 ](#f1fa8c) [](#ff79c6)"
+vicmd_symbol = "[🐑  ](#f1fa8c) [](#ff79c6)"
 # \\[๑ᴖ◡ᴖ๑\\]
 
 [directory]
