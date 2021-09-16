@@ -17,6 +17,7 @@ chafa
 clamtk
 cowfortune
 dbus-python
+ddclient
 dhcpcd
 dialog
 discord
@@ -58,6 +59,7 @@ gzip
 i3-gaps
 i3blocks
 i3status
+i7z
 inkscape
 intel-gpu-tools
 intel-media-driver
@@ -97,6 +99,7 @@ neovim-qt
 netctl
 network-manager-applet
 networkmanager
+nftables
 noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
@@ -126,6 +129,7 @@ python-i3ipc
 python-pip
 python-psutil
 python-pyqt5
+qrencode
 qt5-wayland
 qt5-webengine
 qt5ct
@@ -162,6 +166,7 @@ texlive-pstricks
 texlive-publishers
 texlive-science
 the_silver_searcher
+thermald
 thunar
 thunar-volman
 tilix

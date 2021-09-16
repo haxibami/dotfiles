@@ -143,8 +143,9 @@ bindsym $mod+e exec thunar
 bindsym Mod1+c exec rofi -show calc -modi calc -no-show-match -no-sort
 
 # screenlock (manual)
-bindsym $mod+control+l exec env LANG=en.US_UTF-8 swaylock -f
-bindsym $mod+control+shift+l exec systemctl suspend
+#bindsym $mod+control+l exec env LANG=en.US_UTF-8 swaylock -f
+bindsym $mod+control+l exec .bin/swaylight.sh
+#bindsym $mod+control+shift+l exec systemctl suspend
 
 # brightness controls (requires non-root access to i2c devices)
 #bindsym $mod+F5 exec ~/.bin/downlight.sh

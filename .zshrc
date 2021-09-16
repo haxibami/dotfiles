@@ -1,6 +1,11 @@
 # If not running interactively, do not do anything
 [[ $- != *i* ]] && return
-which tmux && [[ -z "$TMUX" ]] && exec tmux
+
+if [[ ! -z "$SSH_CLIENT" ]]; then
+  export STARSHIP_CONFIG=~/.config/starship_light.toml
+elif which tmux >/dev/null 2>&1; then 
+  [[ -z "$TMUX" ]] && exec tmux
+fi
 
 # aliases
 alias spotify='/usr/bin/spotify --force-device-scale-factor=1.5'

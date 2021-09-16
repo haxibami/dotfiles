@@ -86,6 +86,7 @@ set tabstop=2
 set showmatch
 set pumblend=10
 set shortmess-=S
+set list lcs=tab:\|\ 
 
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 nnoremap <C-E> :Fern . -reveal=% -drawer -toggle -width=40<CR>
