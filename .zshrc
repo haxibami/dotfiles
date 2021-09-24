@@ -12,6 +12,8 @@ alias spotify='/usr/bin/spotify --force-device-scale-factor=1.5'
 alias jp='setxkbmap -layout jp'
 alias onivim='Oni2'
 alias ls='exa'
+alias sued='sudoedit'
+alias memsort='ps ax o %mem,command --sort %mem'
 
 # set environment variables
 export EDITOR=nvim

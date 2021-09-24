@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 # open spotify with right resolution in Xwayland(swaywm)
-/usr/bin/spotify --force-device-scale-factor=1.75
+env GDK_BACKEND=x11 /usr/bin/spotify --force-device-scale-factor=1.75

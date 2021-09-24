@@ -56,6 +56,7 @@ guake
 guvcview
 gvfs
 gzip
+hdparm
 i3-gaps
 i3blocks
 i3status
@@ -105,6 +106,7 @@ noto-fonts-cjk
 noto-fonts-emoji
 npm
 nss-mdns
+nvme-cli
 otf-font-awesome
 otf-ipaexfont
 otf-ipafont
@@ -124,8 +126,10 @@ pkgconf
 playerctl
 polkit-gnome
 poppler-data
+profile-sync-daemon
 python-gobject
 python-i3ipc
+python-numpy
 python-pip
 python-psutil
 python-pyqt5
@@ -146,6 +150,7 @@ slurp
 sof-firmware
 spotifyd
 starship
+steam
 sudo
 swappy
 sway
@@ -191,6 +196,7 @@ which
 wl-clipboard
 wofi
 wpa_supplicant
+wqy-zenhei
 xclip
 xdg-desktop-portal-wlr
 xdg-user-dirs
@@ -240,3 +246,4 @@ youtube-dl
 zathura
 zathura-pdf-poppler
 zsh
+zsh-completions

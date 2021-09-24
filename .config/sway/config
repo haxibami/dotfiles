@@ -36,6 +36,16 @@ exec xdg-settings set default-web-browser wayfox.desktop
 output HDMI-A-1 scale 1
 exec ddccontrol -p
 
+# set virtual output
+
+output HEADLESS-1 {
+pos 1200,0
+mode 1824x1216
+}
+
+workspace 10 9 output HEADLESS-1
+
+
 # set compositor-unique variables
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway 
 #exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
@@ -149,9 +159,9 @@ bindsym $mod+control+l exec .bin/swaylight.sh
 
 # brightness controls (requires non-root access to i2c devices)
 #bindsym $mod+F5 exec ~/.bin/downlight.sh
-bindsym $mod+F5 exec ddccontrol -f -r 0x10 -W -5 dev:/dev/i2c-2 | grep Brightness | cut -d "/" -f 2 | tee $WOBSOCK $DDCSOCK
+bindsym $mod+F5 exec ddccontrol -f -r 0x10 -W -5 dev:/dev/i2c-2 | grep Brightness | cut -d "/" -f 2 | tee $WOBSOCK
 #bindsym $mod+F6 exec ~/.bin/uplight.sh
-bindsym $mod+F6 exec ddccontrol -f -r 0x10 -W +5 dev:/dev/i2c-2 | grep Brightness | cut -d "/" -f 2 | tee $WOBSOCK $DDCSOCK
+bindsym $mod+F6 exec ddccontrol -f -r 0x10 -W +5 dev:/dev/i2c-2 | grep Brightness | cut -d "/" -f 2 | tee $WOBSOCK
 
 # media controls
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && pamixer --get-volume > $WOBSOCK
@@ -174,12 +184,12 @@ bindsym $mod+v exec clipman pick -t wofi
 
 # take screenshots
 # [fullscreen, copy & save]
-#bindsym $mod+shift+a exec grim - | wl-copy & wl-paste > ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim.png'
-bindsym $mod+shift+a exec grimshot --notify save output ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim_full.png'
+#bindsym $mod+shift+a exec grim - | wl-copy & wl-paste > ~/Pictures/screenshot/$(date "+%Y%m%d-%H%M%S")'_grim.png'
+bindsym $mod+shift+a exec grimshot --notify save output ~/Pictures/screenshot/$(date "+%Y%m%d-%H%M%S")'_grim_full.png'
 # [slurp, copy & save]
-bindsym $mod+shift+s exec grimshot --notify save area ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim_area.png'
+bindsym $mod+shift+s exec grimshot --notify save area ~/Pictures/screenshot/$(date "+%Y%m%d-%H%M%S")'_grim_area.png'
 # [select window, copy & save]
-bindsym $mod+shift+f exec grimshot --notify save window ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S")'_grim_window.png'
+bindsym $mod+shift+f exec grimshot --notify save window ~/Pictures/screenshot/$(date "+%Y%m%d-%H%M%S")'_grim_window.png'
 
 # [fullscreen, only copy]
 bindsym $mod+Print exec grimshot --notify copy output
@@ -427,7 +437,7 @@ mode "media" {
 
         # set default sink & sources
         bindsym p exec ~/.bin/swaypulse.sh
-
+        bindsym c exec ~/.bin/swaycolor.sh
 
         # back to normal
 #        bindsym Return mode "default"
