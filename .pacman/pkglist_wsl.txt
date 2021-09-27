@@ -23,6 +23,7 @@ neofetch
 neovim
 nodejs
 npm
+openssh
 pacman-contrib
 patch
 pkgconf
