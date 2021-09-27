@@ -41,8 +41,8 @@ autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 "overall
 set termguicolors
-colorscheme dracula
 syntax enable
+colorscheme dracula
 set ambiwidth=double
 set wildmenu
 set hidden
@@ -87,6 +87,8 @@ set showmatch
 set pumblend=10
 set shortmess-=S
 set list lcs=tab:\|\ 
+let g:dracula_colorterm=1
+
 
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 nnoremap <C-E> :Fern . -reveal=% -drawer -toggle -width=40<CR>

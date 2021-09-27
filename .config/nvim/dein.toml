@@ -3,13 +3,11 @@ repo = 'itchyny/lightline.vim'
 
 [[plugins]]
 repo = 'dracula/vim'
-hook_post_source = '''
-  let g:dracula_colorterm=0
-'''
 
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 rev = 'release'
+merged = 0
 
 [[plugins]]
 repo = 'antoinemadec/FixCursorHold.nvim'
