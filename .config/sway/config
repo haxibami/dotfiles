@@ -99,6 +99,7 @@ exec wl-paste -t text --watch myclipman
 #exec wl-paste -p -t text --watch myclipman
 exec playerctld daemon
 exec thunar --daemon
+exec easyeffects --gapplication-service
 
 # start screenlocker
 exec swayidle -w \
@@ -282,6 +283,10 @@ for_window [class="zoom" title="設定"] {
   floating enable
 }
 
+for_window [class="zoom" title="zoom_linux_float_message_reminder"] {
+  floating enable
+}
+
 #for_window [class="zoom" title="ズーム会議"] {
 #  set height 10 ppt
 #}
@@ -294,10 +299,10 @@ for_window [app_id="meteo-qt.python3"] {
 bindsym $mod+q kill
 
 # change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
 
 # move focused window
 bindsym $mod+Left move left

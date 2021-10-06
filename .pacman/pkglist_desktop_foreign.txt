@@ -1,7 +1,6 @@
 aseprite-skia-bin
 bear
 bibata-cursor-theme-bin
-bitwarden-bin
 cava
 cbonsai
 circleci-cli-bin
@@ -9,16 +8,20 @@ clipman
 cnijfilter2
 ddcci-driver-linux-dkms
 ddccontrol-git
+drawio-desktop-bin
 fcitx5-dark-default
 fcitx5-mozc-ut
 fcitx5-skin-adwaita-dark
 fcitx5-skin-dark-numix
+flashplayer-standalone
 gitkraken
 google-chrome
 google-drive-ocamlfuse-opam
 grimshot
+helvum
 i3lock-color-git
 inxi
+joplin-appimage
 meteo-qt
 mpv-mpris-git
 netdiscover
@@ -40,6 +43,7 @@ spotify-tui
 swaylock-effects
 swaynagmode
 systemd-boot-pacman-hook
+thunar-vcs-plugin
 tomate-alarm-plugin
 tomate-gtk
 tomate-indicator-plugin
@@ -53,4 +57,5 @@ webex-bin
 wev
 wob
 xob
+zoom
 zscroll-git

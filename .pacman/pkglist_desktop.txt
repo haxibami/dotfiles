@@ -1,6 +1,7 @@
 accountsservice
 alacritty
 alsa-utils
+arch-install-scripts
 aria2
 autoconf
 automake
@@ -9,6 +10,7 @@ bashtop
 bat
 binutils
 bison
+bitwarden
 blueman
 bluez
 bluez-utils
@@ -26,7 +28,9 @@ docker
 docker-compose
 drawing
 dunst
+easyeffects
 exa
+exfatprogs
 fakeroot
 fcitx5-configtool
 fcitx5-gtk
@@ -173,13 +177,17 @@ texlive-science
 the_silver_searcher
 thermald
 thunar
+thunar-archive-plugin
+thunar-media-tags-plugin
 thunar-volman
 tilix
 tk
 tmux
 tracker3-miners
+trash-cli
 ttf-font-awesome
 ttf-roboto-mono
+tumbler
 usb_modeswitch
 usbutils
 v4l2loopback-dkms
