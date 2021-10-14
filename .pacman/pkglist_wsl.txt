@@ -23,12 +23,13 @@ neofetch
 neovim
 nodejs
 npm
-openssh
 pacman-contrib
 patch
 pkgconf
+python
 python-pip
 ranger
+scdoc
 starship
 sudo
 systemd
