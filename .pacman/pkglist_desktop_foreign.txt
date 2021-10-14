@@ -1,10 +1,12 @@
 aseprite-skia-bin
+authy
 bear
 bibata-cursor-theme-bin
 cava
 cbonsai
 circleci-cli-bin
 clipman
+cloudflared
 cnijfilter2
 ddcci-driver-linux-dkms
 ddccontrol-git
@@ -18,7 +20,6 @@ gitkraken
 google-chrome
 google-drive-ocamlfuse-opam
 grimshot
-helvum
 i3lock-color-git
 inxi
 joplin-appimage
@@ -57,5 +58,5 @@ webex-bin
 wev
 wob
 xob
-zoom
+zoom-system-qt
 zscroll-git

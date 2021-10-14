@@ -61,6 +61,7 @@ guvcview
 gvfs
 gzip
 hdparm
+helvum
 i3-gaps
 i3blocks
 i3status
@@ -72,8 +73,10 @@ intel-media-sdk
 intel-ucode
 iw
 jq
+kanshi
 kitty
 kmscon
+krita
 libcdio
 libgnome-keyring
 libpipewire02
@@ -147,6 +150,7 @@ redshift
 ripgrep
 rofi
 rofi-calc
+rustup
 seahorse
 sed
 skktools
@@ -205,6 +209,7 @@ wl-clipboard
 wofi
 wpa_supplicant
 wqy-zenhei
+xarchiver
 xclip
 xdg-desktop-portal-wlr
 xdg-user-dirs
