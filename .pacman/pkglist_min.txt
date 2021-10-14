@@ -7,6 +7,7 @@ bat
 binutils
 bison
 exa
+fakeroot
 fd
 flex
 gcc
@@ -14,13 +15,14 @@ git
 groff
 less
 libtool
+libvncserver
 m4
 make
 man-db
-nano
 neofetch
 neovim
 nodejs
+noto-fonts
 npm
 openssh
 pacman-contrib
@@ -29,6 +31,7 @@ pkgconf
 python
 python-pip
 ranger
+remmina
 starship
 sudo
 systemd

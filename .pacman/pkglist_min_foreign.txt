@@ -1,5 +1,6 @@
 daemonize
-fakeroot-tcp
 genie-systemd
 paru
+tigervnc-viewer
+ttf-hackgen
 vim-dein-git
