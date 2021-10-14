@@ -1,3 +1,5 @@
 cbonsai
+daemonize
+genie-systemd
 paru
 vim-dein-git
