@@ -343,6 +343,11 @@ $mybind $mod+shift+v splitv
 # enter fullscreen mode for the focused container
 $mybind $mod+f fullscreen toggle
 
+for_window [class=".*"] inhibit_idle fullscreen
+for_window [app_id=".*"] inhibit_idle fullscreen
+
+$mybind $mod+control+i inhibit_idle focus
+
 # change container layout (stacked, tabbed, toggle split)
 $mybind $mod+control+s layout stacking
 $mybind $mod+control+w layout tabbed

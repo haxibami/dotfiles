@@ -37,6 +37,7 @@ pipes.sh
 pixterm
 polybar
 rofi-greenclip
+ruffle-nightly-bin
 showmethekey
 slack-desktop
 spotify

@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+
+### IMPORTANT ###
+# This is a contribute script from GitHub:Alexays/Waybar(https://github.com/Alexays/Waybar),
+# licensed under MIT License(https://github.com/Alexays/Waybar/blob/6eb9606f239418d225c7367f9e0f44adca764f3c/LICENSE)
+
 import argparse
 import logging
 import sys

@@ -29,6 +29,7 @@ docker-compose
 drawing
 dunst
 easyeffects
+efibootmgr
 exa
 exfatprogs
 fakeroot

@@ -1,5 +1,9 @@
 #!/usr/bin/python
 
+### IMPORTANT ###
+# this is a contributed script from GitHub:swaywm/sway(https://github.com/swaywm/sway),
+# licensed under MIT License(https://github.com/swaywm/sway/blob/ca8c6c3d18a17f6de2eea3f27f0ad2d2f24d6eb9/LICENSE).
+
 # This script requires i3ipc-python package (install it from a system package manager
 # or pip).
 # It makes inactive windows transparent. Use `transparency_val` variable to control
