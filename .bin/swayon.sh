@@ -12,5 +12,9 @@ WINIT_UNIX_BACKEND=x11
 
 export XDG_SESSION_TYPE XDG_CURRENT_DESKTOP XDG_CURRENT_SESSION LIBSEAT_BACKEND QT_QPA_PLATFORM GDK_DPI_SCALE QT_SCALE_FACTOR MOZ_ENABLE_WAYLAND WINIT_UNIX_BACKEND;
 
+eval $(/usr/bin/gnome-keyring-daemon --start);
+export SSH_AUTH_SOCK;
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1;
+
 sleep 1;
 exec sway

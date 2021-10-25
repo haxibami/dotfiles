@@ -102,6 +102,7 @@ man-pages
 mesa
 mesa-demos
 mpv
+nano
 neofetch
 neovim
 neovim-qt
@@ -154,12 +155,15 @@ rofi-calc
 rustup
 seahorse
 sed
+signal-desktop
 skktools
 slurp
 sof-firmware
+speedtest-cli
 spotifyd
 starship
 steam
+stress
 sudo
 swappy
 sway
@@ -202,6 +206,7 @@ vim
 vulkan-intel
 vulkan-mesa-layers
 w3m
+wallutils
 waybar
 wayvnc
 wf-recorder

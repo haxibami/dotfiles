@@ -1,5 +1,6 @@
 aseprite-skia-bin
 authy
+autotiling
 bear
 bibata-cursor-theme-bin
 cava
@@ -23,6 +24,7 @@ grimshot
 i3lock-color-git
 inxi
 joplin-appimage
+keybase-bin
 meteo-qt
 mpv-mpris-git
 netdiscover
@@ -45,6 +47,7 @@ spotify-tui
 swaylock-effects
 swaynagmode
 systemd-boot-pacman-hook
+thunar-secure-delete
 thunar-vcs-plugin
 tomate-alarm-plugin
 tomate-gtk
@@ -55,8 +58,10 @@ tty-clock
 unzip-iconv
 vim-dein-git
 visual-studio-code-bin
+wdisplays
 webex-bin
 wev
+wlogout
 wob
 xob
 zoom-system-qt

@@ -95,9 +95,9 @@ bar {
 ## startup services
 # start auth services
 
-exec "eval $(/usr/bin/gnome-keyring-daemon --start)"
-exec export SSH_AUTH_SOCK
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+#exec "eval $(/usr/bin/gnome-keyring-daemon --start)"
+#exec export SSH_AUTH_SOCK
+#exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # start other background services
 exec mako
@@ -116,11 +116,13 @@ exec swayidle -w \
   before-sleep 'env LANG=en.US_UTF-8 swaylock -f' \
 
 # start display gamma setting tool: you may not want to hurt your eyes.
-
 exec gammastep-indicator
 
-# start applets
+# start auto-tiling tool
 
+exec autotiling
+
+# start applets
 exec nm-applet --indicator
 exec blueman-applet
 exec meteo-qt
@@ -206,6 +208,8 @@ $mybind $mod+Print exec grimshot --notify copy output
 $mybind Print exec grimshot --notify copy area
 # [select window, only copy]
 $mybind $mod+shift+Print exec grimshot --notify copy window
+# [wait for ? seconds, active window]
+$mybind control+Print exec ~/.bin/waytshot.sh
 
 # record screen
 #$mybind $mod+control+r exec ~/.bin/swayrec.sh
@@ -225,7 +229,8 @@ $mybind Mod1+Tab exec ~/.bin/window_walker.sh
 $mybind $mod+Shift+c reload
 
 # exit sway
-$mybind $mod+shift+e exec ~/.bin/swaypower.sh
+#$mybind $mod+shift+e exec ~/.bin/swaypower.sh
+$mybind $mod+shift+e exec LANG=en.US_UTF-8 wlogout
 
 # allow floating popup exceptions
 for_window [app_id="firefox" title="Firefox — 共有インジケータ"] {
@@ -283,11 +288,19 @@ for_window [app_id="zoom" title="zoom"] {
   floating enable
 }
 
+for_window [class="zoom" title="zoom"] {
+  floating enable
+}
+
 for_window [class="zoom" title="Zoom"] {
   floating enable
 }
 
 for_window [app_id="zoom" title="設定"] {
+  floating enable
+}
+
+for_window [class="zoom" title="設定"] {
   floating enable
 }
 
