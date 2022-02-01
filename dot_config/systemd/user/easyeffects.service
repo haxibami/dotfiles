@@ -1,0 +1,13 @@
+[Unit]
+Description = EasyEffects daemon
+Requires = pipewire-pulse.service
+After = pipewire-pulse.service
+
+[Service]
+ExecStart = /usr/bin/easyeffects --gapplication-service
+Restart = always
+RestartSec = 5
+TimeoutStopSec = 15
+
+[Install]
+WantedBy = default.target

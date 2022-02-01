@@ -1,0 +1,90 @@
+[[plugins]]
+repo = 'haxibami/urara.vim'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+  let g:lightline = {
+        \ 'colorscheme': 'urara',
+        \ 'active': {
+        \   'left': [ [ 'mode', 'paste' ],
+        \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+        \ },
+        \ 'component_function': {
+        \   'cocstatus': 'coc#status'
+        \ },
+        \ }
+  autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+'''
+
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+rev = 'release'
+merged = 0
+hook_add = '''
+  augroup mygroup
+    autocmd!
+    " Setup formatexpr specified filetype(s).
+    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " Update signature help on jump placeholder.
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  augroup end
+  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+  "ノーマルモードで
+  "スペース2回でCocList
+  nmap <silent> <space><space> :<C-u>CocList<cr>
+  "スペースhでHover
+  nmap <silent> <space>h :<C-u>call CocAction('doHover')<cr>
+  "スペースdfでDefinition
+  nmap <silent> <space>df <Plug>(coc-definition)
+  "スペースrfでReferences
+  nmap <silent> <space>rf <Plug>(coc-references)
+  "スペースrnでRename
+  nmap <silent> <space>rn <Plug>(coc-rename)
+  "スペースfmtでFormat
+  nmap <silent> <space>fmt <Plug>(coc-format)
+'''
+
+[[plugins]]
+repo = 'antoinemadec/FixCursorHold.nvim'
+
+[[plugins]]
+repo = 'lilydjwg/fcitx.vim'
+rev = 'fcitx5'
+hook_add = '''
+  let g:fcitx5_remote = "/usr/bin/fcitx5-remote"
+'''
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+hook_add = '''
+  " g]で前の変更箇所へ移動する
+  nnoremap g[ :GitGutterPrevHunk<CR>
+  " g[で次の変更箇所へ移動する
+  nnoremap g] :GitGutterNextHunk<CR>
+  " ghでdiffをハイライトする
+  nnoremap gh :GitGutterLineHighlightsToggle<CR>
+  " gpでカーソル行のdiffを表示する
+  nnoremap gp :GitGutterPreviewHunk<CR>
+  " 記号の色を変更する
+  highlight GitGutterAdd ctermfg=green
+  highlight GitGutterChange ctermfg=blue
+  highlight GitGutterDelete ctermfg=red
+'''
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+hook_add = '''
+  fun! FzfOmniFiles()
+    let is_git = system('git status')
+    if v:shell_error
+      :Files
+    else
+      :GFiles
+    endif
+  endfun
+  nnoremap <C-p> :call FzfOmniFiles()<CR>
+'''
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'

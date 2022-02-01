@@ -1,0 +1,55 @@
+* {
+font-family: Neuropol, HackgenNerd;
+font-size: 30;
+}
+
+window {
+margin: 0px;
+border: 2px solid #d9989c;
+background-color: #332433;
+border-radius: 5;
+}
+
+#input {
+margin: 10px;
+padding: 10px;
+border: none;
+color: #d9c77e;
+background-color: #261c26;
+}
+
+#inner-box {
+margin: 5px;
+border: none;
+background-color: #332433;
+}
+
+#outer-box {
+margin: 20px;
+border: none;
+background-color: #332433;
+}
+
+#scroll {
+margin: 0px;
+border: none;
+}
+
+#text {
+margin: 8px;
+border: none;
+color: #d9ced9;
+} 
+
+#entry {
+  margin: 5px;
+  background-color: #332433;
+}
+
+#entry:selected {
+background-color: #664266;
+}
+
+/* #img */
+
+/* #unselected */

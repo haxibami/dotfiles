@@ -1,0 +1,15 @@
+[Unit]
+Description=A VNC server for wlroots based Wayland compositors
+BindsTo=sway-session.target
+Requires=swayvd.service
+After=swayvd.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/wayvnc --output=HEADLESS-1 0.0.0.0
+Restart=always
+RestartSec=1
+TimeoutStopSec=10
+
+[Install]
+WantedBy=sway-session.target

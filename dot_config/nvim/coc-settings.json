@@ -1,0 +1,34 @@
+{
+  "suggest.noselect": true,
+  "suggest.preferCompleteThanJumpPlaceholder": false,
+  "coc.preferences.formatOnType": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "c",
+    "rust",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "html",
+    "css",
+    "markdown",
+    "vim",
+    "tex"
+  ],
+  "coc.source.vimtex.enable": true,
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.refreshOnInsertMode": true,
+  "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+      "rootPatterns": [".ccls-root", "compile_commands.json"],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls-cache"
+        }
+      }
+    }
+  }
+}

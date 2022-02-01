@@ -1,0 +1,11 @@
+[Unit]
+Description=a tool to set virtual display on Sway session
+BindsTo=sway-session.target
+Before=wayvnc.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/swaymsg create_output HEADLESS-1
+
+[Install]
+WantedBy=sway-session.target

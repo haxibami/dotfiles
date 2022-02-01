@@ -1,134 +1,136 @@
-# 最初にすべての階層のファイルを無視します
-# 階層は必要なだけ追加する
-### all ignore ###
-/*
-/.**
-
-# .gitignoreは上から解釈されていくので
-# 管理対象のファイルをホワイトリストのように追記します
-### not ignore ###
-# about
-!/README.md
-!/LICENSE
-
-# pacman
-!/.pacman/
-!/.pacman/*
-
-# zsh
-!/.zshrc
-!/.zshenv
-
-# vim
-!/.vimrc
-!/.vim/
-!/.vim/userautoload/
-!/.vim/userautoload/dein/
-!/.vim/userautoload/dein/dein.toml
-!/.vim/userautoload/dein/dein_lazy.toml
-
-# scripts
-!/.bin/
-!/.bin/**
-
-# git
-!/.gitignore
-!/.gitignore_global
-!/.github/**
-
-# tmux
-!/.tmux.conf
-
-# xorg
-!/.xinitrc
-!/.xprofile
-
-# gtk
-!/.gtkrc-2.0
-
-# latex
-!/.latexmkrc
-
-# .config
-!/.config/
-/.config/*/
-/.config/**
-!/.config/alacritty/
-!/.config/alacritty/**
-!/.config/bashtop/
-!/.config/bashtop/bashtop.cfg
-!/.config/bashtop/user_themes/
-!/.config/bashtop/user_themes/dracula.theme
-!/.config/cava/
-!/.config/cava/**
-!/.config/compton.conf
-!/.config/dracula/
-!/.config/dracula/**
-!/.config/dunst/
-!/.config/dunst/**
-!/.config/gammastep/
-!/.config/gammastep/**
-!/.config/greenclip.toml
-!/.config/gtk-3.0/
-!/.config/gtk-3.0/setting.ini
-!/.config/gtk-3.0/gtk.css
-!/.config/i3/
-!/.config/i3/**
-!/.config/kitty/
-!/.config/kitty/**
-!/.config/mako/
-!/.config/mako/**
-!/.config/mpv/
-!/.config/mpv/mpv.conf
-!/.config/neofetch/
-!/.config/neofetch/config.conf
-!/.config/nvim/
-!/.config/nvim/coc-settings.json
-!/.config/nvim/init.vim
-!/.config/nvim/ginit.vim
-!/.config/nvim/dein.toml
-!/.config/nvim/dein_lazy.toml
-!/.config/oni2/
-!/.config/oni2/configuration.json
-!/.config/oni2/keybindings.json
-!/.config/parcellite/
-!/.config/parcellite/parcelliterc
-!/.config/picom.conf
-!/.config/polybar/
-!/.config/polybar/scripts/
-!/.config/polybar/scripts/**
-!/.config/polybar/**
-!/.config/qt5ct/
-!/.config/qt5ct/colors/
-!/.config/qt5ct/colors/Dracula.conf
-!/.config/ranger/
-!/.config/ranger/**
-!/.config/redshift.conf
-!/.config/rofi/
-!/.config/rofi/**
-!/.config/spotifyd/
-!/.config/spotifyd/spotifyd.conf
-!/.config/spotify-tui/
-!/.config/spotify-tui/config.yml
-!/.config/starship.toml
-!/.config/sway/
-!/.config/sway/**
-!/.config/swaylock/
-!/.config/swaylock/**
-!/.config/swaynag/
-!/.config/swaynag/**
-!/.config/systemd/
-!/.config/systemd/user/
-!/.config/systemd/user/xkeysnail.service
-!/.config/tilix/
-!/.config/tilix/tilix.dconf
-!/.config/tilix/schemes/
-!/.config/tilix/schemes/**
-!/.config/user-dirs.dirs
-!/.config/user-dirs.locale
-!/.config/waybar/
-!/.config/waybar/**
-!/.config/wofi/
-!/.config/wofi/**
-!/.config/xkeysnail/
-!/.config/xkeysnail/**
+## 最初にすべての階層のファイルを無視します
+## 階層は必要なだけ追加する
+#### all ignore ###
+#/*
+#/.**
+#
+## .gitignoreは上から解釈されていくので
+## 管理対象のファイルをホワイトリストのように追記します
+#### not ignore ###
+## about
+#!/README.md
+#!/LICENSE
+#
+## pacman
+#!/.pacman/
+#!/.pacman/*
+#
+## zsh
+#!/.zshrc
+#!/.zshenv
+#
+## vim
+#!/.vimrc
+#!/.vim/
+#!/.vim/userautoload/
+#!/.vim/userautoload/dein/
+#!/.vim/userautoload/dein/dein.toml
+#!/.vim/userautoload/dein/dein_lazy.toml
+#
+## scripts
+#!/.bin/
+#!/.bin/**
+#
+## git
+#!/.gitignore
+#!/.gitignore_global
+#!/.github/**
+#
+## tmux
+#!/.tmux.conf
+#
+## xorg
+#!/.xinitrc
+#!/.xprofile
+#
+## gtk
+#!/.gtkrc-2.0
+#
+## latex
+#!/.latexmkrc
+#
+## .config
+#!/.config/
+#/.config/*/
+#/.config/**
+#!/.config/alacritty/
+#!/.config/alacritty/alacritty.yml
+#!/.config/alacritty/urara.yml
+#!/.config/bashtop/
+#!/.config/bashtop/bashtop.cfg
+#!/.config/bashtop/user_themes/
+#!/.config/bashtop/user_themes/urara.theme
+#!/.config/bottom/bottom.toml
+#!/.config/cava/config
+#!/.config/cava/**
+#!/.config/compton.conf
+#!/.config/dracula/
+#!/.config/dracula/**
+#!/.config/dunst/
+#!/.config/dunst/**
+#!/.config/gammastep/
+#!/.config/gammastep/**
+#!/.config/greenclip.toml
+#!/.config/gtk-3.0/
+#!/.config/gtk-3.0/setting.ini
+#!/.config/gtk-3.0/gtk.css
+#!/.config/i3/
+#!/.config/i3/**
+#!/.config/kitty/
+#!/.config/kitty/**
+#!/.config/mako/
+#!/.config/mako/**
+#!/.config/mpv/
+#!/.config/mpv/mpv.conf
+#!/.config/neofetch/
+#!/.config/neofetch/config.conf
+#!/.config/nvim/
+#!/.config/nvim/coc-settings.json
+#!/.config/nvim/init.vim
+#!/.config/nvim/ginit.vim
+#!/.config/nvim/dein.toml
+#!/.config/nvim/dein_lazy.toml
+#!/.config/oni2/
+#!/.config/oni2/configuration.json
+#!/.config/oni2/keybindings.json
+#!/.config/parcellite/
+#!/.config/parcellite/parcelliterc
+#!/.config/picom.conf
+#!/.config/polybar/
+#!/.config/polybar/scripts/
+#!/.config/polybar/scripts/**
+#!/.config/polybar/**
+#!/.config/qt5ct/
+#!/.config/qt5ct/colors/
+#!/.config/ranger/
+#!/.config/ranger/**
+#!/.config/redshift.conf
+#!/.config/rofi/
+#!/.config/rofi/**
+#!/.config/spotifyd/
+#!/.config/spotifyd/spotifyd.conf
+#!/.config/spotify-tui/
+#!/.config/spotify-tui/config.yml
+#!/.config/starship.toml
+#!/.config/starship_light.toml
+#!/.config/sway/
+#!/.config/sway/**
+#!/.config/swaylock/
+#!/.config/swaylock/**
+#!/.config/swaynag/
+#!/.config/swaynag/**
+#!/.config/systemd/
+#!/.config/systemd/user/
+#!/.config/systemd/user/xkeysnail.service
+#!/.config/tilix/
+#!/.config/tilix/tilix.dconf
+#!/.config/tilix/schemes/
+#!/.config/tilix/schemes/**
+#!/.config/user-dirs.dirs
+#!/.config/user-dirs.locale
+#!/.config/waybar/
+#!/.config/waybar/**
+#!/.config/wofi/
+#!/.config/wofi/**
+#!/.config/xkeysnail/
+#!/.config/xkeysnail/**

@@ -1,0 +1,36 @@
+# Base16 Urara - alacritty color config
+# haxibami
+colors:
+  # Default colors
+  primary:
+    background: '0x211921'
+    foreground: '0xd9ced9'
+
+  # Colors the cursor will use if `custom_cursor_colors` is true
+  cursor:
+    text: '0x211921'
+    cursor: '0xd9ced9'
+
+  # Normal colors
+  normal:
+    black:   '0x332433'
+    red:     '0xd9989c'
+    green:   '0x9abf86'
+    yellow:  '0xd9c77e'
+    blue:    '0xb686bf'
+    magenta: '0xa6b4de'
+    cyan:    '0x86bfb6'
+    white:   '0xd9ced9'
+
+  # Bright colors
+  bright:
+    black:   '0x664266'
+    red:     '0xe6bbbe'
+    green:   '0xb4cea5'
+    yellow:  '0xe4d7a4'
+    blue:    '0xc7a5ce'
+    magenta: '0xcbd3eb'
+    cyan:    '0xa5cec7'
+    white:   '0xf2e6f2'
+
+draw_bold_text_with_bright_colors: false

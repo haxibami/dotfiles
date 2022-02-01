@@ -1,0 +1,75 @@
+[[plugins]]
+repo = 'lervag/vimtex'
+on_ft=['tex']
+hook_source='''
+  let g:vimtex_view_general_viewer = 'zathura'
+  let g:vimtex_compiler_progname = 'nvr'
+  let g:vimtex_view_general_options = "-x \"nvr +%{line} %{input}\" --synctex-forward @line:0:@tex @pdf"
+  let g:vimtex_compiler_latexmk = {
+      \ 'build_dir' : 'latexbuild',
+      \}
+  let g:vimtex_compiler_latexmk_engines = { '_': 'lualatex' }
+  let g:tex_flavor = 'latex'
+  let g:latex_latexmk_options = '-pdflua'
+  let g:vimtex_syntax_conceal_disable = 1
+  let g:vimtex_syntax_conceal = {
+      \ 'accents': 1,
+      \ 'cites': 0,
+      \ 'fancy': 1,
+      \ 'greek': 1,
+      \ 'math_bounds': 0,
+      \ 'math_delimiters': 1,
+      \ 'math_fracs': 1,
+      \ 'math_super_sub': 1,
+      \ 'math_symbols': 1,
+      \ 'sections': 0,
+      \ 'styles': 0,
+      \}
+
+'''
+
+[[plugins]]
+repo = 'lambdalisue/fern.vim'
+hook_source = '''
+  let g:fern#default_hidden=1
+  let g:fern#renderer = "nerdfont"
+'''
+hook_add = '''
+  nnoremap <C-S-e> :Fern . -reveal=% -drawer -toggle -width=40<CR>
+'''
+
+[[plugins]]
+repo = 'lambdalisue/nerdfont.vim'
+on_source = ['fern.vim']
+
+[[plugins]]
+repo = 'lambdalisue/fern-renderer-nerdfont.vim'
+on_source = ['fern.vim']
+
+[[plugins]]
+repo = 'lambdalisue/glyph-palette.vim'
+on_source = ['fern.vim']
+hook_source = '''
+  augroup my-glyph-palette
+    autocmd! *
+    autocmd FileType fern call glyph_palette#apply()
+    autocmd FileType nerdtree,startify call glyph_palette#apply()
+  augroup END
+'''
+
+[[plugins]]
+repo = 'iamcco/markdown-preview.nvim'
+on_ft = ['md', 'markdown', 'pandoc.markdown', 'rmd']
+build = 'sh -c "cd app && yarn install"'
+
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+on_ft = ['rs']
+
+[[plugins]]
+repo = 'mzlogin/vim-markdown-toc'
+on_ft = ['md']
+
+[[plugins]]
+repo = 'whonore/Coqtail'
+on_ft = ['v']

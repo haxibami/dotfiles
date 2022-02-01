@@ -1,0 +1,6 @@
+[Unit]
+Description=Switch GTK theme on evening
+
+[Service]
+Type=oneshot
+ExecStart=/home/haxibami/.bin/gtk-modeswitch.sh "night"
