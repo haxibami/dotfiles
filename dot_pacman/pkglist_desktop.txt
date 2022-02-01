@@ -106,7 +106,6 @@ jdk-openjdk
 jpegoptim
 jq
 kanshi
-kitty
 kmscon
 krita
 lib32-gnutls

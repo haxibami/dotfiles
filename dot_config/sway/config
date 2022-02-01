@@ -199,7 +199,7 @@ $mybind control+Print exec ~/.bin/waytshot.sh
 # launch wofi, a rofi alternative on Wayland
 $mybind Mod1+space exec $menu
 $mybind Mod1+shift+space exec ~/.bin/myrofi.sh
-$mybind Mod1+Tab exec ~/.bin/window_walker.sh
+$mybind Mod1+Tab exec ~/.bin/window-walker.sh
 
 
 ## window-related keybinds

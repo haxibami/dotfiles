@@ -1,0 +1,26 @@
+README.md
+
+{{- if ne .chezmoi.osRelease.name "Arch Linux"}}
+.pacman
+{{- end }}
+
+{{- if ne .chezmoi.os "linux" }}
+.config/sway
+.config/waybar
+.config/swaynag
+.config/wofi
+.config/i3
+.config/polybar
+.config/rofi
+.config/systemd
+.config/xkeysnail
+.config/user-dirs.dirs
+.config/user-dirs.locale
+.config/.parcellite
+.config/.picom.conf
+.config/gammastep
+.config/compton.conf
+.config/cava
+.cofnig/dunst
+.gtkrc-2.0
+{{- end }}
