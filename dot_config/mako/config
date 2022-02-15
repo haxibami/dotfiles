@@ -10,21 +10,21 @@ margin=40
 padding=20,10,20,30
 border-size=2
 
-background-color=#4b424edd
-text-color=#ebeaeb
-border-color=#eba0aa
+background-color=#292433dd
+text-color=#d2ced9
+border-color=#d9989c
 
 border-radius=10
 default-timeout=10000
 
 [urgency=low]
-border-color=#afd9ad
+border-color=#abbf86
 
 [urgency=normal]
-border-color=#ebeaeb
+border-color=#d9ced9
 
 [urgency=high]
-border-color=#f0787a
+border-color=#d9989c
 
 [mode=silent]
 invisible=1

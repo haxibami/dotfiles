@@ -16,6 +16,7 @@
     "vim",
     "tex"
   ],
+  "highlight.colors.enable": true,
   "coc.source.vimtex.enable": true,
   "diagnostic.checkCurrentLine": true,
   "diagnostic.refreshOnInsertMode": true,

@@ -38,6 +38,7 @@ dhcpcd
 dialog
 discord
 dmenu
+dmidecode
 dnsmasq
 docker
 docker-compose
@@ -60,6 +61,7 @@ firefox-i18n-ja
 flameshot
 flatpak
 flex
+fwupd
 fzf
 gammastep
 gawk
@@ -94,6 +96,7 @@ i3-gaps
 i3blocks
 i3status
 i7z
+ifuse
 inkscape
 intel-compute-runtime
 intel-gpu-tools
@@ -178,6 +181,7 @@ pkgconf
 playerctl
 polkit-gnome
 poppler-data
+prettier
 profile-sync-daemon
 pyenv
 python-gobject
@@ -245,7 +249,6 @@ thunar
 thunar-archive-plugin
 thunar-media-tags-plugin
 thunar-volman
-tilix
 tk
 tmux
 tor

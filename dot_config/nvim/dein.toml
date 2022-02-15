@@ -26,6 +26,8 @@ hook_add = '''
     autocmd!
     " Setup formatexpr specified filetype(s).
     autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " Scss support
+    autocmd FileType scss setl iskeyword+=@-@
     " Update signature help on jump placeholder.
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
   augroup end
@@ -88,3 +90,6 @@ hook_add = '''
 
 [[plugins]]
 repo = 'Yggdroot/indentLine'
+
+#[[plugins]]
+#repo = 'chrisbra/Colorizer'

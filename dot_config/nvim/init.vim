@@ -1,6 +1,7 @@
 "" neovim config
 
 "" dein.vim setup
+
 if &compatible
   set nocompatible
 endif
@@ -10,7 +11,7 @@ set rtp+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 "" initialize dein, plugins are installed to this directory
 call dein#begin(expand('~/.cache/dein'))
 "" add packages here, e.g:
-"call dein#add('qwelyt/TrippingRobot')
+call dein#add('Shougo/dein.vim')
 "" or install packages from toml file
 let s:toml_dir  = $HOME . '/.config/nvim' 
 let s:toml      = s:toml_dir . '/dein.toml'
@@ -23,6 +24,13 @@ call dein#end()
 if dein#check_install()
   call dein#install()
 endif
+
+"" source files
+if filereadable(expand('$HOME/.secure/dein_update.vim'))
+    source $HOME/.secure/dein_update.vim
+ endif
+
+command! DeinUpdate call dein#check_update(v:true)
 
 filetype plugin indent on
 

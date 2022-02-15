@@ -14,6 +14,8 @@ alias ls='exa'
 alias sued='sudoedit'
 alias memsort='ps ax o %mem,command --sort %mem'
 #alias nvui='env QT_SCALE_FACTOR=1 nvui --ext_popupmenu --ext_cmdline --detached --ext_multigrid'
+alias ruslovo='~/Projects/ruslovo-tufs/target/release/ruslovo'
+alias nvm-init='test -r /usr/share/nvm/init-nvm.sh && source /usr/share/nvm/init-nvm.sh > /dev/null 2> /dev/null || true'
 
 # set environment variables
 export EDITOR=nvim
@@ -91,8 +93,5 @@ eval "$(starship init zsh)"
 # opam configuration
 test -r /home/haxibami/.opam/opam-init/init.zsh && . /home/haxibami/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
-# nvm
-
-#test -r /usr/share/nvm/init-nvm.sh && source /usr/share/nvm/init-nvm.sh > /dev/null 2> /dev/null || true
 
 eval "$(pyenv init -)"

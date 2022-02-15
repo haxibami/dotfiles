@@ -4,7 +4,7 @@
 include "/home/haxibami/.gtkrc-2.0.mine"
 gtk-theme-name="WhiteSur"
 gtk-icon-theme-name="WhiteSur"
-gtk-font-name="Noto Sans 12"
+gtk-font-name="Noto Sans CJK JP 12"
 gtk-cursor-theme-name="Bibata-Original-Classic"
 gtk-cursor-theme-size=24
 gtk-toolbar-style=GTK_TOOLBAR_BOTH

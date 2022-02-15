@@ -14,11 +14,11 @@ set $up     k
 set $right  l
 
 set $bg             #c5c5e688
-set $bg-inactive    #21192100
+set $bg-inactive    #1c192100
 set $bg-urgent      #d9989c88
-set $text-light     #d9ced988
-set $text-dark      #33243388
-set $text-inactive  #99829988
+set $text-light     #d2ced988
+set $text-dark      #29243388
+set $text-inactive  #8a829988
 
 set $term alacritty
 
@@ -131,7 +131,7 @@ exec_always ~/.bin/import-gsettings.sh \
 seat seat0 xcursor_theme Bibata-Original-Classic 24
 
 # switch GTK theme according to time
-exec_always "sh -c 'sleep 3; ~/.bin/gtk_modeswitch.sh'"
+exec_always "sh -c 'sleep 3; ~/.bin/gtk-modeswitch.sh'"
 
 # set volume/brightness bar
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock

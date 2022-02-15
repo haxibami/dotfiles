@@ -24,6 +24,13 @@ if dein#check_install()
   call dein#install()
 endif
 
+"" source files
+if filereadable(expand('$HOME/.secure/dein_update.vim'))
+    source $HOME/.secure/dein_update.vim
+ endif
+
+command! DeinUpdate call dein#check_update(v:true)
+
 filetype plugin indent on
 
 ""display

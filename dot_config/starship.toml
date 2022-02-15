@@ -25,7 +25,7 @@ vicmd_symbol = "[ 🏳 ](#d9c77e)[ ](#d9c77e)"
 
 [directory]
 truncation_length = 5
-format = " [$read_only]($read_only_style)[$path](bold underline #a6b4de) "
+format = " [$read_only]($read_only_style)<[$path](bold underline #a6b4de)>"
 
 [hostname]
 ssh_only = false
@@ -33,3 +33,4 @@ format = "on [$hostname](bold #86bfb6)"
 
 [git_branch]
 style = "bold green"
+format = "::[$branch $symbol](bold green)"

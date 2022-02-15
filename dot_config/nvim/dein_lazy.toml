@@ -35,7 +35,7 @@ hook_source = '''
   let g:fern#renderer = "nerdfont"
 '''
 hook_add = '''
-  nnoremap <C-S-e> :Fern . -reveal=% -drawer -toggle -width=40<CR>
+  nnoremap <C-E> :Fern . -reveal=% -drawer -toggle -width=40<CR>
 '''
 
 [[plugins]]
@@ -45,6 +45,9 @@ on_source = ['fern.vim']
 [[plugins]]
 repo = 'lambdalisue/fern-renderer-nerdfont.vim'
 on_source = ['fern.vim']
+hook_source = '''
+  let g:fern#renderer = "nerdfont"
+'''
 
 [[plugins]]
 repo = 'lambdalisue/glyph-palette.vim'

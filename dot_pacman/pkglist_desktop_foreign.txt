@@ -27,7 +27,6 @@ google-drive-ocamlfuse-opam
 google-earth-pro
 grimshot
 i3lock-color-git
-ifuse
 intellij-idea-ultimate-edition
 inxi
 joplin-appimage
@@ -61,6 +60,7 @@ paru
 pipes.sh
 pixterm
 polybar
+pup
 pygtk
 python-pyclip
 qt5-styleplugins
@@ -76,7 +76,6 @@ stack-static
 sunwait
 swaylock-effects-git
 swaynagmode
-systemd-boot-pacman-hook
 tesseract-data-jpn_vert-git
 thunar-secure-delete
 thunar-vcs-plugin
@@ -95,8 +94,8 @@ verapdf
 visual-studio-code-bin
 vsce
 waifu2x-ncnn-vulkan
-waydroid
-waydroid-image-gapps
+waydroid-git
+waydroid-image-dev
 wdisplays
 webex-bin
 wev
