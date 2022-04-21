@@ -13,7 +13,7 @@ set $down   j
 set $up     k
 set $right  l
 
-set $bg             #c5c5e688
+set $bg             #a6b4decc
 set $bg-inactive    #1c192100
 set $bg-urgent      #d9989c88
 set $text-light     #d2ced988
@@ -53,7 +53,7 @@ input 1133:16534:Logitech_ERGO_M575S {
 }
 
 # set wallpaper
-output "*" background ~/Pictures/wallpaper/arch_chan.png fill
+output "*" background ~/Pictures/wallpaper/hikari_0.png fill
 
 # set inner and outer gaps
 gaps outer 3
@@ -91,18 +91,27 @@ exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DE
 
 # start polkit service
 
-exec eval $(/usr/bin/gnome-keyring-daemon --start);
-exec export SSH_AUTH_SOCK;
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1;
+#exec eval $(/usr/bin/gnome-keyring-daemon --start);
+#exec export SSH_AUTH_SOCK;
+#exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1;
 
 # start other background apps
-exec ddccontrol -p                      # get display info (brightness, etc...)
-exec mako                               # notification daemon
-exec fcitx5 -d                          # input system
-exec myclipman restore                  # clipboard; previous session retrieval
-exec wl-paste -t text --watch myclipman # clipboard manager
-exec playerctld daemon                  # media controller
-exec easyeffects --gapplication-service # sound equalizer
+exec ddccontrol -p                      
+# get display info (brightness, etc...)
+exec mako                               
+# notification daemon
+exec fcitx5 -d                          
+# input system
+exec myclipman restore                  
+# clipboard; previous session retrieval
+exec wl-paste -t text --watch myclipman 
+# clipboard manager
+exec playerctld daemon                  
+# media controller
+exec easyeffects --gapplication-service 
+# sound equalizer
+exec emote                              
+# emoji picker daemon
 
 # start screenlocker
 exec swayidle -w \
@@ -119,16 +128,18 @@ exec autotiling
 # start applets
 exec nm-applet --indicator
 exec blueman-applet
-exec meteo-qt
+exec "sleep 3; meteo-qt"
 
 # set gtk themes
 exec_always ~/.bin/import-gsettings.sh \
               gtk-theme:gtk-theme-name \
               icon-theme:gtk-icon-theme-name \
-              cursor-theme:gtk-cursor-theme-name
+              cursor-theme:gtk-cursor-theme-name \
+              font-name:gtk-font-name \
+              monospace-font-name:gtk-monospace-font-name
 
 # set cursor theme
-seat seat0 xcursor_theme Bibata-Original-Classic 24
+seat seat0 xcursor_theme Bibata-Original-Classic 36
 
 # switch GTK theme according to time
 exec_always "sh -c 'sleep 3; ~/.bin/gtk-modeswitch.sh'"
@@ -163,18 +174,22 @@ $mybind $mod+F6 exec ddccontrol -f -r 0x10 -W +5 dev:/dev/i2c-1 | grep Brightnes
 
 # media controls
 $mybind XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && pamixer --get-volume > $WOBSOCK
-$mybind control+XF86AudioRaiseVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +5% && pamixer --sink alsa_output.pci-0000_00_1f.3.analog-stereo --get-volume > $WOBSOCK
+$mybind control+XF86AudioRaiseVolume exec pactl set-sink-volume Headset_output +5% && pamixer --sink Headset_output --get-volume > $WOBSOCK
 $mybind XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && pamixer --get-volume > $WOBSOCK
-$mybind control+XF86AudioLowerVolume exec pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -5% && pamixer --sink alsa_output.pci-0000_00_1f.3.analog-stereo --get-volume > $WOBSOCK
+$mybind control+XF86AudioLowerVolume exec pactl set-sink-volume Headset_output -5% && pamixer --sink Headset_output --get-volume > $WOBSOCK
 $mybind XF86AudioRaiseVolume+shift exec pactl set-source-volume @DEFAULT_SOURCE@ +5% && pamixer --default-source --get-volume > $WOBSOCK
 $mybind XF86AudioLowerVolume+shift exec pactl set-source-volume @DEFAULT_SOURCE@ -5% && pamixer --default-source --get-volume > $WOBSOCK
 $mybind $mod+shift+m exec  pactl set-sink-mute @DEFAULT_SINK@ toggle && ( pamixer --get-mute && echo 0 > $WOBSOCK ) || pamixer --get-volume > $WOBSOCK
 $mybind $mod+m exec  pactl set-source-mute @DEFAULT_SOURCE@ toggle && ( pamixer --default-source --get-mute && echo 0 > $WOBSOCK ) || pamixer --default-source --get-volume > $WOBSOCK
 $mybind $mod+comma exec playerctl previous
-$mybind $mod+period exec ~/.bin/play-pause.sh
+#$mybind $mod+period exec ~/.bin/play-pause.sh
+$mybind $mod+period exec playerctl play-pause
 $mybind $mod+slash exec playerctl next
 $mybind $mod+shift+comma exec playerctl --player playerctld position -10
 $mybind $mod+shift+slash exec playerctl --player playerctld position +10
+
+# launch emoji picker
+$mybind Mod1+control+e exec emote
 
 # show history with clipboard manager & wofi
 $mybind $mod+v exec clipman pick -t wofi
@@ -212,10 +227,10 @@ $mybind $mod+shift+e exec ~/.bin/swaypower.sh
 
 # allow floating popup exceptions
 for_window [app_id="firefox" title="Firefox — 共有インジケータ"] {
-	floating enable
+  floating enable
   sticky enable
-  move up 1065 px
-  move right 330 px
+  move up 1070 px
+  move left 330 px
 }
 
 for_window [app_id="thunar" title="ファイル操作進行中"] {
@@ -287,7 +302,7 @@ for_window [class="zoom" title="Zoom - 許可取得済のアカウント"] {
   floating disable
 }
 
-for_window [class="zoom" title="ズーム会議"] {
+for_window [class="zoom" title="Zoom ミーティング"] {
   floating disable
 }
 

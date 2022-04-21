@@ -30,6 +30,7 @@ hook_add = '''
     autocmd FileType scss setl iskeyword+=@-@
     " Update signature help on jump placeholder.
     autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    autocmd CursorHold * silent call CocActionAsync('highlight')
   augroup end
   inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
   "ノーマルモードで
@@ -93,3 +94,10 @@ repo = 'Yggdroot/indentLine'
 
 #[[plugins]]
 #repo = 'chrisbra/Colorizer'
+
+#[[plugins]]
+#repo = 'nvim-treesitter/nvim-treesitter'
+#merged = 0
+
+[[plugins]]
+repo = 'github/copilot.vim'

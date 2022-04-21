@@ -2,8 +2,9 @@
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
 include "/home/haxibami/.gtkrc-2.0.mine"
-gtk-theme-name="WhiteSur"
+gtk-theme-name="WhiteSur-light-solid-alt-pink"
 gtk-icon-theme-name="WhiteSur"
+gtk-icon-sizes = "panel-menu=64,64:panel=64,64:gtk-menu=64,64:gtk-large-toolbar=64,64:gtk-small-toolbar=64,64:gtk-button=64,64:gtk-dnd=64,64:gtk-dialog=64,64"
 gtk-font-name="Noto Sans CJK JP 12"
 gtk-cursor-theme-name="Bibata-Original-Classic"
 gtk-cursor-theme-size=24

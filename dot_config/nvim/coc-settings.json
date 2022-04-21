@@ -1,9 +1,19 @@
 {
   "suggest.noselect": true,
   "suggest.preferCompleteThanJumpPlaceholder": false,
+  "suggest.floatConfig": {
+    "border": true
+  },
+  "diagnostic.floatConfig": {
+    "border": true
+  },
+  "signature.floatConfig": {
+    "border": true
+  },
   "coc.preferences.formatOnType": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "c",
+    "sh",
     "rust",
     "javascript",
     "javascriptreact",
@@ -12,12 +22,17 @@
     "json",
     "html",
     "css",
+    "scss",
     "markdown",
     "vim",
-    "tex"
+    "tex",
+    "go",
+    "xml"
   ],
   "highlight.colors.enable": true,
-  "coc.source.vimtex.enable": true,
+  "highlight.colorNames.enable": true,
+  "highlight.document.enable": true,
+  "colors.filetypes": ["*"],
   "diagnostic.checkCurrentLine": true,
   "diagnostic.refreshOnInsertMode": true,
   "languageserver": {
@@ -31,5 +46,6 @@
         }
       }
     }
-  }
+  },
+  "coc.source.vimtex.filetypes": ["tex", "latex"]
 }

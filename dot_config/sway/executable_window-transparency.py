@@ -39,7 +39,7 @@ def remove_opacity(ipc):
 
 
 if __name__ == "__main__":
-    transparency_val = "0.97"
+    transparency_val = "0.95"
 
     parser = argparse.ArgumentParser(
         description="This script allows you to set the transparency of unfocused windows in sway."

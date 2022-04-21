@@ -115,3 +115,19 @@ function! Jptoggle(jpmode)
   endif
 endfunction
 
+"lua <<EOF
+"require'nvim-treesitter.configs'.setup {
+"  ignore_install = { "phpdoc" },
+"  highlight = {
+"    enable = true,
+"    disable = {
+"      --'lua',
+"      --'ruby',
+"      --'toml',
+"      --'c_sharp',
+"      --'vue',
+"    }
+"  },
+"  ensure_installed = 'maintained',
+"}
+"EOF
