@@ -22,6 +22,7 @@ export EDITOR=nvim
 export VISUAL=nvim
 export LANG=ja_JP.UTF-8
 #export TERM=xterm-256color
+#export TERM=tmux-256color
 #export COLORTERM=truecolor
 
 # auto-compile ~/.zshrc

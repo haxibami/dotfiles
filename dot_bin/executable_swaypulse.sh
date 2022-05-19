@@ -12,7 +12,8 @@ setdefault () {
     pactl set-default-$1 "${id}"
 }
 
-pref=$(echo -e " input\n墳 output" | wofi -i -b -p in/out --dmenu --width 300 --lines=2 --style=${HOME}/.config/wofi/powermenu.css --conf={$HOME}/.config/wofi/powermenu.conf | awk '{print tolower($2)}' )&&
+pref=$(echo -e "input \noutput ﰝ" | wofi -i -b -p in/out --dmenu --width 300 --lines=2 --style=${HOME}/.config/wofi/powermenu.css --conf={$HOME}/.config/wofi/powermenu.conf | awk '{print tolower($1)}' )&&
+  echo $pref
   case $pref in
     input)
       setdefault "source" "input"

@@ -20,7 +20,7 @@ set $text-light     #d2ced988
 set $text-dark      #29243388
 set $text-inactive  #8a829988
 
-set $term alacritty
+set $term foot
 
 #set $menu dmenu_path | ~/.bin/mydofi.sh | xargs swaymsg exec --
 set $menu ~/.bin/mywofi.sh
@@ -73,7 +73,7 @@ client.placeholder      $bg-inactive  $bg-inactive  $text-light $bg-inactive  $b
 
 # set xkeyboard layout
 input * {
-  xkb_layout "us,jp,ru"
+  xkb_layout "us,ru"
   xkb_model "jp106"
   xkb_options "grp:win_space_toggle"
 }
@@ -93,7 +93,7 @@ exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DE
 
 #exec eval $(/usr/bin/gnome-keyring-daemon --start);
 #exec export SSH_AUTH_SOCK;
-#exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1;
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1;
 
 # start other background apps
 exec ddccontrol -p                      

@@ -74,7 +74,7 @@ set wrapscan
 set hlsearch
 
 "" gui config
-set guifont=PlemolJP\ Console:h22,HackgenNerd\ Console:h22
+set guifont=PlemolJP\ Console\ NF:h22,HackgenNerd\ Console:h22
 
 "" nvui config
 if exists('g:nvui')

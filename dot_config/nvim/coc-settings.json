@@ -27,7 +27,8 @@
     "vim",
     "tex",
     "go",
-    "xml"
+    "xml",
+    "ocaml"
   ],
   "highlight.colors.enable": true,
   "highlight.colorNames.enable": true,
@@ -45,6 +46,11 @@
           "directory": "/tmp/ccls-cache"
         }
       }
+    },
+    "ocaml-lsp": {
+      "command": "opam",
+      "args": ["config", "exec", "--", "ocamllsp"],
+      "filetypes": ["ocaml", "reason"]
     }
   },
   "coc.source.vimtex.filetypes": ["tex", "latex"]
