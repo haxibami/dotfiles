@@ -8,45 +8,41 @@ hook_add = '''
         \ 'colorscheme': 'urara',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ],
-        \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-        \ },
-        \ 'component_function': {
-        \   'cocstatus': 'coc#status'
+        \             [ 'readonly', 'filename', 'modified' ] ]
         \ },
         \ }
-  autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 '''
 
-[[plugins]]
-repo = 'neoclide/coc.nvim'
-rev = 'release'
-merged = 0
-hook_add = '''
-  augroup mygroup
-    autocmd!
-    " Setup formatexpr specified filetype(s).
-    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-    " Scss support
-    autocmd FileType scss setl iskeyword+=@-@
-    " Update signature help on jump placeholder.
-    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-    autocmd CursorHold * silent call CocActionAsync('highlight')
-  augroup end
-  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-  "ノーマルモードで
-  "スペース2回でCocList
-  nmap <silent> <space><space> :<C-u>CocList<cr>
-  "スペースhでHover
-  nmap <silent> <space>h :<C-u>call CocAction('doHover')<cr>
-  "スペースdfでDefinition
-  nmap <silent> <space>df <Plug>(coc-definition)
-  "スペースrfでReferences
-  nmap <silent> <space>rf <Plug>(coc-references)
-  "スペースrnでRename
-  nmap <silent> <space>rn <Plug>(coc-rename)
-  "スペースfmtでFormat
-  nmap <silent> <space>fmt <Plug>(coc-format)
-'''
+#[[plugins]]
+#repo = 'neoclide/coc.nvim'
+#rev = 'release'
+#merged = 0
+#hook_add = '''
+#  augroup mygroup
+#    autocmd!
+#    " Setup formatexpr specified filetype(s).
+#    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+#    " Scss support
+#    autocmd FileType scss setl iskeyword+=@-@
+#    " Update signature help on jump placeholder.
+#    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+#    autocmd CursorHold * silent call CocActionAsync('highlight')
+#  augroup end
+#  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+#  "ノーマルモードで
+#  "スペース2回でCocList
+#  nmap <silent> <space><space> :<C-u>CocList<cr>
+#  "スペースhでHover
+#  nmap <silent> <space>h :<C-u>call CocAction('doHover')<cr>
+#  "スペースdfでDefinition
+#  nmap <silent> <space>df <Plug>(coc-definition)
+#  "スペースrfでReferences
+#  nmap <silent> <space>rf <Plug>(coc-references)
+#  "スペースrnでRename
+#  nmap <silent> <space>rn <Plug>(coc-rename)
+#  "スペースfmtでFormat
+#  nmap <silent> <space>fmt <Plug>(coc-format)
+#'''
 
 [[plugins]]
 repo = 'antoinemadec/FixCursorHold.nvim'
@@ -91,9 +87,6 @@ hook_add = '''
 
 [[plugins]]
 repo = 'Yggdroot/indentLine'
-
-#[[plugins]]
-#repo = 'chrisbra/Colorizer'
 
 #[[plugins]]
 #repo = 'nvim-treesitter/nvim-treesitter'

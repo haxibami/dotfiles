@@ -34,6 +34,7 @@
   "highlight.colorNames.enable": true,
   "highlight.document.enable": true,
   "colors.filetypes": ["*"],
+  "eslint.autoFixOnSave": true,
   "diagnostic.checkCurrentLine": true,
   "diagnostic.refreshOnInsertMode": true,
   "languageserver": {
@@ -51,6 +52,12 @@
       "command": "opam",
       "args": ["config", "exec", "--", "ocamllsp"],
       "filetypes": ["ocaml", "reason"]
+    },
+    "satysfi-ls": {
+      "command": "~/.cargo/bin/satysfi-language-server",
+      "args": [],
+      "filetypes": ["satysfi"],
+      "trace.server": "verbose"
     }
   },
   "coc.source.vimtex.filetypes": ["tex", "latex"]

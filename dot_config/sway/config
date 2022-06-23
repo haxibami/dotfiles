@@ -53,7 +53,7 @@ input 1133:16534:Logitech_ERGO_M575S {
 }
 
 # set wallpaper
-output "*" background ~/Pictures/wallpaper/hikari_0.png fill
+output "*" background ~/Pictures/wallpaper/taki_kafe_city.jpg fill
 
 # set inner and outer gaps
 gaps outer 3
@@ -108,7 +108,7 @@ exec wl-paste -t text --watch myclipman
 # clipboard manager
 exec playerctld daemon                  
 # media controller
-exec easyeffects --gapplication-service 
+#exec easyeffects --gapplication-service 
 # sound equalizer
 exec emote                              
 # emoji picker daemon
@@ -329,6 +329,10 @@ for_window [title="Inkporter"] {
 }
 
 for_window [title="Mozilla Firefox について"] {
+  floating enable
+}
+
+for_window [app_id="anki" title="追加"] {
   floating enable
 }
 

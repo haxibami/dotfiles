@@ -1,5 +1,6 @@
 aacskeys
 android-studio
+anki
 aseprite-skia-bin
 authy
 autotiling-git
@@ -10,6 +11,7 @@ cava
 cbonsai
 clipman
 cnijfilter2
+davfs2
 ddcci-driver-linux-dkms
 ddccontrol-git
 difftance-git
@@ -20,6 +22,7 @@ fcitx5-skin-adwaita-dark
 flashplayer-standalone
 fontpreview
 fzpac-git
+ghcup-hs-bin
 google-chrome
 google-drive-ocamlfuse-opam
 google-earth-pro
@@ -37,6 +40,7 @@ lssecret-git
 makemkv
 makemkv-libaacs
 man-pages-ja
+marksman-bin
 meteo-qt-git
 mozc-ut
 mpvpaper
@@ -46,7 +50,8 @@ netdiscover
 neuropolitical-ttf
 nextdns-bin
 nodejs-generator-code
-noise-suppression-for-voice
+nodejs-markdownlint-cli
+nodejs-yeoman
 nvm
 nvui-git
 obs-cli
@@ -66,7 +71,7 @@ pup
 pygtk
 qt6gtk2
 r-mkl
-rakudo
+reflector-mirrorlist-update
 rofi-greenclip
 screamingfrogseospider
 showmethekey
@@ -93,6 +98,7 @@ ttf-oradano-mincho
 ttf-plemoljp
 ttf-twemoji
 tty-clock
+verapdf
 visual-studio-code-bin
 vsce
 waifu2x-ncnn-vulkan
@@ -107,5 +113,6 @@ wob
 workflowy
 xiccd
 xob
+zoom
 zotero-bin
 zscroll-git

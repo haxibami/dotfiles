@@ -1,1 +1,1 @@
-export PATH=/home/haxibami/.deno/bin:/home/haxibami/go/bin:/home/haxibami/.local/bin:$PATH
+export PATH=/home/haxibami/.deno/bin:/home/haxibami/go/bin:/home/haxibami/.local/bin:/home/haxibami/.cargo/bin:/home/haxibami/.ghcup/bin:$HOME/.cabal/bin:$PATH

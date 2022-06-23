@@ -26,6 +26,10 @@ if dein#check_install()
 endif
 
 "" source files
+
+"source ~/.config/nvim/scripts/source-ddc.vim
+source ~/.config/nvim/scripts/filetype.vim
+
 if filereadable(expand('$HOME/.secure/dein_update.vim'))
     source $HOME/.secure/dein_update.vim
  endif
@@ -131,3 +135,5 @@ endfunction
 "  ensure_installed = 'maintained',
 "}
 "EOF
+
+

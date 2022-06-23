@@ -1,7 +1,93 @@
 [[plugins]]
+repo = 'vim-denops/denops.vim'
+
+[[plugins]]
+repo = 'nvim-lua/plenary.nvim'
+on_source = 'null-ls.nvim'
+
+[[plugins]]
+repo = 'jose-elias-alvarez/null-ls.nvim'
+on_source = 'nvim-lsp-installer'
+
+[[plugins]]
+repo = 'williamboman/nvim-lsp-installer'
+on_source = 'nvim-lspconfig'
+
+[[plugins]]
+on_event = 'BufEnter'
+repo = 'neovim/nvim-lspconfig'
+hook_source = '''
+  source ~/.config/nvim/lua/lsprc.lua
+'''
+
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip'
+
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip-integ'
+
+[[plugins]]
+repo = 'Shougo/pum.vim'
+hook_post_source = '''
+  call pum#set_option('border', 'single')
+  call pum#set_option('padding', v:true)
+'''
+
+[[plugins]]
+repo = 'Shougo/ddc.vim'
+on_event = 'InsertEnter'
+depends = ['pum.vim', 'denops.vim', 'nvim-lspconfig']
+hook_post_source = '''
+  source ~/.config/nvim/ddc/ddcrc.vim
+'''
+
+[[plugins]]
+repo = 'Shougo/ddc-nvim-lsp'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-around'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-cmdline'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-cmdline-history'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'LumaKernel/ddc-file'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'tani/ddc-fuzzy'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'matsui54/denops-popup-preview.vim'
+on_source = 'ddc.vim'
+hook_source = '''
+  call popup_preview#enable()
+'''
+
+[[plugins]]
+repo = 'matsui54/denops-signature_help'
+on_source = 'ddc.vim'
+hook_source = '''
+  let g:signature_help_config = {
+        \ 'style': 'virtual',
+        \ 'border': v:true,
+        \ }
+  call signature_help#enable()
+'''
+
+
+[[plugins]]
 repo = 'lervag/vimtex'
-on_ft=['latex', 'tex']
-hook_source='''
+on_ft = ['latex', 'tex']
+hook_source = '''
   let g:vimtex_view_general_viewer = 'zathura'
   let g:vimtex_compiler_progname = 'nvr'
   let g:vimtex_view_general_options = "-x \"nvr +%{line} %{input}\" --synctex-forward @line:0:@tex @pdf"
@@ -26,7 +112,6 @@ hook_source='''
       \ 'styles': 0,
       \}
   let g:vimtex_complete_close_braces = 0
-
 '''
 
 [[plugins]]
@@ -82,3 +167,9 @@ on_ft = ['v']
 repo = "jalvesaq/Nvim-R"
 rev = "stable"
 on_ft = ['r']
+
+[[plugins]]
+repo = 'chrisbra/Colorizer'
+hook_add = '''
+  let g:colorizer_auto_filetype='css,scss,html,palette,json'
+'''
