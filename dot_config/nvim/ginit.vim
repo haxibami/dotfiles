@@ -7,7 +7,7 @@ set mouse=a
 " Set Editor Font
 if exists(':GuiFont!')
     " Use GuiFont! to ignore font errors
-    GuiFont PlemolJP\ Console:h36
+    GuiFont Firge\ Console:h12
 endif
 
 " Disable GUI Tabline

@@ -22,9 +22,25 @@ hook_source = '''
 
 [[plugins]]
 repo = 'hrsh7th/vim-vsnip'
+depends = ['vim-vsnip-integ', 'friendly-snippets']
+on_event = 'InsertEnter'
+hook_add = '''
+" Expand
+imap <expr> <C-l> vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-l>'
+smap <expr> <C-l> vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-l>'
+" Jump forward or backward
+imap <expr> <C-f> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-f>'
+smap <expr> <C-f> vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<C-f>'
+imap <expr> <C-b> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-b>'
+smap <expr> <C-b> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-b>'
+let g:vsnip_snippet_dir = expand('~/dotfiles/nvim/snippets')
+'''
 
 [[plugins]]
 repo = 'hrsh7th/vim-vsnip-integ'
+
+[[plugins]]
+repo = 'rafamadriz/friendly-snippets'
 
 [[plugins]]
 repo = 'Shougo/pum.vim'
@@ -35,10 +51,10 @@ hook_post_source = '''
 
 [[plugins]]
 repo = 'Shougo/ddc.vim'
-on_event = 'InsertEnter'
+on_event = ['InsertEnter', 'CmdlineEnter']
 depends = ['pum.vim', 'denops.vim', 'nvim-lspconfig']
-hook_post_source = '''
-  source ~/.config/nvim/ddc/ddcrc.vim
+hook_source = '''
+  source ~/.config/nvim/lua/ddc/ddcrc.lua
 '''
 
 [[plugins]]
@@ -83,6 +99,14 @@ hook_source = '''
   call signature_help#enable()
 '''
 
+[[plugins]]
+repo = 'windwp/nvim-autopairs'
+on_event = 'InsertEnter'
+hook_source = '''
+lua << EOF
+require('nvim-autopairs').setup()
+EOF
+'''
 
 [[plugins]]
 repo = 'lervag/vimtex'
@@ -153,23 +177,21 @@ build = 'sh -c "cd app && yarn install"'
 
 [[plugins]]
 repo = 'rust-lang/rust.vim'
-on_ft = ['rs']
+on_ft = ['rust']
+
+[[plugins]]
+repo = 'simrat39/rust-tools.nvim'
+on_ft = ['rust']
 
 [[plugins]]
 repo = 'mzlogin/vim-markdown-toc'
-on_ft = ['md']
+on_ft = ['markdown']
 
 [[plugins]]
 repo = 'whonore/Coqtail'
-on_ft = ['v']
+on_ft = ['coq']
 
 [[plugins]]
 repo = "jalvesaq/Nvim-R"
 rev = "stable"
 on_ft = ['r']
-
-[[plugins]]
-repo = 'chrisbra/Colorizer'
-hook_add = '''
-  let g:colorizer_auto_filetype='css,scss,html,palette,json'
-'''

@@ -46,6 +46,7 @@ mozc-ut
 mpvpaper
 ncurses5-compat-libs
 neofetch-git
+neovide
 netdiscover
 neuropolitical-ttf
 nextdns-bin
@@ -93,6 +94,7 @@ tomate-notify-plugin
 tor-browser
 ttf-apple-emoji
 ttf-cinecaption
+ttf-firge
 ttf-hackgen
 ttf-oradano-mincho
 ttf-plemoljp
