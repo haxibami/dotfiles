@@ -46,7 +46,7 @@ mozc-ut
 mpvpaper
 ncurses5-compat-libs
 neofetch-git
-neovide
+neovim-remote
 netdiscover
 neuropolitical-ttf
 nextdns-bin
