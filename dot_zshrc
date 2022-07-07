@@ -3,9 +3,11 @@
 
 if [[ ! -z "$SSH_CLIENT" ]]; then
   export STARSHIP_CONFIG=~/.config/starship_light.toml
-elif which tmux >/dev/null 2>&1; then 
-  [[ -z "$TMUX" ]] && exec tmux
+elif which zellij >/dev/null 2>&1; then 
+  eval "$(zellij setup --generate-auto-start zsh)"
 fi
+
+
 
 # aliases
 alias spotify='/usr/bin/spotify --force-device-scale-factor=1.5'

@@ -169,8 +169,8 @@ $mybind Mod1+c exec rofi -show calc -modi calc -no-show-match -no-sort
 $mybind $mod+control+l exec .bin/swaylight.sh
 
 # brightness controls (requires non-root access to i2c devices)
-$mybind $mod+F5 exec ddccontrol -f -r 0x10 -W -5 dev:/dev/i2c-1 | grep Brightness | cut -d "/" -f 2 | tee $WOBSOCK
-$mybind $mod+F6 exec ddccontrol -f -r 0x10 -W +5 dev:/dev/i2c-1 | grep Brightness | cut -d "/" -f 2 | tee $WOBSOCK
+$mybind $mod+F5 exec ddccontrol -f -r 0x10 -W -5 dev:/dev/i2c-5 | grep Brightness | cut -d "/" -f 2 | tee $WOBSOCK
+$mybind $mod+F6 exec ddccontrol -f -r 0x10 -W +5 dev:/dev/i2c-5 | grep Brightness | cut -d "/" -f 2 | tee $WOBSOCK
 
 # media controls
 $mybind XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && pamixer --get-volume > $WOBSOCK

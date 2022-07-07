@@ -145,7 +145,7 @@
     },
     "temperature": {
         "thermal-zone": 1, 
-        "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+        "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
         "critical-threshold": 75,
         "interval": 5,
         "format-critical": "{temperatureC}°C {icon}",
@@ -183,7 +183,7 @@
         //  "bat": "BAT2"
     //  },
     "network": {
-        "interface": "wlp4*", // (Optional) To force the use of this interface
+        "interface": "wlp*", // (Optional) To force the use of this interface
         "format-wifi": "{signalStrength}% ",
         "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
         "format-linked": "{ifname} (No IP) ",

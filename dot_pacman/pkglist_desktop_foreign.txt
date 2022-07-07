@@ -1,4 +1,6 @@
 aacskeys
+amd-vulkan-prefixes
+amf-amdgpu-pro
 android-studio
 anki
 aseprite-skia-bin
@@ -19,6 +21,7 @@ emote
 fcitx5-dark-default
 fcitx5-mozc-ut
 fcitx5-skin-adwaita-dark
+firefox-nightly
 flashplayer-standalone
 fontpreview
 fzpac-git
@@ -29,6 +32,8 @@ google-earth-pro
 grimshot
 heroku-cli-bin
 i3lock-color-git
+intel-oneapi-mkl
+intel-opencl-runtime
 intellij-idea-ultimate-edition
 intellij-idea-ultimate-edition-jre
 inxi
@@ -60,7 +65,6 @@ obs-websocket
 onedriver
 onevpl
 onevpl-cpu
-onevpl-intel-gpu
 openconnect-sso
 otf-rubik
 pacman-static
@@ -73,6 +77,8 @@ pygtk
 qt6gtk2
 r-mkl
 reflector-mirrorlist-update
+rocm-opencl-runtime
+rocminfo
 rofi-greenclip
 screamingfrogseospider
 showmethekey
@@ -103,6 +109,7 @@ tty-clock
 verapdf
 visual-studio-code-bin
 vsce
+vulkan-amdgpu-pro
 waifu2x-ncnn-vulkan
 wdisplays
 wev

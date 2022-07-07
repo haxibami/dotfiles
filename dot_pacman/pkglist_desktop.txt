@@ -6,6 +6,7 @@ arch-install-scripts
 aria2
 asciinema
 asunder
+atool
 audacity
 autoconf
 automake
@@ -52,6 +53,7 @@ dunst
 easyeffects
 efibootmgr
 electron16
+epiphany
 evince
 exa
 exfatprogs
@@ -108,16 +110,12 @@ handlr
 hdparm
 helvum
 hexedit
+highlight
 i3-gaps
 i3status
 i7z
 ifuse
 inkscape
-intel-compute-runtime
-intel-gpu-tools
-intel-media-driver
-intel-media-sdk
-intel-mkl-static
 intel-ucode
 iptables-nft
 iw
@@ -128,6 +126,7 @@ kanshi
 kmscon
 krita
 kvantum
+lib32-vulkan-radeon
 libbluray
 libcdio
 libgnome-keyring
@@ -137,6 +136,7 @@ libreoffice-fresh
 libreoffice-fresh-ja
 libsecret
 libtool
+libva-mesa-driver
 libva-utils
 libvdpau-va-gl
 lightdm
@@ -155,6 +155,7 @@ man-pages
 mesa
 mesa-demos
 mesa-utils
+mesa-vdpau
 mpv
 mpv-mpris
 namcap
@@ -178,6 +179,7 @@ ntfs-3g
 nvme-cli
 obs-studio
 opam
+opencl-mesa
 otf-font-awesome
 otf-ipaexfont
 otf-ipafont
@@ -192,6 +194,7 @@ patch
 pavucontrol
 pdftk
 peek
+perl-image-exiftool
 picom
 pipewire
 pipewire-alsa
@@ -219,6 +222,7 @@ qt5-webengine
 qt5ct
 qt6-wayland
 qt6ct
+radeontop
 ranger
 read-edid
 redshift
@@ -288,8 +292,8 @@ vdpauinfo
 vim
 vlc
 vorbis-tools
-vulkan-intel
 vulkan-mesa-layers
+vulkan-radeon
 vulkan-tools
 vulkan-validation-layers
 wallutils
@@ -310,6 +314,7 @@ xclip
 xdg-desktop-portal-gtk
 xdg-desktop-portal-wlr
 xdg-user-dirs
+xf86-video-amdgpu
 xorg-bdftopcf
 xorg-iceauth
 xorg-mkfontscale
@@ -361,5 +366,6 @@ zathura-cb
 zathura-djvu
 zathura-pdf-mupdf
 zathura-ps
+zellij
 zsh
 zsh-completions
