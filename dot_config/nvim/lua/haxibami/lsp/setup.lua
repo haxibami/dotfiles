@@ -45,3 +45,7 @@ for _, server in ipairs(lsp_installer.get_installed_servers()) do
   local setup_fn = server_configs[server.name] or utils.default_setup
   setup_fn(server)
 end
+
+require('lspconfig')['satysfi-ls'].setup {
+  autostart = true
+}

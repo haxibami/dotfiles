@@ -257,7 +257,7 @@ for_window [class="XEyes" title="xeyes"] {
   floating enable
 }
 
-for_window [app_id="one.alynx.showmethekey" title="Floating Window - Show Me The Key"] {
+for_window [app_id="showmethekey-gtk" title="Floating Window - Show Me The Key"] {
   floating enable
   sticky enable
   move down 950 px

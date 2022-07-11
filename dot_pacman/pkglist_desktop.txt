@@ -1,6 +1,7 @@
 accountsservice
 alacritty
 alsa-utils
+amf-headers
 android-tools
 arch-install-scripts
 aria2
@@ -18,20 +19,16 @@ binutils
 bison
 bitwarden
 bitwarden-cli
+blender
 blueman
 bluez
 bluez-utils
 booster
 bottom
 busybox
-chafa
 chezmoi
-chromium
-clamtk
-clevis
 clinfo
 cmake
-convmv
 coq
 coqide
 cowfortune
@@ -87,7 +84,6 @@ git
 git-delta
 github-cli
 glfw-wayland
-gnome-boxes
 gnome-keyring
 gnome-sound-recorder
 go
@@ -100,7 +96,6 @@ gst-plugin-pipewire
 gst-plugins-bad
 gtk-engine-murrine
 gtk-engines
-gtk4-demos
 guvcview
 gvfs
 gvfs-afc
@@ -138,9 +133,7 @@ libsecret
 libtool
 libva-mesa-driver
 libva-utils
-libvdpau-va-gl
 lightdm
-lightdm-webkit-theme-litarvan
 lightdm-webkit2-greeter
 linux-firmware
 linux-zen
@@ -179,7 +172,6 @@ ntfs-3g
 nvme-cli
 obs-studio
 opam
-opencl-mesa
 otf-font-awesome
 otf-ipaexfont
 otf-ipafont
@@ -189,11 +181,9 @@ pacman
 pacman-contrib
 pamixer
 parallel
-parcellite
 patch
 pavucontrol
 pdftk
-peek
 perl-image-exiftool
 picom
 pipewire
@@ -227,7 +217,6 @@ ranger
 read-edid
 redshift
 reflector
-rhythmbox
 ripgrep
 rofi
 rofi-calc
@@ -244,9 +233,7 @@ speedtest-cli
 spotifyd
 starship
 steam
-stress
 sudo
-swappy
 sway
 swaybg
 swayidle
@@ -296,8 +283,6 @@ vulkan-mesa-layers
 vulkan-radeon
 vulkan-tools
 vulkan-validation-layers
-wallutils
-wasm-pack
 waybar
 wayvnc
 wf-recorder

@@ -5,23 +5,11 @@ scan_timeout = 10
 format = """
 [┌──](#d9ced9)$directory$git_branch$git_status
 [└─](#d9ced9)$character(#d9ced9)"""
-# 
-#[│](#d9ced9)$directory$hostname
-
-#🐑
-
-#ﳴ 
-
-#
 
 [character]
-
 success_symbol = "[ 🏳 ](#9abf86)[ ](#d9c77e)"
-# \\[๑ᴖ◡ᴖ๑\\]🏳
 error_symbol = "[ 🏳 ](#d9989c)[ ](#d9c77e)"
-# \\[๑>_<๑\\]
 vicmd_symbol = "[ 🏳 ](#d9c77e)[ ](#d9c77e)"
-# \\[๑ᴖ◡ᴖ๑\\]
 
 [directory]
 truncation_length = 5

@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-env QT_QPA_PLATFORM=xcb zoom "$@"
+XDG_CURRENT_DESKTOP=gnome QT_SCALE_FACTOR=1 QT_QPA_PLATFORM=wayland zoom "$@"

@@ -1,13 +1,13 @@
 [Unit]
 Description = EasyEffects daemon
-Requires = pipewire-pulse.service
-After = pipewire-pulse.service
+Requires = graphical-session.target
+After = graphical-session.target
 
 [Service]
-ExecStart = /usr/bin/easyeffects --gapplication-service
+ExecStart = /usr/bin/nohup /usr/bin/easyeffects --gapplication-service
 Restart = always
 RestartSec = 5
 TimeoutStopSec = 15
 
 [Install]
-WantedBy = sway-session.target
+WantedBy = graphical-session.target
