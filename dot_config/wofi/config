@@ -11,16 +11,16 @@ style=/home/haxibami/.config/wofi/style.css
 #colors=PATH
       #Specifies  the  colors  file to use. This option is NOT the same as color. Absolute paths are absolute however relative paths are relative to the  wofi  config  folder location  $XDG_CONFIG_HOME/wofi  and  NOT the current working directory as they are with color. They are also NOT relative to the path as  specified  by  --conf.  This option  comes  from  rootbar  and  is  probably more confusing than it's worth. You should probably use color unless you're sure this is what you want.
 
-show=run
+show=drun
       #Specifies the mode to run in. A list of modes can be found in wofi(7).
 
 #mode=MODE
       #Identical to show.
 
-width=25%
+width=35%
       #Specifies the menu width in pixels or percent  of  screen  size,  default  is  50%. Pixels are used unless the number ends with a %.
 
-height=18%
+height=30%
       #Specifies  the  menu  height  in  pixels or percent of screen size, default is 40%.
       #Pixels are used unless the number ends with a %.
 
@@ -51,25 +51,25 @@ allow_images=true
 #cache_file=PATH
       #Specifies the cache file to load/store cache, default is $XDG_CACHE_HOME/wofi-<mode name>  where  <mode  name>  is  the  name  of  the  mode, if $XDG_CACHE_HOME is not specified ~/.cache is used.
 
-term=tilix
+term=foot
       #Specifies the term to use when running a program in a terminal. This overrides  the default terminal run order which is kitty, termite, gnome-terminal, weston-terminal in that order.
 
 #password=CHARACTER
       #Runs wofi in password mode using the specified character, default is false.
 
-exec_search=true
+#exec_search=false
       #If true activiating a search with enter will  execute  the  search  not  the  first result, default is false.
 
-#hide_scroll=BOOL
+hide_scroll=true
       #If true hides the scroll bars, default is false.
 
-#matching=MODE
+#matching=fuzzy
       #Specifies  the  matching  mode,  it  can  be  either  contains or fuzzy, default is contains.
 
-#insensitive=BOOL
+insensitive=true
       #If true enables case insensitive search, default is false.
 
-#parse_search=BOOL
+parse_search=true
       #If true parses out image escapes and pango preventing  them  from  being  used  for searching, default is false.
 
 #location=LOCATION
@@ -111,7 +111,7 @@ exec_search=true
 #filter_rate=RATE
       #Specifies the rate at which search results are updated in milliseconds, default  is 100.
 
-#image_size=SIZE
+image_size=60
       #Specifies the size of images in pixels when images are enabled, default is 32.
 
 #key_up=KEY
@@ -164,3 +164,4 @@ dynamic_lines=true
 
 #layer=LAYER
       #Specifies  the  layer  to  open  on.  The  options are background, bottom, top, and overlay. Default is top
+run-always_parse_args=true

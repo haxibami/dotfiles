@@ -13,9 +13,9 @@ null_ls.setup {
     -- use prettier
     null_ls.builtins.formatting.prettier.with {
       condition = function(utils)
-        return utils.has_file { '.prettierrc', '.prettierrc.js', '.prettierrc.yaml' }
+        return not (utils.has_file { 'deps.ts' })
       end,
-      prefer_local = 'node_modules/.bin',
+      -- prefer_local = 'node_modules/.bin',
     },
     -- use markdownlint
     null_ls.builtins.diagnostics.markdownlint,

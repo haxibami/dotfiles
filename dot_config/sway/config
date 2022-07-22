@@ -53,7 +53,9 @@ input 1133:16534:Logitech_ERGO_M575S {
 }
 
 # set wallpaper
-output "*" background ~/Pictures/wallpaper/taki_kafe_city.jpg fill
+#output "*" background ~/Pictures/wallpaper/99_pierce.jpg fill
+
+#exec wpaperd
 
 # set inner and outer gaps
 gaps outer 3
@@ -84,34 +86,41 @@ bar {
 }
 
 
-## background services
+## environment
 
 # set desktop environment unique variables
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway 
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
 
-# start polkit service
 
-#exec eval $(/usr/bin/gnome-keyring-daemon --start);
-#exec export SSH_AUTH_SOCK;
+## background services
+
+# XWayland config daemon
+exec xsettingsd
+
+# polkit
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1;
 
+# geoclue
+exec /usr/lib/geoclue-2.0/demos/agent
+
 # start other background apps
-exec ddccontrol -p                      
+
 # get display info (brightness, etc...)
+exec ddccontrol -p                      
+# notification
 exec mako                               
-# notification daemon
-exec fcitx5 -d                          
 # input system
+exec fcitx5 -d                          
+# clipboard manager; previous session restoration
 exec myclipman restore                  
-# clipboard; previous session retrieval
-exec wl-paste -t text --watch myclipman 
 # clipboard manager
-exec playerctld daemon                  
+exec wl-paste --watch cliphist store
 # media controller
-#exec easyeffects --gapplication-service 
+exec playerctld daemon                  
 # sound equalizer
-exec emote                              
-# emoji picker daemon
+exec "sleep 3; easyeffects --gapplication-service"
+# emoji picker
+exec emote                            
 
 # start screenlocker
 exec swayidle -w \
@@ -120,7 +129,7 @@ exec swayidle -w \
   before-sleep 'env LANG=en.US_UTF-8 swaylock -f' \
 
 # start display gamma setting tool
-exec gammastep-indicator
+# exec gammastep-indicator
 
 # start auto-tiling
 exec autotiling
@@ -131,18 +140,17 @@ exec blueman-applet
 exec "sleep 3; meteo-qt"
 
 # set gtk themes
-exec_always ~/.bin/import-gsettings.sh \
-              gtk-theme:gtk-theme-name \
-              icon-theme:gtk-icon-theme-name \
-              cursor-theme:gtk-cursor-theme-name \
-              font-name:gtk-font-name \
-              monospace-font-name:gtk-monospace-font-name
+# exec_always ~/.bin/import-gsettings.sh \
+#               gtk-theme:gtk-theme-name \
+#               icon-theme:gtk-icon-theme-name \
+#               cursor-theme:gtk-cursor-theme-name \
+#               font-name:gtk-font-name \
 
 # set cursor theme
 seat seat0 xcursor_theme Bibata-Original-Classic 36
 
 # switch GTK theme according to time
-exec_always "sh -c 'sleep 3; ~/.bin/gtk-modeswitch.sh'"
+# exec_always "sh -c 'sleep 3; ~/.bin/gtk-modeswitch.sh'"
 
 # set volume/brightness bar
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
@@ -166,23 +174,25 @@ $mybind $mod+e exec thunar
 $mybind Mod1+c exec rofi -show calc -modi calc -no-show-match -no-sort
 
 # screenlock (manual)
-$mybind $mod+control+l exec .bin/swaylight.sh
+$mybind $mod+control+l exec ~/.bin/swaylight.sh
 
 # brightness controls (requires non-root access to i2c devices)
 $mybind $mod+F5 exec ddccontrol -f -r 0x10 -W -5 dev:/dev/i2c-5 | grep Brightness | cut -d "/" -f 2 | tee $WOBSOCK
 $mybind $mod+F6 exec ddccontrol -f -r 0x10 -W +5 dev:/dev/i2c-5 | grep Brightness | cut -d "/" -f 2 | tee $WOBSOCK
 
 # media controls
-$mybind XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && pamixer --get-volume > $WOBSOCK
-$mybind control+XF86AudioRaiseVolume exec pactl set-sink-volume Headset_output +5% && pamixer --sink Headset_output --get-volume > $WOBSOCK
-$mybind XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && pamixer --get-volume > $WOBSOCK
-$mybind control+XF86AudioLowerVolume exec pactl set-sink-volume Headset_output -5% && pamixer --sink Headset_output --get-volume > $WOBSOCK
-$mybind XF86AudioRaiseVolume+shift exec pactl set-source-volume @DEFAULT_SOURCE@ +5% && pamixer --default-source --get-volume > $WOBSOCK
-$mybind XF86AudioLowerVolume+shift exec pactl set-source-volume @DEFAULT_SOURCE@ -5% && pamixer --default-source --get-volume > $WOBSOCK
-$mybind $mod+shift+m exec  pactl set-sink-mute @DEFAULT_SINK@ toggle && ( pamixer --get-mute && echo 0 > $WOBSOCK ) || pamixer --get-volume > $WOBSOCK
-$mybind $mod+m exec  pactl set-source-mute @DEFAULT_SOURCE@ toggle && ( pamixer --default-source --get-mute && echo 0 > $WOBSOCK ) || pamixer --default-source --get-volume > $WOBSOCK
+# output
+$mybind XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SINK@) > $WOBSOCK
+$mybind control+XF86AudioRaiseVolume exec wpctl set-volume $(~/.bin/pwnodefd.sh "Headset_output") 5%+ && ~/.bin/percentify.sh $(wpctl get-volume `~/.bin/pwnodefd.sh "Headset_output"`) > $WOBSOCK
+$mybind XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SINK@) > $WOBSOCK
+$mybind control+XF86AudioLowerVolume exec wpctl set-volume $(~/.bin/pwnodefd.sh "Headset_output") 5%- && ~/.bin/percentify.sh $(wpctl get-volume `~/.bin/pwnodefd.sh "Headset_output"`) > $WOBSOCK
+# input
+$mybind XF86AudioRaiseVolume+shift exec wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+ && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SOURCE@) > $WOBSOCK
+$mybind XF86AudioLowerVolume+shift exec wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%- && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SOURCE@) > $WOBSOCK
+
+$mybind $mod+shift+m exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SINK@) > $WOBSOCK
+$mybind $mod+m exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SOURCE@) > $WOBSOCK
 $mybind $mod+comma exec playerctl previous
-#$mybind $mod+period exec ~/.bin/play-pause.sh
 $mybind $mod+period exec playerctl play-pause
 $mybind $mod+slash exec playerctl next
 $mybind $mod+shift+comma exec playerctl --player playerctld position -10
@@ -192,16 +202,16 @@ $mybind $mod+shift+slash exec playerctl --player playerctld position +10
 $mybind Mod1+control+e exec emote
 
 # show history with clipboard manager & wofi
-$mybind $mod+v exec clipman pick -t wofi
+$mybind $mod+v exec cliphist list | wofi -d -p clipboard | cliphist decode | wl-copy
 
 # take screenshots
+
 # [fullscreen, copy & save]
 $mybind $mod+shift+a exec grimshot --notify save output ~/Pictures/screenshot/$(date "+%Y%m%d-%H%M%S")'_grim_full.png'
 # [slurp, copy & save]
 $mybind $mod+shift+s exec grimshot --notify save area ~/Pictures/screenshot/$(date "+%Y%m%d-%H%M%S")'_grim_area.png'
 # [select window, copy & save]
 $mybind $mod+shift+f exec grimshot --notify save window ~/Pictures/screenshot/$(date "+%Y%m%d-%H%M%S")'_grim_window.png'
-
 # [fullscreen, only copy]
 $mybind $mod+Print exec grimshot --notify copy output
 # [slurp, only copy]
@@ -213,7 +223,7 @@ $mybind control+Print exec ~/.bin/waytshot.sh
 
 # launch wofi, a rofi alternative on Wayland
 $mybind Mod1+space exec $menu
-$mybind Mod1+shift+space exec ~/.bin/myrofi.sh
+$mybind Mod1+shift+space exec ~/.bin/mywofi.sh -S run
 $mybind Mod1+Tab exec ~/.bin/window-walker.sh
 
 
@@ -222,8 +232,8 @@ $mybind Mod1+Tab exec ~/.bin/window-walker.sh
 $mybind $mod+Shift+c reload
 
 # exit sway
-$mybind $mod+shift+e exec ~/.bin/swaypower.sh
-#$mybind $mod+shift+e exec LANG=en.US_UTF-8 wlogout
+#$mybind $mod+shift+e exec ~/.bin/swaypower.sh
+$mybind $mod+shift+e exec LANG=en.US_UTF-8 wlogout
 
 # allow floating popup exceptions
 for_window [app_id="firefox" title="Firefox — 共有インジケータ"] {
@@ -302,11 +312,19 @@ for_window [class="zoom" title="Zoom - 許可取得済のアカウント"] {
   floating disable
 }
 
+for_window [app_id="zoom" title="Zoom - 許可取得済のアカウント"] {
+  floating disable
+}
+
 for_window [class="zoom" title="Zoom ミーティング"] {
   floating disable
 }
 
 for_window [class="zoom" title="Zoom ウェビナー"] {
+  floating disable
+}
+
+for_window [app_id="zoom" title="Zoom ウェビナー"] {
   floating disable
 }
 
@@ -318,6 +336,16 @@ for_window [class="zoom" title="^参加者"] {
 for_window [class="zoom" title="^ブレイクアウトルーム"] {
   floating enable
   resize set 2000 1500
+}
+
+for_window [app_id="zoom" title="as_toolbar"] {
+  floating enable
+  move up 1050 px
+  move left 750 px
+}
+
+for_window [app_id="zoom" title="レコーディング アラート"] {
+  floating enable
 }
 
 for_window [app_id="meteo-qt.python3"] {

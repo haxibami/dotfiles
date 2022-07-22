@@ -1,13 +1,11 @@
 [Unit]
 Description = EasyEffects daemon
-Requires = graphical-session.target
-After = graphical-session.target
 
 [Service]
-ExecStart = /usr/bin/nohup /usr/bin/easyeffects --gapplication-service
-Restart = always
-RestartSec = 5
-TimeoutStopSec = 15
+Type = simple
+ExecStart = /usr/local/bin/easyeffectsd start
+ExecStop = /usr/local/bin/easyeffectsd stop
+Restart = on-failure
 
 [Install]
-WantedBy = graphical-session.target
+WantedBy = default.target

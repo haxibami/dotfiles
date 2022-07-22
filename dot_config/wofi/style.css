@@ -1,54 +1,51 @@
 * {
-  font-family: Neuropolitical, Plemol JP Console NF;
-  font-size: 25;
+  font-family: FirgeNerdConsole;
+  font-size: 30px;
+  color: @fg_color;
 }
 
 window {
   margin: 0px;
-  border: 2px solid #a6b4de;
-  background-color: #292433;
-  border-radius: 5;
+  border-radius: 5px;
+  background-color: @theme_base_color;
+  box-shadow: 0px 19px 38px rgba(0, 0, 0, 0.3),
+    0px 15px 12px rgba(0, 0, 0, 0.22);
 }
 
 #input {
   margin: 10px;
   padding: 10px;
   border: none;
-  color: #d9c77e;
-  background-color: #1c1921;
+  background-color: @bg_color;
 }
 
 #inner-box {
-  margin: 5px;
   border: none;
-  background-color: #292433;
 }
 
 #outer-box {
-  margin: 20px;
   border: none;
-  background-color: #292433;
 }
 
 #scroll {
   margin: 0px;
-  border: none;
 }
 
 #text {
   margin: 15px;
-  border: none;
-  color: #d2ced9;
 }
 
 #entry {
   margin: 5px;
-  background-color: #292433;
 }
 
 #entry:selected {
-  background-color: #4e4266;
-  color: #edebef;
+  background-color: @unfocused_borders;
+  border: none;
+}
+
+#selected #text {
+  /*color: @fg_color;*/
 }
 
 /* #img */

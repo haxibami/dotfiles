@@ -87,6 +87,7 @@ PASS=`cat ${PASSFILE}`
 
 if [[ $STATUS -ne 0 ]] && [ -e ~/.secure/obs-websocket.txt ]; then
   obs-cli virtualcam toggle --password "${PASS}"
+  notify-send --app-name="obs" --urgency=low --icon=media-record "OBS" "Virtualcam toggled"
 else
   echo "Launch obs studio with obs-websocket, and set password!"
 fi

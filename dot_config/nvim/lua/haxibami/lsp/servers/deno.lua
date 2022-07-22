@@ -1,6 +1,6 @@
 local root_pattern = require('lspconfig').util.root_pattern
 
-local deno_root_pattern = root_pattern('deno.json', 'deps.ts')
+local deno_root_pattern = root_pattern('deps.ts')
 
 return {
   root_dir = deno_root_pattern,

@@ -24,6 +24,20 @@ require('packer').startup({ function(use)
 
   use { 'haxibami/urara.vim' }
 
+  use {
+    'xiyaowong/nvim-transparent',
+    config = function()
+      require('transparent').setup({
+        enable = true, -- boolean: enable transparent
+        extra_groups = { -- table/string: additional groups that should be cleared
+          -- In particular, when you set it to 'all', that means all available groups
+          'all'
+        },
+        exclude = {}, -- table: groups you don't want to clear
+      })
+    end
+  }
+
   use 'cocopon/iceberg.vim'
 
   use {
@@ -100,9 +114,19 @@ require('packer').startup({ function(use)
   }
 
   use {
-    'norcalli/nvim-colorizer.lua',
+    'NvChad/nvim-colorizer.lua',
     config = function()
-      require('colorizer').setup()
+      require('colorizer').setup(
+        { '*' }, {
+        RGB      = true; -- #RGB hex codes
+        RRGGBB   = true; -- #RRGGBB hex codes
+        names    = true; -- "Name" codes like Blue oe blue
+        RRGGBBAA = true; -- #RRGGBBAA hex codes
+        rgb_fn   = true; -- CSS rgb() and rgba() functions
+        hsl_fn   = true; -- CSS hsl() and hsla() functions
+        mode     = 'background'; -- Set the display mode.
+      }
+      )
     end
   }
 
@@ -192,7 +216,16 @@ require('packer').startup({ function(use)
 
   use 'SmiteshP/nvim-navic'
 
-  use 'j-hui/fidget.nvim'
+  use {
+    'j-hui/fidget.nvim',
+    config = function()
+      require('fidget').setup({
+        window = {
+          blend = 0,
+        }
+      })
+    end
+  }
 
   use {
     'windwp/nvim-autopairs',

@@ -2,7 +2,7 @@ if [[ ! -z "$SSH_CLIENT" ]]; then
   export STARSHIP_CONFIG=~/.config/starship_light.toml
 fi
 
-if which zellij >/dev/null 2>&1; then 
+if which zellij >/dev/null 2>&1 && [[ -n $DESKTOP_SESSION ]]; then 
   eval "$(zellij setup --generate-auto-start zsh)"
 fi
 
@@ -21,12 +21,17 @@ HISTFILE=$HOME/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 
+# fzf
+
+export FZF_DEFAULT_OPTS='--color=fg:#d2ced9,bg:#1c1921,hl:#86bfb6 --color=fg+:#edebef,bg+:#292433,hl+:#86bfb6 --color=info:#d9c77e,prompt:#abbf86,pointer:#d9989c --color=marker:#d9989c,spinner:#d9c77e,header:#4e4266'
+
 # keybind
 bindkey -v
-bindkey "^[[A" history-substring-search-up; bindkey "^[[B" history-substring-search-down
+# bindkey "^[[A" history-substring-search-up; bindkey "^[[B" history-substring-search-down
+ZSH_FZF_HISTORY_SEARCH_BIND="^[[A"
+ZSH_FZF_HISTORY_SEARCH_EVENT_NUMBERS=0
 bindkey '^[[H' beginning-of-line
 bindkey '^[[F' end-of-line
-
 
 # auto-compilation
 if [ ~/.zshrc -nt ~/.zshrc.zwc ]; then
@@ -40,6 +45,9 @@ eval "$(sheldon source)"
 autoload -Uz compinit
 compinit
 
+source /usr/share/fzf-tab-completion/zsh/fzf-zsh-completion.sh
+#bindkey '^I' fzf_completion
+
 # select completion
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -49,3 +57,5 @@ eval "$(starship init zsh)"
 
 # opam configuration
 [[ ! -r /home/haxibami/.opam/opam-init/init.zsh ]] || source /home/haxibami/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+# vim: set ft=zsh :

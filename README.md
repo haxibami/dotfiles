@@ -1,9 +1,10 @@
 # dotfiles
 
-setting, preference, and all the necessities. mainly configured for Arch Linux (x64) machine.
+setting, preference, and all the necessities.
 
-![swaywm](https://user-images.githubusercontent.com/57034105/134686642-840f30ef-3a99-4b3d-9821-efc565f523ea.png)
-↑swaywm:  wayland tiling compositor
+- Mainly configured for Arch Linux (x64) machine.
+- Managed by [chezmoi](https://github.com/twpayne/chezmoi/)
 
-![i3wm](https://user-images.githubusercontent.com/57034105/134686831-3764fa45-8ea3-40ec-9bc3-912cbbc4f67c.png)
-↑i3wm:  X11 tiling window manager
+![swaywm](https://user-images.githubusercontent.com/57034105/180386667-c15b2be1-3ec3-4474-b7f4-08da789a685a.png)
+
+zsh, neovim, sway, waybar, wpaperd, imv, pipes-rs, cava, ranger, tty-clock, cbonsai, etc...
