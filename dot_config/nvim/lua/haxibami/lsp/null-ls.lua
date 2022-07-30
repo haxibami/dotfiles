@@ -20,6 +20,8 @@ null_ls.setup {
     -- use markdownlint
     null_ls.builtins.diagnostics.markdownlint,
 
+    null_ls.builtins.formatting.black
+
   },
   capabilities = config.capabilities,
   on_attach = config.on_attach,

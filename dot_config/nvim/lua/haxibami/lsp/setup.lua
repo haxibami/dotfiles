@@ -1,8 +1,20 @@
 -- lsp installation & setup
 
-local installer_status, lsp_installer = pcall(require, 'nvim-lsp-installer')
+local installer_status, mason = pcall(require, 'mason')
 if not installer_status then
-  vim.notify('Error loading LSP-Installer')
+  vim.notify('Error loading mason LSP-Installer')
+  return
+end
+
+local masonlspconfig_status, masonlspconfig = pcall(require, 'mason-lspconfig')
+if not masonlspconfig_status then
+  vim.notify('Error loading mason-lspconfig')
+  return
+end
+
+local lspconfig_status, lspconfig = pcall(require, 'lspconfig')
+if not lspconfig_status then
+  vim.notify('Error loading lspconfig')
   return
 end
 
@@ -12,7 +24,8 @@ local utils = require('haxibami.lsp.utils')
 local servers = {
   'awk_ls',
   'bashls',
-  'ccls',
+  'clangd',
+  'cmake',
   'cssls',
   'cssmodules_ls',
   'denols',
@@ -34,18 +47,41 @@ local servers = {
   'yamlls',
 }
 
-local options = {
+local masonlspconfig_options = {
   automatic_installation = true,
   ensure_installed = servers
 }
 
-lsp_installer.setup(options)
+mason.setup({})
 
-for _, server in ipairs(lsp_installer.get_installed_servers()) do
-  local setup_fn = server_configs[server.name] or utils.default_setup
-  setup_fn(server)
-end
+masonlspconfig.setup(masonlspconfig_options)
 
-require('lspconfig')['satysfi-ls'].setup {
+masonlspconfig.setup_handlers({
+  -- The first entry (without a key) will be the default handler
+  -- and will be called for each installed server that doesn't have
+  -- a dedicated handler.
+  function(server_name) -- default handler (optional)
+    lspconfig[server_name].setup {}
+  end,
+  -- Next, you can provide targeted overrides for specific servers.
+  --   ['rust_analyzer'] = function()
+  --     require('rust-tools').setup {}
+  --   end,
+
+  --   ['clangd'] = function()
+  --     lspconfig.clangd.setup(server_configs.clangd)
+  --   end,
+  ['denols'] = function()
+    lspconfig.denols.setup(server_configs.denols)
+  end,
+  ['sumneko_lua'] = function()
+    lspconfig.sumneko_lua.setup(server_configs.sumneko_lua)
+  end,
+  ['tsserver'] = function()
+    lspconfig.tsserver.setup(server_configs.tsserver)
+  end,
+})
+
+lspconfig['satysfi-ls'].setup {
   autostart = true
 }

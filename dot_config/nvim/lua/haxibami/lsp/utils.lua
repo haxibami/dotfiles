@@ -10,13 +10,4 @@ M.create_config = function(server_config)
   return config
 end
 
-M.create_setup = function(server_config)
-  return function(server)
-    local lspconfig = require('lspconfig')
-    lspconfig[server.name].setup(M.create_config(server_config))
-  end
-end
-
-M.default_setup = M.create_setup {}
-
 return M

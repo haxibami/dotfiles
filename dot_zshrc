@@ -7,7 +7,7 @@ if which zellij >/dev/null 2>&1 && [[ -n $DESKTOP_SESSION ]]; then
 fi
 
 # aliases
-alias ls='exa'
+alias ls='lsd'
 alias sued='sudoedit'
 alias memsort='ps ax o %mem,command --sort %mem'
 alias nvm-init='[[ ! -r /usr/share/nvm/init-nvm.sh ]] || source /usr/share/nvm/init-nvm.sh  > /dev/null 2> /dev/null'
@@ -59,3 +59,10 @@ eval "$(starship init zsh)"
 [[ ! -r /home/haxibami/.opam/opam-init/init.zsh ]] || source /home/haxibami/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
 # vim: set ft=zsh :
+
+source /home/haxibami/.config/broot/launcher/bash/br
+
+# pnpm
+export PNPM_HOME="/home/haxibami/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end

@@ -101,7 +101,7 @@ exec xsettingsd
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1;
 
 # geoclue
-exec /usr/lib/geoclue-2.0/demos/agent
+exec /usr/lib/geoclue2-1-pantheon/pantheon-agent-geoclue2
 
 # start other background apps
 
@@ -111,8 +111,6 @@ exec ddccontrol -p
 exec mako                               
 # input system
 exec fcitx5 -d                          
-# clipboard manager; previous session restoration
-exec myclipman restore                  
 # clipboard manager
 exec wl-paste --watch cliphist store
 # media controller
@@ -125,7 +123,9 @@ exec emote
 # start screenlocker
 exec swayidle -w \
   timeout 600 'env LANG=en.US_UTF-8 swaylock -f' \
-  timeout 1200 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+  timeout 1100 'systemctl start --user ai-haxibami.service' \
+  timeout 1200 'swaymsg "output * dpms off"' \
+  resume 'swaymsg "output * dpms on" && systemctl stop --user ai-haxibami.service' \
   before-sleep 'env LANG=en.US_UTF-8 swaylock -f' \
 
 # start display gamma setting tool
