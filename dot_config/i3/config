@@ -32,7 +32,7 @@ font pango:Source Han Code JP 10
 
 ## look & feel
 # set wallpaper
-exec_always --no-startup-id "feh --bg-scale ~/Pictures/wallpaper/arch_chan.png"
+exec_always --no-startup-id "feh --bg-scale --no-fehbg ~/Pictures/wallpaper/arch_chan.png"
 
 # set gaps
 gaps inner 16

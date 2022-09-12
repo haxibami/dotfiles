@@ -9,4 +9,5 @@ return {
     lint = true,
     unstable = true,
   },
+  single_file_support = false
 }

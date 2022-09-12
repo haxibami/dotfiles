@@ -17,6 +17,7 @@ vim.opt.laststatus = 2
 vim.opt.history = 10000
 vim.opt.number = true
 vim.opt.pumblend = 10
+vim.opt.winblend = 30
 vim.opt.shiftwidth = 2
 vim.opt.showcmd = true
 vim.opt.signcolumn = 'number'

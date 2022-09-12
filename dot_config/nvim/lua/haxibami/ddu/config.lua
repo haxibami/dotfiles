@@ -6,10 +6,11 @@ local ddu = {
 ddu.alias('source', 'directory_rec', 'file_external')
 
 local lines = vim.o.lines - 6
-local winh = math.floor(lines)
-local houter = math.floor(vim.o.columns * 0.1)
+local winh = math.floor(lines * 0.8)
+local houter = math.floor((lines - winh) / 2)
+local wouter = math.floor(vim.o.columns * 0.05)
 local inner = 3
-local winw = math.floor((vim.o.columns - houter * 2 - inner) / 2)
+local winw = math.floor((vim.o.columns - wouter * 2 - inner) / 2)
 
 ddu.patch_global({
   ui = 'ff',
@@ -23,12 +24,12 @@ ddu.patch_global({
       previewFloating = true,
       previewFloatingBorder = 'rounded',
       filterSplitDirection = 'floating',
-      winRow = 0.5,
-      winCol = houter,
+      winRow = houter,
+      winCol = wouter,
       winHeight = winh,
       winWidth = winw,
-      previewRow = 0.5,
-      previewCol = houter + winw + inner,
+      previewRow = 0,
+      previewCol = wouter + winw + inner,
       previewHeight = winh,
       previewWidth = winw,
       startFilter = true,
@@ -76,19 +77,20 @@ vim.api.nvim_create_autocmd('VimResized', {
   callback = function()
 
     local lines = vim.o.lines - 6
-    local winh = math.floor(lines)
-    local houter = math.floor(vim.o.columns * 0.1)
+    local winh = math.floor(lines * 0.8)
+    local houter = math.floor((lines - winh) / 2)
+    local wouter = math.floor(vim.o.columns * 0.05)
     local inner = 3
-    local winw = math.floor((vim.o.columns - houter * 2 - inner) / 2)
+    local winw = math.floor((vim.o.columns - wouter * 2 - inner) / 2)
 
     vim.fn['ddu#custom#patch_global']('uiParams', {
       ff = {
-        winRow = 0.5,
-        winCol = houter,
+        winRow = houter,
+        winCol = wouter,
         winHeight = winh,
         winWidth = winw,
-        previewRow = 0.5,
-        previewCol = houter + winw + inner,
+        previewRow = 0,
+        previewCol = wouter + winw + inner,
         previewHeight = winh,
         previewWidth = winw,
       }

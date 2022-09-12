@@ -12,15 +12,20 @@
 
 shell = "zsh"
 
-[plugins]
+apply = ["defer"]
 
-# For example:
-#
-# [plugins.base16]
-# github = "chriskempson/base16-shell"
+[plugins.zsh-defer]
+github = "romkatv/zsh-defer"
+apply = ["source"]
 
-[plugins.zsh-history-substring-search]
-github = "zsh-users/zsh-history-substring-search"
+[templates]
+defer = { value = 'zsh-defer source "{{ file }}"', each = true }
+
+[plugins.compinit]
+inline = 'autoload -Uz compinit && zsh-defer compinit -d $XDG_CACHE_HOME/zsh/zcompdump-${ZSH_VERSION}'
+
+[plugins.fzf-tab]
+github = "Aloxaf/fzf-tab"
 
 [plugins.fast-syntax-highlighting]
 github = "zdharma-continuum/fast-syntax-highlighting"
@@ -30,3 +35,15 @@ github = "zsh-users/zsh-autosuggestions"
 
 [plugins.zsh-fzf-history-search]
 github = "joshskidmore/zsh-fzf-history-search"
+
+#[plugins.fzf-tab-completion]
+#remote = "https://raw.githubusercontent.com/lincheney/fzf-tab-completion/master/zsh/fzf-zsh-completion.sh"
+
+[plugins.config-defers]
+local = "~/.config/zsh"
+use = ["{!sync,*}.zsh"]
+
+[plugins.config-sync]
+local = "~/.config/zsh"
+use = ["sync.zsh"]
+apply = ["source"]

@@ -116,17 +116,19 @@ require('packer').startup({ function(use)
   use {
     'NvChad/nvim-colorizer.lua',
     config = function()
-      require('colorizer').setup(
-        { '*' }, {
-        RGB      = true; -- #RGB hex codes
-        RRGGBB   = true; -- #RRGGBB hex codes
-        names    = true; -- "Name" codes like Blue oe blue
-        RRGGBBAA = true; -- #RRGGBBAA hex codes
-        rgb_fn   = true; -- CSS rgb() and rgba() functions
-        hsl_fn   = true; -- CSS hsl() and hsla() functions
-        mode     = 'background'; -- Set the display mode.
+      require('colorizer').setup {
+        filetypes = { '*' },
+        user_default_options = {
+          RGB      = true; -- #RGB hex codes
+          RRGGBB   = true; -- #RRGGBB hex codes
+          names    = true; -- "Name" codes like Blue oe blue
+          RRGGBBAA = true; -- #RRGGBBAA hex codes
+          rgb_fn   = true; -- CSS rgb() and rgba() functions
+          hsl_fn   = true; -- CSS hsl() and hsla() functions
+          mode     = 'background'; -- Set the display mode.
+        },
+        buftypes = {}
       }
-      )
     end
   }
 
@@ -140,6 +142,19 @@ require('packer').startup({ function(use)
 
   use {
     'neovim/nvim-lspconfig'
+  }
+
+  use {
+    'tamago324/nlsp-settings.nvim',
+    config = function()
+      require('nlspsettings').setup({
+        config_home = vim.fn.stdpath('config') .. '/nlsp-settings',
+        local_settings_dir = '.nlsp-settings',
+        local_settings_root_markers_fallback = { '.git' },
+        append_default_schemas = true,
+        loader = 'json'
+      })
+    end
   }
 
   use {

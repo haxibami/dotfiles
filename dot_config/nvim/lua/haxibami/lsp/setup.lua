@@ -18,6 +18,7 @@ if not lspconfig_status then
   return
 end
 
+local common_config = require('haxibami.lsp.config')
 local server_configs = require('haxibami.lsp.servers')
 local utils = require('haxibami.lsp.utils')
 
@@ -61,16 +62,16 @@ masonlspconfig.setup_handlers({
   -- and will be called for each installed server that doesn't have
   -- a dedicated handler.
   function(server_name) -- default handler (optional)
-    lspconfig[server_name].setup {}
+    lspconfig[server_name].setup(common_config)
   end,
   -- Next, you can provide targeted overrides for specific servers.
   --   ['rust_analyzer'] = function()
   --     require('rust-tools').setup {}
   --   end,
 
-  --   ['clangd'] = function()
-  --     lspconfig.clangd.setup(server_configs.clangd)
-  --   end,
+  ['clangd'] = function()
+    lspconfig.clangd.setup(server_configs.clangd)
+  end,
   ['denols'] = function()
     lspconfig.denols.setup(server_configs.denols)
   end,

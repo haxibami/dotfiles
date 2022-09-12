@@ -9,7 +9,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 }
 
 capabilities.textDocument.foldingRange = {
-  dynamicRegistration = false,
+  dynamicRegistration = true, -- ?
   lineFoldingOnly = true,
 }
 
