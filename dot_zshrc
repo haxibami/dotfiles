@@ -5,5 +5,6 @@ fi
 
 # plugin & config
 eval "$(sheldon source)"
+eval "$(zoxide init zsh)"
 
 # vim: set ft=zsh :

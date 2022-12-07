@@ -24,7 +24,7 @@
     ],
     "modules-right": [
         "tray",
-        "custom/pacman", 
+        // "custom/pacman", 
         "idle_inhibitor", 
         "cpu", 
         "temperature", 
@@ -130,13 +130,15 @@
     "clock": {
         //  "timezone": "America/New_York",
         "interval": 1,
-        "format": " {:%H:%M:%S}",
+        // "format": " {:%H:%M:%S}",
+        "format": " {:%H:%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
         "interval": 5,
-        "format": "{usage}%/{avg_frequency}/{max_frequency}G ",
+        // "format": "{usage}%/{avg_frequency}/{max_frequency}G ",
+        "format": "{usage}% ",
         "tooltip": true
     },
     "memory": {

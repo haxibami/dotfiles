@@ -13,12 +13,12 @@ set $down   j
 set $up     k
 set $right  l
 
-set $bg             #a6b4decc
-set $bg-inactive    #1c192100
-set $bg-urgent      #d9989c88
-set $text-light     #d2ced988
-set $text-dark      #29243388
-set $text-inactive  #8a829988
+set $bg             #a48abfcc
+set $bg-inactive    #120e1200
+set $bg-urgent      #d9236588
+set $text-light     #f2d8e988
+set $text-dark      #0b0b0b88
+set $text-inactive  #59485088
 
 set $term foot
 
@@ -60,7 +60,7 @@ input 1133:16534:Logitech_ERGO_M575S {
 # set inner and outer gaps
 gaps outer 3
 gaps inner 15
-default_border pixel 4
+default_border pixel 3
 
 # set window transparency
 exec_always ~/.config/sway/window-transparency.sh
@@ -345,6 +345,10 @@ for_window [app_id="zoom" title="as_toolbar"] {
 }
 
 for_window [app_id="zoom" title="レコーディング アラート"] {
+  floating enable
+}
+
+for_window [app_id="zoom" title="詳細情報"] {
   floating enable
 }
 

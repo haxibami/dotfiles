@@ -6,6 +6,7 @@ local ddc = {
   set_buffer = vim.fn['ddc#custom#set_buffer'];
 }
 
+ddc.patch_global('ui', 'pum')
 ddc.patch_global('completionMenu', 'pum.vim')
 ddc.patch_global('sources', {
   'nvim-lsp',
@@ -69,7 +70,7 @@ vim.fn['ddc#enable']()
 -- key binding
 local function pum_insert(key, line)
   return function()
-    if (vim.fn['pum#visible']() == 1) then
+    if (vim.fn['pum#visible']() == true) then
       vim.fn['pum#map#insert_relative'](line)
       return ''
     end
@@ -79,7 +80,7 @@ end
 
 vim.keymap.set('i', '<Tab>',
   function()
-    if vim.fn['pum#visible']() == 1 then
+    if vim.fn['pum#visible']() == true then
       vim.fn['pum#map#insert_relative'](1)
       return ''
     elseif (vim.fn['vsnip#available'](1) == 1) then
@@ -89,14 +90,14 @@ vim.keymap.set('i', '<Tab>',
     if col <= 1 or vim.fn.getline('.'):sub(col - 1):match '%s' then
       return '<Tab>'
     else
-      vim.fn['ddc#manual_complete']()
+      vim.fn['ddc#map#manual_complete']()
       return ''
     end
   end
   , { noremap = true, expr = true });
 
 vim.keymap.set('i', '<S-Tab>', function()
-  if (vim.fn['pum#visible']() == 1) then
+  if (vim.fn['pum#visible']() == true) then
     vim.fn['pum#map#insert_relative'](-1)
     return ''
   elseif (vim.fn['vsnip#jumpable'](-1) == 1) then
@@ -107,7 +108,7 @@ end
   , { noremap = true, expr = true });
 
 vim.keymap.set('i', '<C-k>', function()
-  if (vim.fn['pum#visible']() == 1) then
+  if (vim.fn['pum#visible']() == true) then
     vim.fn['pum#map#confirm']()
     return ''
   else
@@ -116,7 +117,7 @@ vim.keymap.set('i', '<C-k>', function()
 end, { noremap = true, expr = true })
 
 -- vim.keymap.set('i', '<Esc>', function()
---   if (vim.fn['pum#visible']() == 1) then
+--   if (vim.fn['pum#visible']() == true) then
 --     vim.fn['pum#map#cancel']()
 --     return ''
 --   else
@@ -140,11 +141,11 @@ end
 
 local cmdlinepre = function(mode)
   vim.keymap.set('c', '<Tab>', function()
-    if (vim.fn['pum#visible']() == 1) then
+    if (vim.fn['pum#visible']() == true) then
       vim.fn['pum#map#insert_relative'](1)
       return ''
     elseif (vim.b.ddc_cmdline_completion ~= nil) then
-      vim.fn['ddc#manual_complete']()
+      vim.fn['ddc#map#manual_complete']()
       return ''
     end
   end

@@ -201,6 +201,7 @@ require('packer').startup({ function(use)
           vim.fn['signature_help#enable']()
         end
       },
+      'Shougo/ddc-ui-pum',
       'Shougo/ddc-nvim-lsp',
       'tani/ddc-fuzzy',
       'LumaKernel/ddc-file',
@@ -349,7 +350,7 @@ require('packer').startup({ function(use)
     end
   }
 
-  use 'woodyZootopia/novel-preview.vim'
+  -- use 'woodyZootopia/novel-preview.vim'
 end,
   config = {
     display = {
