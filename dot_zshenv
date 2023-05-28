@@ -1,0 +1,28 @@
+# system
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_STATE_HOME=$HOME/.local/state
+export XDG_CACHE_HOME=$HOME/.cache
+export PATH=/opt/rocm/hip/bin:/opt/rocm/bin:$HOME/.deno/bin:$XDG_DATA_HOME/go/bin:$HOME/.local/bin:$XDG_DATA_HOME/cargo/bin:$HOME/.cabal/bin:$PATH
+export EDITOR=nvim
+export VISUAL=nvim
+
+# lang
+export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
+export GOPATH="$XDG_DATA_HOME"/go
+export GHCUP_USE_XDG_DIRS=true
+export STACK_ROOT="$XDG_DATA_HOME"/stack
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
+export OPAMROOT="$XDG_DATA_HOME/opam"
+export KERAS_HOME="${XDG_STATE_HOME}/keras"
+
+# app
+export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
+export FFMPEG_DATADIR="$XDG_CONFIG_HOME"/ffmpeg
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
+export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+export TEXMFVAR="$XDG_CACHE_HOME"/texlive/texmf-var
+export DVDCSS_CACHE="$XDG_DATA_HOME"/dvdcss
+export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
+export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
