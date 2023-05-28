@@ -3,10 +3,10 @@
 # a script to switch GTK theme according to time
 # requires: gsettings
 
-GTK_DARK_THEME="WhiteSur-Dark-alt-pink"
+GTK_DARK_THEME="Catppuccin-Mocha-Standard-Mauve-Dark"
 GTK_DARK_ICON_THEME="WhiteSur-dark"
-GTK_DARK_CURSOR_THEME="Bibata-Original-Classic"
-KVANTUM_DARK_THEME="WhiteSurDark"
+GTK_DARK_CURSOR_THEME="Catppuccin-Mocha-Light-Cursors"
+KVANTUM_DARK_THEME="Catppuccin-Mocha-Mauve"
 XSETTINGS_CONF="$HOME/.config/xsettingsd/xsettingsd.conf"
 
 function setdarktheme() {

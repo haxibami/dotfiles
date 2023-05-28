@@ -1,5 +1,7 @@
 ### sway config file
 
+include /etc/sway/config.d/*.conf
+
 ## custom binding
 
 # set modifier
@@ -20,13 +22,13 @@ set $text-light     #f2d8e988
 set $text-dark      #0b0b0b88
 set $text-inactive  #59485088
 
-set $term foot
+set $term alacritty
 
 #set $menu dmenu_path | ~/.bin/mydofi.sh | xargs swaymsg exec --
 set $menu ~/.bin/mywofi.sh
 
 # start sway systemd target
-exec_always "systemctl --user import-environment; systemctl --user start sway-session.target"
+exec_always "systemctl --user start sway-session.target"
 
 
 ## look & feel
@@ -40,6 +42,7 @@ output HDMI-A-1 {
   res 3840x2160
   scale 1
 }
+# adaptive_sync on
 
 # set virtual output (for wayvnc vnc server)
 output HEADLESS-1 {
@@ -52,10 +55,7 @@ input 1133:16534:Logitech_ERGO_M575S {
   pointer_accel 0.8
 }
 
-# set wallpaper
-#output "*" background ~/Pictures/wallpaper/99_pierce.jpg fill
-
-#exec wpaperd
+# wallpaper is set via wpaperd
 
 # set inner and outer gaps
 gaps outer 3
@@ -63,7 +63,7 @@ gaps inner 15
 default_border pixel 3
 
 # set window transparency
-exec_always ~/.config/sway/window-transparency.sh
+# exec_always ~/.config/sway/window-transparency.sh
 
 # set color theme
 # class                 border        bground       text        indicator     child_border
@@ -75,7 +75,7 @@ client.placeholder      $bg-inactive  $bg-inactive  $text-light $bg-inactive  $b
 
 # set xkeyboard layout
 input * {
-  xkb_layout "us,ru"
+  xkb_layout "us,ru,hr"
   xkb_model "jp106"
   xkb_options "grp:win_space_toggle"
 }
@@ -106,57 +106,46 @@ exec /usr/lib/geoclue2-1-pantheon/pantheon-agent-geoclue2
 # start other background apps
 
 # get display info (brightness, etc...)
-exec ddccontrol -p                      
+# exec ddccontrol -p                      
 # notification
 exec mako                               
 # input system
 exec fcitx5 -d                          
+# exec ibus-daemon -d
 # clipboard manager
 exec wl-paste --watch cliphist store
 # media controller
 exec playerctld daemon                  
 # sound equalizer
 exec "sleep 3; easyeffects --gapplication-service"
-# emoji picker
-exec emote                            
 
 # start screenlocker
 exec swayidle -w \
   timeout 600 'env LANG=en.US_UTF-8 swaylock -f' \
   timeout 1100 'systemctl start --user ai-haxibami.service' \
-  timeout 1200 'swaymsg "output * dpms off"' \
-  resume 'swaymsg "output * dpms on" && systemctl stop --user ai-haxibami.service' \
+  timeout 1200 'swaymsg "output * power off"' \
+  resume 'swaymsg "output * power on" && systemctl stop --user ai-haxibami.service' \
   before-sleep 'env LANG=en.US_UTF-8 swaylock -f' \
 
-# start display gamma setting tool
-# exec gammastep-indicator
-
 # start auto-tiling
-exec autotiling
+exec autotiling-rs
+exec wl-mpris-idle-inhibit
 
 # start applets
-exec nm-applet --indicator
-exec blueman-applet
+exec thunar --daemon
+exec iwgtk -i
+#exec tailscale-systray
+exec "sleep 3; trayscale --gapplication-service"
 exec "sleep 3; meteo-qt"
-
-# set gtk themes
-# exec_always ~/.bin/import-gsettings.sh \
-#               gtk-theme:gtk-theme-name \
-#               icon-theme:gtk-icon-theme-name \
-#               cursor-theme:gtk-cursor-theme-name \
-#               font-name:gtk-font-name \
+exec blueman-applet
 
 # set cursor theme
-seat seat0 xcursor_theme Bibata-Original-Classic 36
-
-# switch GTK theme according to time
-# exec_always "sh -c 'sleep 3; ~/.bin/gtk-modeswitch.sh'"
+seat seat0 xcursor_theme Catppuccin-Latte-Light-Cursors 36
 
 # set volume/brightness bar
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 exec mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
-set $DDCSOCK $XDG_RUNTIME_DIR/ddc.sock
-exec mkfifo $DDCSOCK && tail -f $DDCSOCK | wob
+exec avizo-service
 
 
 ## apps-related keybinds
@@ -177,21 +166,35 @@ $mybind Mod1+c exec rofi -show calc -modi calc -no-show-match -no-sort
 $mybind $mod+control+l exec ~/.bin/swaylight.sh
 
 # brightness controls (requires non-root access to i2c devices)
-$mybind $mod+F5 exec ddccontrol -f -r 0x10 -W -5 dev:/dev/i2c-5 | grep Brightness | cut -d "/" -f 2 | tee $WOBSOCK
-$mybind $mod+F6 exec ddccontrol -f -r 0x10 -W +5 dev:/dev/i2c-5 | grep Brightness | cut -d "/" -f 2 | tee $WOBSOCK
+#$mybind $mod+F5 exec ddccontrol -f -r 0x10 -W -5 dev:/dev/i2c-5 | grep Brightness | cut -d "/" -f 2 | tee $WOBSOCK
+#$mybind $mod+F6 exec ddccontrol -f -r 0x10 -W +5 dev:/dev/i2c-5 | grep Brightness | cut -d "/" -f 2 | tee $WOBSOCK
+$mybind $mod+F5 exec lightctl down
+$mybind $mod+F6 exec lightctl up
+
 
 # media controls
 # output
-$mybind XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SINK@) > $WOBSOCK
-$mybind control+XF86AudioRaiseVolume exec wpctl set-volume $(~/.bin/pwnodefd.sh "Headset_output") 5%+ && ~/.bin/percentify.sh $(wpctl get-volume `~/.bin/pwnodefd.sh "Headset_output"`) > $WOBSOCK
-$mybind XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SINK@) > $WOBSOCK
-$mybind control+XF86AudioLowerVolume exec wpctl set-volume $(~/.bin/pwnodefd.sh "Headset_output") 5%- && ~/.bin/percentify.sh $(wpctl get-volume `~/.bin/pwnodefd.sh "Headset_output"`) > $WOBSOCK
-# input
-$mybind XF86AudioRaiseVolume+shift exec wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+ && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SOURCE@) > $WOBSOCK
-$mybind XF86AudioLowerVolume+shift exec wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%- && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SOURCE@) > $WOBSOCK
+# $mybind XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SINK@) > $WOBSOCK
+# $mybind control+XF86AudioRaiseVolume exec wpctl set-volume $(~/.bin/pwnodefd.sh "Headset_output") 5%+ && ~/.bin/percentify.sh $(wpctl get-volume `~/.bin/pwnodefd.sh "Headset_output"`) > $WOBSOCK
+# $mybind XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SINK@) > $WOBSOCK
+# $mybind control+XF86AudioLowerVolume exec wpctl set-volume $(~/.bin/pwnodefd.sh "Headset_output") 5%- && ~/.bin/percentify.sh $(wpctl get-volume `~/.bin/pwnodefd.sh "Headset_output"`) > $WOBSOCK
+# # input
+# $mybind XF86AudioRaiseVolume+shift exec wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+ && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SOURCE@) > $WOBSOCK
+# $mybind XF86AudioLowerVolume+shift exec wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%- && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SOURCE@) > $WOBSOCK
+# 
+# $mybind $mod+shift+m exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SINK@) > $WOBSOCK
+# $mybind $mod+m exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SOURCE@) > $WOBSOCK
 
-$mybind $mod+shift+m exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SINK@) > $WOBSOCK
-$mybind $mod+m exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SOURCE@) > $WOBSOCK
+# output
+$mybind XF86AudioRaiseVolume exec volumectl -u up
+$mybind XF86AudioLowerVolume exec volumectl -u down
+# input
+$mybind XF86AudioRaiseVolume+shift exec volumectl -u -m up
+$mybind XF86AudioLowerVolume+shift exec volumectl -u -m down
+
+$mybind $mod+shift+m exec volumectl -m toggle-mute
+$mybind $mod+m exec volumectl toggle-mute
+
 $mybind $mod+comma exec playerctl previous
 $mybind $mod+period exec playerctl play-pause
 $mybind $mod+slash exec playerctl next
@@ -199,7 +202,7 @@ $mybind $mod+shift+comma exec playerctl --player playerctld position -10
 $mybind $mod+shift+slash exec playerctl --player playerctld position +10
 
 # launch emoji picker
-$mybind Mod1+control+e exec emote
+$mybind Mod1+control+e exec rofimoji --selector wofi --clipboarder wl-copy --action copy
 
 # show history with clipboard manager & wofi
 $mybind $mod+v exec cliphist list | wofi -d -p clipboard | cliphist decode | wl-copy
@@ -209,13 +212,13 @@ $mybind $mod+v exec cliphist list | wofi -d -p clipboard | cliphist decode | wl-
 # [fullscreen, copy & save]
 $mybind $mod+shift+a exec grimshot --notify save output ~/Pictures/screenshot/$(date "+%Y%m%d-%H%M%S")'_grim_full.png'
 # [slurp, copy & save]
-$mybind $mod+shift+s exec grimshot --notify save area ~/Pictures/screenshot/$(date "+%Y%m%d-%H%M%S")'_grim_area.png'
+$mybind $mod+shift+s exec watershot -c path ~/Pictures/screenshot/$(date "+%Y%m%d-%H%M%S")'_grim_area.png'
 # [select window, copy & save]
 $mybind $mod+shift+f exec grimshot --notify save window ~/Pictures/screenshot/$(date "+%Y%m%d-%H%M%S")'_grim_window.png'
 # [fullscreen, only copy]
 $mybind $mod+Print exec grimshot --notify copy output
 # [slurp, only copy]
-$mybind Print exec grimshot --notify copy area
+$mybind Print exec watershot -c
 # [select window, only copy]
 $mybind $mod+shift+Print exec grimshot --notify copy window
 # [wait for ? seconds, active window]
@@ -233,7 +236,7 @@ $mybind $mod+Shift+c reload
 
 # exit sway
 #$mybind $mod+shift+e exec ~/.bin/swaypower.sh
-$mybind $mod+shift+e exec LANG=en.US_UTF-8 wlogout
+$mybind $mod+shift+e exec wleave
 
 # allow floating popup exceptions
 for_window [app_id="firefox" title="Firefox — 共有インジケータ"] {
@@ -241,6 +244,13 @@ for_window [app_id="firefox" title="Firefox — 共有インジケータ"] {
   sticky enable
   move up 1070 px
   move left 330 px
+}
+
+for_window [app_id="firefox" title="ピクチャーインピクチャー"] {
+  floating enable
+  sticky enable
+  move down 500 px
+  move right 850 px
 }
 
 for_window [app_id="thunar" title="ファイル操作進行中"] {
@@ -282,13 +292,12 @@ for_window [app_id="zoom" title="zoom"] {
   floating enable
 }
 
-for_window [class="zoom" title="zoom"] {
+for_window [class="zoom" title="zoom" window_type="unknown"] {
   floating enable
+  no_focus
 }
 
-for_window [class="zoom" title="Zoom"] {
-  floating enable
-}
+#no_focus [class="zoom" title="zoom" window_type="unknown"]
 
 for_window [app_id="zoom" title="設定"] {
   floating enable
@@ -308,19 +317,19 @@ for_window [app_id="zoom" title="zoom_linux_float_message_reminder"] {
   border none
 }
 
-for_window [class="zoom" title="Zoom - 許可取得済のアカウント"] {
-  floating disable
+for_window [class="zoom" title="zoom_linux_float_message_reminder"] {
+  floating enable
+  sticky enable
+  move down 900 px
+  move right 1575 px
+  border none
 }
 
 for_window [app_id="zoom" title="Zoom - 許可取得済のアカウント"] {
   floating disable
 }
 
-for_window [class="zoom" title="Zoom ミーティング"] {
-  floating disable
-}
-
-for_window [class="zoom" title="Zoom ウェビナー"] {
+for_window [class="zoom" title="Zoom - 許可取得済のアカウント"] {
   floating disable
 }
 
@@ -333,12 +342,13 @@ for_window [class="zoom" title="^参加者"] {
   resize set 3000 1500
 }
 
-for_window [class="zoom" title="^ブレイクアウトルーム"] {
+for_window [app_id="zoom" title="as_toolbar"] {
   floating enable
-  resize set 2000 1500
+  move up 1050 px
+  move left 750 px
 }
 
-for_window [app_id="zoom" title="as_toolbar"] {
+for_window [class="zoom" title="as_toolbar"] {
   floating enable
   move up 1050 px
   move left 750 px
@@ -348,7 +358,15 @@ for_window [app_id="zoom" title="レコーディング アラート"] {
   floating enable
 }
 
+for_window [class="zoom" title="レコーディング アラート"] {
+  floating enable
+}
+
 for_window [app_id="zoom" title="詳細情報"] {
+  floating enable
+}
+
+for_window [class="zoom" title="詳細情報"] {
   floating enable
 }
 
@@ -365,6 +383,18 @@ for_window [title="Mozilla Firefox について"] {
 }
 
 for_window [app_id="anki" title="追加"] {
+  floating enable
+}
+
+for_window [class="swayimg-screenshot"] {
+  fullscreen enable
+}
+
+for_window [app_id="org.twosheds.iwgtk"] {
+  floating enable
+}
+
+for_window [app_id="dev.deedles.Trayscale"] {
   floating enable
 }
 
@@ -502,7 +532,7 @@ mode "media" {
         # These bindings trigger as soon as you enter the resize mode
 
         # record screen
-        $mybind control+r exec ~/.bin/swayrec.sh # obs(-cli)
+        $mybind r exec ~/.bin/swayrec.sh
 
         # cast screen as dummy camera
         $mybind Mod1+r exec ~/.bin/swayscrshare.sh # obs(-cli)
@@ -510,12 +540,10 @@ mode "media" {
         # set default sink & sources
         $mybind d exec ~/.bin/swaypulse.sh # choose pipewire-pulse device (input & output)
         $mybind p exec ~/.bin/swaypulseprof.sh # choose card profile (ex. analog vs. HDMI)
-        $mybind c exec ~/.bin/swaycolor.sh # color picker
+        $mybind c exec hyprpicker -a
 
         # back to normal
         $mybind $mod+g mode "default"
 }
 
 $mybind $mod+g mode "media"
-
-include /etc/sway/config.d/*

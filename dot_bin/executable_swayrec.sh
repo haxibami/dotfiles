@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
-STATUS=`ps -ef | grep obs | grep -v grep | wc -l`
-PASSFILE="${HOME}/.secure/obs-websocket.txt"
-PASS=`cat ${PASSFILE}`
+pid=`pgrep wf-recorder`
+status=$?
 
-if [[ $STATUS -ne 0 ]] && [ -e ~/.secure/obs-websocket.txt ]; then
-  obs-cli recording toggle --password "${PASS}"
-else
-  echo "Launch obs studio with obs-websocket, and set password!"
-fi
+if [ $status != 0 ] 
+then 
+  notify-send --app-name="Recorder" --urgency=low --icon=media-record "wf-recorder" "Recording start"
+  wf-recorder -f $(xdg-user-dir VIDEOS)/screencapture/$(date +'%Y-%m-%d_%H-%M-%S.mp4') -c h264_vaapi -d /dev/dri/renderD128 -g "$(slurp -f '%x,%y %wx%h' -d -b 00000066)"
+else 
+  pkill --signal SIGINT wf-recorder
+  notify-send --app-name="Recorder" --urgency=low --icon=media-record "wf-recorder" "Recording stopped"
+fi;

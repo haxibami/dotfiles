@@ -1,14 +1,14 @@
 local root_pattern = require('lspconfig').util.root_pattern
 
-local node_root_pattern = root_pattern('package.json', 'tsconfig.json')
+local node_root_pattern = root_pattern('package.json', 'node_modules')
 
 return {
   root_dir = node_root_pattern,
+  single_file_support = false,
   on_attach = function(client, bufnr)
     -- disable tsserver formatting if you plan on formatting via null-ls
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
-    -- client.server_capabilities.document_formatting = false
 
     --     local ts_utils = require 'nvim-lsp-ts-utils'
     --

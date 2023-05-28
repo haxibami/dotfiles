@@ -1,7 +1,7 @@
 * {
   font-family: FirgeNerdConsole;
   font-size: 30px;
-  color: @fg_color;
+  color: @theme_fg_color;
 }
 
 window {
@@ -16,7 +16,7 @@ window {
   margin: 10px;
   padding: 10px;
   border: none;
-  background-color: @bg_color;
+  background-color: @theme_bg_color;
 }
 
 #inner-box {

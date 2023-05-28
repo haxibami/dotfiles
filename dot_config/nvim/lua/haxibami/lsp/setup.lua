@@ -24,23 +24,27 @@ local utils = require('haxibami.lsp.utils')
 
 local servers = {
   'awk_ls',
+  'astro',
   'bashls',
   'clangd',
   'cmake',
   'cssls',
   'cssmodules_ls',
-  'denols',
+  -- 'denols',
+  'dockerls',
+  'dotls',
   'eslint',
   'gopls',
   'hls',
   'html',
   'jsonls',
   'lemminx',
+  'nil_ls',
   'ocamllsp',
   'pyright',
   'r_language_server',
   'rust_analyzer',
-  'sumneko_lua',
+  'lua_ls',
   'taplo',
   'texlab',
   'tsserver',
@@ -75,11 +79,14 @@ masonlspconfig.setup_handlers({
   ['denols'] = function()
     lspconfig.denols.setup(server_configs.denols)
   end,
-  ['sumneko_lua'] = function()
-    lspconfig.sumneko_lua.setup(server_configs.sumneko_lua)
+  ['lua_ls'] = function()
+    lspconfig.lua_ls.setup(server_configs.lua_ls)
   end,
   ['tsserver'] = function()
     lspconfig.tsserver.setup(server_configs.tsserver)
+  end,
+  ['r_language_server'] = function()
+    lspconfig.r_language_server.setup(server_configs.r_language_server)
   end,
 })
 

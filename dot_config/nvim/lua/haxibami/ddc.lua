@@ -1,13 +1,13 @@
 -- ddc config
 
 local ddc = {
-  patch_global = vim.fn['ddc#custom#patch_global'];
-  patch_buffer = vim.fn['ddc#custom#patch_buffer'];
-  set_buffer = vim.fn['ddc#custom#set_buffer'];
+  patch_global = vim.fn['ddc#custom#patch_global'],
+  patch_buffer = vim.fn['ddc#custom#patch_buffer'],
+  set_buffer = vim.fn['ddc#custom#set_buffer'],
+  get_buffer = vim.fn['ddc#custom#get_buffer'],
 }
 
 ddc.patch_global('ui', 'pum')
-ddc.patch_global('completionMenu', 'pum.vim')
 ddc.patch_global('sources', {
   'nvim-lsp',
   'around',
@@ -98,9 +98,9 @@ vim.keymap.set('i', '<Tab>',
 
 vim.keymap.set('i', '<S-Tab>', function()
   if (vim.fn['pum#visible']() == true) then
-    vim.fn['pum#map#insert_relative'](-1)
+    vim.fn['pum#map#insert_relative']( -1)
     return ''
-  elseif (vim.fn['vsnip#jumpable'](-1) == 1) then
+  elseif (vim.fn['vsnip#jumpable']( -1) == 1) then
     return '<Plug>(vsnip-jump-prev)'
   end
   return '<S-Tab>'
@@ -135,7 +135,7 @@ local cmdlinepost = function()
     ddc.set_buffer(prev_buffer_config)
     prev_buffer_config = nil
   else
-    ddc.set_buffer({})
+    ddc.set_buffer(vim.empty_dict())
   end
 end
 
@@ -155,7 +155,7 @@ local cmdlinepre = function(mode)
   if (prev_buffer_config == nil) then
     prev_buffer_config = vim.fn['ddc#custom#get_buffer']()
   end
-  ddc.patch_buffer('completionMenu', 'pum.vim')
+  -- ddc.patch_buffer('ui', 'pum')
   if mode == ':' then
     ddc.patch_buffer('cmdlineSources', {
       'cmdline',
@@ -218,7 +218,7 @@ vim.keymap.set('s', '<Tab>', function()
 end, { noremap = true, expr = true });
 
 vim.keymap.set('s', '<S-Tab>', function()
-  if (vim.fn['vsnip#jumpable'](-1) == 1) then
+  if (vim.fn['vsnip#jumpable']( -1) == 1) then
     return '<Plug>(vsnip-jump-prev)'
   else
     return '<S-Tab>'

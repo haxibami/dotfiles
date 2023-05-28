@@ -27,3 +27,11 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
 --   autocmd BufRead,BufNewFile *.saty nnoremap <buffer> @Q :!satysfi --debug-show-bbox --debug-show-space --debug-show-block-bbox --debug-show-block-space --debug-show-overfull %<CR>
 -- augroup END
 -- ]])
+
+-- §§1 Typst
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  group = augroupid,
+  pattern = { '*.typ', '*.typc' },
+  callback = function() vim.opt.filetype = 'typst' end
+})
+-- §§

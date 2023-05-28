@@ -3,10 +3,10 @@
 # a script to switch GTK theme according to time
 # requires: gsettings
 
-GTK_LIGHT_THEME="WhiteSur-Light-alt-pink"
+GTK_LIGHT_THEME="Catppuccin-Latte-Standard-Mauve-Light"
 GTK_LIGHT_ICON_THEME="WhiteSur"
-GTK_LIGHT_CURSOR_THEME="Bibata-Original-Classic"
-KVANTUM_LIGHT_THEME="WhiteSur"
+GTK_LIGHT_CURSOR_THEME="Catppuccin-Latte-Dark-Cursors"
+KVANTUM_LIGHT_THEME="Catppuccin-Latte-Mauve"
 XSETTINGS_CONF="$HOME/.config/xsettingsd/xsettingsd.conf"
 
 function setlighttheme() {

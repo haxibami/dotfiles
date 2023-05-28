@@ -1,9 +1,9 @@
 #!/bin/sh
 read lcd < /tmp/lcd
     if [ "$lcd" -eq "0" ]; then
-        swaymsg "output * dpms on"
+        swaymsg "output * power on"
         echo 1 > /tmp/lcd
     else
-        swaymsg "output * dpms off"
+        swaymsg "output * power off"
         echo 0 > /tmp/lcd
     fi

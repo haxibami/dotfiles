@@ -34,7 +34,11 @@ github = "zdharma-continuum/fast-syntax-highlighting"
 github = "zsh-users/zsh-autosuggestions"
 
 [plugins.zsh-fzf-history-search]
-github = "joshskidmore/zsh-fzf-history-search"
+github = "haxibami/zsh-fzf-history-search"
+branch = "fix-not-equal"
+#github = "joshskidmore/zsh-fzf-history-search"
+#rev = "446da4a412048ae3ea16e5a355f953385d965742"
+#rev = "de4c3c7a8a1ab94c9ec2d7aeb37abb8ae4ebb6ed"
 
 #[plugins.fzf-tab-completion]
 #remote = "https://raw.githubusercontent.com/lincheney/fzf-tab-completion/master/zsh/fzf-zsh-completion.sh"
