@@ -5,7 +5,7 @@
 
 GTK_LIGHT_THEME="Catppuccin-Latte-Standard-Mauve-Light"
 GTK_LIGHT_ICON_THEME="WhiteSur"
-GTK_LIGHT_CURSOR_THEME="Catppuccin-Latte-Dark-Cursors"
+GTK_LIGHT_CURSOR_THEME="Bibata-Original-Classic"
 KVANTUM_LIGHT_THEME="Catppuccin-Latte-Mauve"
 XSETTINGS_CONF="$HOME/.config/xsettingsd/xsettingsd.conf"
 
@@ -14,6 +14,9 @@ function setlighttheme() {
   gsettings set org.gnome.desktop.interface gtk-theme $GTK_LIGHT_THEME
   gsettings set org.gnome.desktop.interface icon-theme $GTK_LIGHT_ICON_THEME
   gsettings set org.gnome.desktop.interface color-scheme "prefer-light"
+  # GTK4
+  cp /usr/share/themes/$GTK_LIGHT_THEME/gtk-4.0/gtk.css ~/.config/gtk-4.0/gtk.css
+  cp /usr/share/themes/$GTK_LIGHT_THEME/gtk-4.0/gtk-dark.css ~/.config/gtk-4.0/gtk-dark.css
   # QT (kvantum)
   kvantummanager --set $KVANTUM_LIGHT_THEME > /dev/null 2>&1
   # GTK (XWayland)

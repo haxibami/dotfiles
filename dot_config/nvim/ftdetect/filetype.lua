@@ -35,3 +35,17 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   callback = function() vim.opt.filetype = 'typst' end
 })
 -- §§
+-- §§1 Astro
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  group = augroupid,
+  pattern = { '*.astro' },
+  callback = function() vim.opt.filetype = 'astro' end
+})
+-- §§
+-- §§1 MDX
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  group = augroupid,
+  pattern = { '*.mdx' },
+  callback = function() vim.opt.filetype = 'markdown.mdx' end
+})
+-- §§

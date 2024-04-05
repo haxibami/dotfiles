@@ -1,3 +1,4 @@
 require('haxibami.lsp.setup')
 require('haxibami.lsp.ui')
-require('haxibami.lsp.null-ls')
+require('haxibami.lsp.keymap')
+require('haxibami.lsp.autocmd')

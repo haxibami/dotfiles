@@ -13,7 +13,7 @@ export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export GOPATH="$XDG_DATA_HOME"/go
 export GHCUP_USE_XDG_DIRS=true
 export STACK_ROOT="$XDG_DATA_HOME"/stack
-export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
+export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc
 export OPAMROOT="$XDG_DATA_HOME/opam"
 export KERAS_HOME="${XDG_STATE_HOME}/keras"
 
@@ -26,3 +26,12 @@ export TEXMFVAR="$XDG_CACHE_HOME"/texlive/texmf-var
 export DVDCSS_CACHE="$XDG_DATA_HOME"/dvdcss
 export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
+export ANDROID_HOME="$XDG_DATA_HOME"/android
+export WINEPREFIX="$XDG_DATA_HOME"/wine
+export SQLITE_HISTORY="$XDG_CACHE_HOME"/sqlite_history
+export FLY_CONFIG_DIR="$XDG_STATE_HOME"/fly
+export EASYOCR_MODULE_PATH="$XDG_CONFIG_HOME"/EasyOCR
+export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
+export WINEPREFIX="$XDG_DATA_HOME"/wine
+
+# vim: set ft=zsh :

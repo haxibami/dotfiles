@@ -1,16 +1,19 @@
 -- lsp status viewer
-require('fidget').setup {
-  text = {
-    spinner = 'dots',
-  },
-}
+-- require('fidget').setup {
+--   text = {
+--     spinner = 'dots',
+--   },
+--   window = {
+--     blend = 0,
+--   }
+-- }
 
 -- signs
 local signs = {
   { name = 'DiagnosticSignError', text = '' },
-  { name = 'DiagnosticSignWarn', text = '' },
-  { name = 'DiagnosticSignHint', text = '' },
-  { name = 'DiagnosticSignInfo', text = '' },
+  { name = 'DiagnosticSignWarn',  text = '' },
+  { name = 'DiagnosticSignHint',  text = '' },
+  { name = 'DiagnosticSignInfo',  text = '' },
 }
 
 for _, sign in ipairs(signs) do

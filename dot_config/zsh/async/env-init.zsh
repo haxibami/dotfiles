@@ -7,8 +7,11 @@ source ~/.config/broot/launcher/bash/br
 # pnpm
 export PNPM_HOME="$XDG_DATA_HOME/pnpm"
 export PATH="$PNPM_HOME:$PATH"
-# pnpm end
 
-export PYENV_ROOT="$XDG_DATA_HOME"/pyenv
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# rye
+source "$XDG_CONFIG_HOME"/rye/env
+
+# bun
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

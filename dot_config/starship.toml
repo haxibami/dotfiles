@@ -8,9 +8,9 @@ format = """
 [└─](#f2d8e9)$character(#f2d8e9)"""
 
 [character]
-success_symbol = "[ 🏳 ](#96bfd9)[ ](#f27999)"
-error_symbol = "[ 🏳 ](#d92365)[ ](#f27999)"
-vicmd_symbol = "[ 🏳 ](#f27999)[ ](#f27999)"
+success_symbol = "[ 🏳 ](#96bfd9)[ 󰄾](#f27999)"
+error_symbol = "[ 🏳 ](#d92365)[ 󰄾](#f27999)"
+vicmd_symbol = "[ 🏳 ](#f27999)[ 󰄾](#f27999)"
 
 [directory]
 truncation_length = 5

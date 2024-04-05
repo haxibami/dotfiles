@@ -122,10 +122,12 @@ exec "sleep 3; easyeffects --gapplication-service"
 # start screenlocker
 exec swayidle -w \
   timeout 600 'env LANG=en.US_UTF-8 swaylock -f' \
-  timeout 1100 'systemctl start --user ai-haxibami.service' \
   timeout 1200 'swaymsg "output * power off"' \
-  resume 'swaymsg "output * power on" && systemctl stop --user ai-haxibami.service' \
+  resume 'swaymsg "output * power on"' \
   before-sleep 'env LANG=en.US_UTF-8 swaylock -f' \
+
+# timeout 1100 'systemctl start --user ai-haxibami.service' \
+# && systemctl stop --user ai-haxibami.service
 
 # start auto-tiling
 exec autotiling-rs
@@ -133,20 +135,20 @@ exec wl-mpris-idle-inhibit
 
 # start applets
 exec thunar --daemon
-exec iwgtk -i
+#exec iwgtk -i
 #exec tailscale-systray
 exec "sleep 3; trayscale --gapplication-service"
 exec "sleep 3; meteo-qt"
 exec blueman-applet
+# exec waylyrics
 
 # set cursor theme
-seat seat0 xcursor_theme Catppuccin-Latte-Light-Cursors 36
+seat seat0 xcursor_theme Bibata-Original-Classic 36
 
 # set volume/brightness bar
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 exec mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 exec avizo-service
-
 
 ## apps-related keybinds
 
@@ -173,18 +175,6 @@ $mybind $mod+F6 exec lightctl up
 
 
 # media controls
-# output
-# $mybind XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SINK@) > $WOBSOCK
-# $mybind control+XF86AudioRaiseVolume exec wpctl set-volume $(~/.bin/pwnodefd.sh "Headset_output") 5%+ && ~/.bin/percentify.sh $(wpctl get-volume `~/.bin/pwnodefd.sh "Headset_output"`) > $WOBSOCK
-# $mybind XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SINK@) > $WOBSOCK
-# $mybind control+XF86AudioLowerVolume exec wpctl set-volume $(~/.bin/pwnodefd.sh "Headset_output") 5%- && ~/.bin/percentify.sh $(wpctl get-volume `~/.bin/pwnodefd.sh "Headset_output"`) > $WOBSOCK
-# # input
-# $mybind XF86AudioRaiseVolume+shift exec wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%+ && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SOURCE@) > $WOBSOCK
-# $mybind XF86AudioLowerVolume+shift exec wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%- && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SOURCE@) > $WOBSOCK
-# 
-# $mybind $mod+shift+m exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SINK@) > $WOBSOCK
-# $mybind $mod+m exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && ~/.bin/percentify.sh $(wpctl get-volume @DEFAULT_AUDIO_SOURCE@) > $WOBSOCK
-
 # output
 $mybind XF86AudioRaiseVolume exec volumectl -u up
 $mybind XF86AudioLowerVolume exec volumectl -u down
@@ -214,7 +204,7 @@ $mybind $mod+shift+a exec grimshot --notify save output ~/Pictures/screenshot/$(
 # [slurp, copy & save]
 $mybind $mod+shift+s exec watershot -c path ~/Pictures/screenshot/$(date "+%Y%m%d-%H%M%S")'_grim_area.png'
 # [select window, copy & save]
-$mybind $mod+shift+f exec grimshot --notify save window ~/Pictures/screenshot/$(date "+%Y%m%d-%H%M%S")'_grim_window.png'
+$mybind $mod+shift+w exec grimshot --notify save window ~/Pictures/screenshot/$(date "+%Y%m%d-%H%M%S")'_grim_window.png'
 # [fullscreen, only copy]
 $mybind $mod+Print exec grimshot --notify copy output
 # [slurp, only copy]
@@ -223,6 +213,11 @@ $mybind Print exec watershot -c
 $mybind $mod+shift+Print exec grimshot --notify copy window
 # [wait for ? seconds, active window]
 $mybind control+Print exec ~/.bin/waytshot.sh
+
+# take screencapture
+$mybind $mod+alt+s exec ~/.bin/swayrec.sh area
+$mybind $mod+alt+w exec ~/.bin/swayrec.sh window
+$mybind $mod+alt+a exec ~/.bin/swayrec.sh output
 
 # launch wofi, a rofi alternative on Wayland
 $mybind Mod1+space exec $menu
@@ -292,12 +287,27 @@ for_window [app_id="zoom" title="zoom"] {
   floating enable
 }
 
-for_window [class="zoom" title="zoom" window_type="unknown"] {
+for_window [class="zoom" title="zoom"] {
   floating enable
-  no_focus
 }
 
-#no_focus [class="zoom" title="zoom" window_type="unknown"]
+for_window [app_id="zoom" title="Zoom"] {
+  floating enable
+}
+
+for_window [class="zoom" title="Zoom"] {
+  floating enable
+}
+
+# for_window [class="zoom" title="zoom" window_type="unknown"] {
+#   floating enable
+#   no_focus
+# }
+# 
+# for_window [class="zoom" title="zoom" window_type="unknown"] {
+#   floating enable
+#   no_focus
+# }
 
 for_window [app_id="zoom" title="設定"] {
   floating enable
@@ -325,16 +335,33 @@ for_window [class="zoom" title="zoom_linux_float_message_reminder"] {
   border none
 }
 
-for_window [app_id="zoom" title="Zoom - 許可取得済のアカウント"] {
+# for_window [app_id="zoom" title="Zoom - 許可取得済のアカウント"] {
+#   floating disable
+# }
+# 
+# for_window [class="zoom" title="Zoom - 許可取得済のアカウント"] {
+#   floating disable
+# }
+
+for_window [app_id="zoom" title="Zoom ミーティング"] {
   floating disable
 }
 
-for_window [class="zoom" title="Zoom - 許可取得済のアカウント"] {
+for_window [class="zoom" title="Zoom ミーティング"] {
   floating disable
 }
 
 for_window [app_id="zoom" title="Zoom ウェビナー"] {
   floating disable
+}
+
+for_window [class="zoom" title="Zoom ウェビナー"] {
+  floating disable
+}
+
+for_window [app_id="zoom" title="^参加者"] {
+  floating enable
+  resize set 3000 1500
 }
 
 for_window [class="zoom" title="^参加者"] {
@@ -348,11 +375,11 @@ for_window [app_id="zoom" title="as_toolbar"] {
   move left 750 px
 }
 
-for_window [class="zoom" title="as_toolbar"] {
-  floating enable
-  move up 1050 px
-  move left 750 px
-}
+# for_window [class="zoom" title="as_toolbar"] {
+#   floating enable
+#   move up 1050 px
+#   move left 750 px
+# }
 
 for_window [app_id="zoom" title="レコーディング アラート"] {
   floating enable
@@ -362,13 +389,13 @@ for_window [class="zoom" title="レコーディング アラート"] {
   floating enable
 }
 
-for_window [app_id="zoom" title="詳細情報"] {
-  floating enable
-}
-
-for_window [class="zoom" title="詳細情報"] {
-  floating enable
-}
+# for_window [app_id="zoom" title="詳細情報"] {
+#   floating enable
+# }
+# 
+# for_window [class="zoom" title="詳細情報"] {
+#   floating enable
+# }
 
 for_window [app_id="meteo-qt.python3"] {
   floating enable
@@ -396,6 +423,25 @@ for_window [app_id="org.twosheds.iwgtk"] {
 
 for_window [app_id="dev.deedles.Trayscale"] {
   floating enable
+}
+
+for_window [title="abaddon" app_id="abaddon"] {
+  floating enable
+}
+
+for_window [title="Bitwarden" app_id="chrome-.*"] {
+  floating enable
+}
+
+for_window [title="拡張機能.*Bitwarden — Mozilla Firefox" app_id="firefox"] {
+  floating enable
+}
+
+for_window [app_id="io.poly000.waylyrics"] {
+  floating enable
+  border none
+  sticky enable
+  move down 900 px
 }
 
 # kill focused window
@@ -436,6 +482,10 @@ $mybind $mod+f fullscreen toggle
 
 for_window [class=".*"] inhibit_idle fullscreen
 for_window [app_id=".*"] inhibit_idle fullscreen
+
+for_window [app_id="com.obsproject.Studio"] {
+  inhibit_idle
+}
 
 $mybind $mod+control+i inhibit_idle focus
 

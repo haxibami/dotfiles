@@ -38,7 +38,7 @@
     //  Modules Configuration
 
     "sway/workspaces": {
-        "persistent_workspaces": {
+        "persistent-workspaces": {
             "1": [],
             "2": [],
             "3": [],
@@ -61,7 +61,7 @@
             //  "4": "",
             "urgent": "",
             "focused": "",
-            "default": "ﱤ",
+            "default": ""
         }
     },
     "sway/mode": {
@@ -138,7 +138,7 @@
     "cpu": {
         "interval": 5,
         // "format": "{usage}%/{avg_frequency}/{max_frequency}G ",
-        "format": "{usage}% ",
+        "format": "{usage}% ",
         "tooltip": true
     },
     "memory": {
@@ -146,13 +146,13 @@
         "interval": 5
     },
     "temperature": {
-        "thermal-zone": 1, 
+        // "thermal-zone": 0, 
         // "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
         "critical-threshold": 75,
         "interval": 5,
         "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
+        "format-icons": ["", "", ""]
     },
 
     "disk": {
@@ -185,7 +185,7 @@
         //  "bat": "BAT2"
     //  },
     "network": {
-        "interface": "wl*", // (Optional) To force the use of this interface
+        "interface": "eth*", // (Optional) To force the use of this interface
         "format-wifi": "{signalStrength}% ",
         "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
         "format-linked": "{ifname} (No IP) ",

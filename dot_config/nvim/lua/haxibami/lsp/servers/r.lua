@@ -1,5 +1,0 @@
-return {
-  cmd = {
-    'r-languageserver'
-  }
-}

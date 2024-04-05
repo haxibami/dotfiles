@@ -1,11 +1,5 @@
 -- lsp installation & setup
 
-local installer_status, mason = pcall(require, 'mason')
-if not installer_status then
-  vim.notify('Error loading mason LSP-Installer')
-  return
-end
-
 local masonlspconfig_status, masonlspconfig = pcall(require, 'mason-lspconfig')
 if not masonlspconfig_status then
   vim.notify('Error loading mason-lspconfig')
@@ -19,76 +13,61 @@ if not lspconfig_status then
 end
 
 local common_config = require('haxibami.lsp.config')
-local server_configs = require('haxibami.lsp.servers')
-local utils = require('haxibami.lsp.utils')
+local create_config = require('haxibami.lsp.utils').create_config
 
-local servers = {
-  'awk_ls',
-  'astro',
-  'bashls',
-  'clangd',
-  'cmake',
-  'cssls',
-  'cssmodules_ls',
-  -- 'denols',
-  'dockerls',
-  'dotls',
-  'eslint',
-  'gopls',
-  'hls',
-  'html',
-  'jsonls',
-  'lemminx',
-  'nil_ls',
-  'ocamllsp',
-  'pyright',
-  'r_language_server',
-  'rust_analyzer',
-  'lua_ls',
-  'taplo',
-  'texlab',
-  'tsserver',
-  'vimls',
-  'yamlls',
-}
+-- local servers = {
+--   'astro',
+--   'awk_ls',
+--   'bashls',
+--   'clangd',
+--   'cmake',
+--   'cssls',
+--   'cssmodules_ls',
+--   -- 'denols',
+--   'dockerls',
+--   'dotls',
+--   'eslint',
+--   'gopls',
+--   'hls',
+--   'html',
+--   'jsonls',
+--   'lemminx',
+--   'lua_ls',
+--   'nil_ls',
+--   'ocamllsp',
+--   'pylyzer',
+--   'r_language_server',
+--   'ruff',
+--   'rust_analyzer',
+--   'taplo',
+--   'texlab',
+--   'tsserver',
+--   'typst_lsp',
+--   'vimls',
+--   'yamlls',
+-- }
 
-local masonlspconfig_options = {
-  automatic_installation = true,
-  ensure_installed = servers
-}
+local server_file = vim.split(vim.fn.glob(vim.fn.stdpath('config') .. '/lua/haxibami/lsp/servers/*.lua'), '\n')
 
-mason.setup({})
+local handlers = function()
+  local setup_fn = {
+    function(server_name)
+      lspconfig[server_name].setup(common_config)
+    end,
+  }
 
-masonlspconfig.setup(masonlspconfig_options)
+  for _, server in ipairs(server_file) do
+    local server_name = server:match('^.*/(.*)%.lua$')
+    setup_fn[server_name] = function()
+      local server_config = create_config(require('haxibami.lsp.servers.' .. server_name))
+      lspconfig[server_name].setup(server_config)
+    end
+  end
 
-masonlspconfig.setup_handlers({
-  -- The first entry (without a key) will be the default handler
-  -- and will be called for each installed server that doesn't have
-  -- a dedicated handler.
-  function(server_name) -- default handler (optional)
-    lspconfig[server_name].setup(common_config)
-  end,
-  -- Next, you can provide targeted overrides for specific servers.
-  --   ['rust_analyzer'] = function()
-  --     require('rust-tools').setup {}
-  --   end,
+  return setup_fn
+end
 
-  ['clangd'] = function()
-    lspconfig.clangd.setup(server_configs.clangd)
-  end,
-  ['denols'] = function()
-    lspconfig.denols.setup(server_configs.denols)
-  end,
-  ['lua_ls'] = function()
-    lspconfig.lua_ls.setup(server_configs.lua_ls)
-  end,
-  ['tsserver'] = function()
-    lspconfig.tsserver.setup(server_configs.tsserver)
-  end,
-  ['r_language_server'] = function()
-    lspconfig.r_language_server.setup(server_configs.r_language_server)
-  end,
-})
+masonlspconfig.setup_handlers(handlers())
 
 lspconfig['satysfi-ls'].setup {
   autostart = true

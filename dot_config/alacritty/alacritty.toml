@@ -1,0 +1,33 @@
+import = ["/home/haxibami/.config/alacritty/claymore.toml"]
+
+[env]
+TERM = "xterm-256color"
+
+[shell]
+program = "/bin/zsh"
+args = ["-l", "-c", "zellij attach --index 0 --create"]
+
+[font]
+size = 18.0
+
+[font.bold]
+family = "MoralerspaceNeon"
+style = "Bold"
+
+[font.bold_italic]
+family = "MoralerspaceNeon"
+style = "Bold Italic"
+
+[font.italic]
+family = "MoralerspaceNeon"
+style = "Italic"
+
+[font.normal]
+family = "MoralerspaceNeon"
+
+[window]
+opacity = 0.9
+
+[window.padding]
+x = 25
+y = 25

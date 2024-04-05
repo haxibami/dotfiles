@@ -1,13 +1,12 @@
 local root_pattern = require('lspconfig').util.root_pattern
 
-local deno_root_pattern = root_pattern('deps.ts')
+local deno_root_pattern = root_pattern('deno.json')
 
 return {
   root_dir = deno_root_pattern,
-  settings = {
+  init_options = {
     enable = true,
-    lint = true,
+    lint = false,
     unstable = true,
   },
-  single_file_support = false
 }

@@ -1,0 +1,11 @@
+alias ls='lsd'
+alias sued='sudoedit'
+alias memsort='ps ax o pid,rss,command --sort rss'
+alias wget='wget --hsts-file="$XDG_DATA_HOME/wget-hsts"'
+alias svn="svn --config-dir $XDG_CONFIG_HOME/subversion"
+alias hx='helix'
+alias img='swayimg'
+alias R='R --quiet --no-save --no-restore-data'
+alias utokyo-vpn='openconnect-sso -s vpn1.adm.u-tokyo.ac.jp --browser-display-mode hidden -- -s ~/.config/openconnect-sso/vpnc-script-wrapper.sh'
+alias unzip-sjis='unzip -O CP932'
+alias adb='HOME="$XDG_DATA_HOME"/android adb'

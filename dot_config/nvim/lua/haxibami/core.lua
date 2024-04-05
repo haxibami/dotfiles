@@ -5,7 +5,7 @@ local cachedir = homedir .. '/.cache/nvim'
 -- base
 vim.opt.backupdir = cachedir
 vim.opt.clipboard:prepend { 'unnamedplus' }
-vim.opt.cmdheight = 2
+vim.opt.cmdheight = 0
 vim.opt.directory = cachedir
 vim.opt.expandtab = true
 vim.opt.guifont = 'FirgeNerd Console:h12'
@@ -17,7 +17,6 @@ vim.opt.laststatus = 2
 vim.opt.history = 10000
 vim.opt.number = true
 vim.opt.pumblend = 10
-vim.opt.winblend = 30
 vim.opt.shiftwidth = 2
 vim.opt.showcmd = true
 vim.opt.signcolumn = 'number'
@@ -28,8 +27,6 @@ vim.opt.title = true
 vim.opt.undodir = cachedir
 vim.opt.updatetime = 250
 vim.opt.wildmenu = true
-vim.opt.winblend = 10
+vim.opt.winblend = 0
 vim.opt.list = false
-
--- configuration relying on plugins
-vim.cmd('colorscheme urara')
+vim.opt.completeopt = { 'menuone', 'noselect', 'preview' }

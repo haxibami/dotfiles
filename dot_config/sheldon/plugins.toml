@@ -19,7 +19,7 @@ github = "romkatv/zsh-defer"
 apply = ["source"]
 
 [templates]
-defer = "{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}"
+defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks?.post | nl }}"
 
 [plugins.compinit]
 inline = 'autoload -Uz compinit && zsh-defer compinit -d $XDG_CACHE_HOME/zsh/zcompdump-${ZSH_VERSION}'
@@ -34,20 +34,16 @@ github = "zdharma-continuum/fast-syntax-highlighting"
 github = "zsh-users/zsh-autosuggestions"
 
 [plugins.zsh-fzf-history-search]
-github = "haxibami/zsh-fzf-history-search"
-branch = "fix-not-equal"
-#github = "joshskidmore/zsh-fzf-history-search"
-#rev = "446da4a412048ae3ea16e5a355f953385d965742"
-#rev = "de4c3c7a8a1ab94c9ec2d7aeb37abb8ae4ebb6ed"
+github = "joshskidmore/zsh-fzf-history-search"
 
 #[plugins.fzf-tab-completion]
 #remote = "https://raw.githubusercontent.com/lincheney/fzf-tab-completion/master/zsh/fzf-zsh-completion.sh"
 
 [plugins.config-defers]
-local = "~/.config/zsh"
-use = ["{!sync,*}.zsh"]
+local = "~/.config/zsh/async"
+use = ["*.zsh"]
 
 [plugins.config-sync]
-local = "~/.config/zsh"
+local = "~/.config/zsh/sync"
 use = ["sync.zsh"]
 apply = ["source"]

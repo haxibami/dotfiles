@@ -10,4 +10,15 @@ M.create_config = function(server_config)
   return config
 end
 
+
+M.on_attach = function(fn)
+  vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+      local buffer = args.buf
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      fn(client, buffer)
+    end,
+  })
+end
+
 return M

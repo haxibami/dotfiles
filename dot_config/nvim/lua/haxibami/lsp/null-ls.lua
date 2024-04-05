@@ -1,30 +1,46 @@
 -- null-ls setup
 
-local null_ls_status_ok, null_ls = pcall(require, 'null-ls')
-if not null_ls_status_ok then
+local none_ls_status_ok, none_ls = pcall(require, 'null-ls')
+if not none_ls_status_ok then
   vim.notify('Error loading Null-LS')
   return
 end
 
 local config = require('haxibami.lsp.config')
 
-null_ls.setup {
+none_ls.setup {
   sources = {
-    -- use prettier
-    null_ls.builtins.formatting.prettier.with {
-      filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue', 'css', 'scss', 'less',
-        'html', 'yaml', 'markdown', 'graphql', 'handlebars' },
+    none_ls.builtins.formatting.biome.with({
       condition = function(utils)
-        return not (utils.has_file { 'deps.ts' })
+        return not (utils.root_has_file { 'deps.ts', 'deno.json' } or utils.root_has_file_matches('.?prettier*'))
       end,
+      filetypes = {
+        'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
       prefer_local = 'node_modules/.bin',
-    },
-    -- use markdownlint
-    null_ls.builtins.diagnostics.markdownlint,
+    }),
 
-    null_ls.builtins.formatting.black,
+    none_ls.builtins.formatting.prettierd.with({
+      filetypes = { 'yaml' },
+    }),
 
-    -- null_ls.builtins.formatting.clang_format,
+    none_ls.builtins.formatting.prettierd.with({
+      condition = function(utils)
+        return utils.root_has_file_matches('.?prettier*')
+      end,
+      filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' }
+    }),
+
+    --     none_ls.builtins.formatting.dprint.with({
+    --       filetypes = { 'markdown', 'markdown.mdx' },
+    --     }),
+
+    none_ls.builtins.diagnostics.markdownlint.with({
+      filetypes = { 'markdown' },
+    }),
+
+    --     none_ls.builtins.formatting.ruff,
+
+    -- none_ls.builtins.formatting.clang_format,
 
   },
   capabilities = config.capabilities,
